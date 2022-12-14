@@ -9,15 +9,11 @@ const baseConfig = {
     module: {
         rules: [
             {
-                test: /\.html$/i,
-                loader: "html-loader",
-            },
-            {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.tsx?$/,
+                test: /\.[tj]s$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },

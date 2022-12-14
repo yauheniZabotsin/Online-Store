@@ -1,0 +1,18 @@
+body {
+    background-image: url('/assets/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.brand {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.brand-name {
+    margin-left: 1rem;
+    text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
+    font-size: 160%;
+}
