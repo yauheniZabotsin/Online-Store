@@ -1,7 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: calc(0.2rem + 1vw);
+    color: orange;
+    font-family: Philosopher, sans-serif;
+    word-wrap: break-word;
+}
+
 body {
-    background-image: url('/assets/bg.jpg');
+    background-image: url('./assets/bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.header {
+    height: 10vh;
+    width: 100%;
+    background-color: #181a1c;
+    color: orange;
+    border-bottom: 2px solid orange;
+    border-radius: 0 0 1.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    overflow: hidden;
+    justify-content: space-between;
 }
 
 .brand {
@@ -15,4 +40,49 @@ body {
     margin-left: 1rem;
     text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
     font-size: 160%;
+}
+.logo {
+    outline: none;
+    text-decoration: none;
+}
+
+.total-price {
+    display: block;
+    color: wheat;
+}
+
+.cart {
+    width: 5%;
+    height: 80%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-image: url('./assets/cart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: center;
+}
+
+.total {
+    overflow: hidden;
+    position: relative;
+    width: 40%;
+    padding-bottom: 40%;
+}
+
+.total_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #181a1c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    border: 1px solid orange;
+    font-size: 130%;
+    border-radius: 50%;
 }
