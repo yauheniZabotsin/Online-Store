@@ -1,6 +1,6 @@
 import { Data } from "../interfaces/interfaces";
 
-const prodData = {
+const prodData: Data = {
   products: [
       {
           id: 1,
