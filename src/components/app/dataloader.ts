@@ -27,7 +27,7 @@ class Products {
             itemCont.style.backgroundRepeat = "cover";
             itemTitle.textContent = item.title;
             itemCat.insertAdjacentText("beforeend", item.category);
-            itemBrand.textContent = item.brand;
+            itemBrand.insertAdjacentText("beforeend", item.brand);
             itemPrice.insertAdjacentText("beforeend", item.price.toString());
             itemDiscount.insertAdjacentText("beforeend", item.discountPercentage.toString());
             itemRating.insertAdjacentText("beforeend", item.rating.toString());
