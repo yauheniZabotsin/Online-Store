@@ -21,7 +21,8 @@
         </header>
 
         <main class="main">
-            <div class="filters">
+            <div class="app-storage-page">
+              <div class="filters">
                 <div class="reset-total">
                     <button class="btn">Reset Filters</button><button class="btn">Copy Link</button>
                 </div>
@@ -80,8 +81,116 @@
                     </div>
                 </div>
             </div>
+            <div class="products">
+                <div class="sort-products">
+                    <div class="sort-bar">
+                        <select>
+                            <option value="sort-title" disabled selected class="sort-name">Sort options:</option>
+                            <option value="price-down">Price (High to Low)</option>
+                            <option value="price-up">Price (Low to High)</option>
+                            <option value="rating-down">Rating (High to Low)</option>
+                            <option value="rating-up">Rating (Low to High)</option>
+                        </select>
+                    </div>
+                    <div class="stat">Found: 0</div>
+                    <div class="search-bar">
+                        <input type="search" placeholder="Search product">
+                    </div>
+                    <div class="view-mode">
+                        <div class="smaill-vm">
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                        </div>
+                        <div class="big-vm">
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                            <div>.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-items">
+
+                </div>
+                <div class="not-found">
+
+                </div>
+            </div>
+            </div>    
         </main>
 
-        <footer class="footer"><p>Online Store 2022</p></footer>
+        <footer class="footer">
+            <p>Online Store 2022</p>
+        </footer>
+
+        <template class="item-template" >
+            <div class="item big-item">
+                <div class="item-container">
+                    <div class="item-text">
+                        <div class="item-title"></div>
+                        <div class="item-info">
+                            <div class="item-info-item">
+                                <p class="item-category"><span>Category: </span></p>
+                                <p class="item-brand"><span>Brand: </span></p>
+                                <p class="item-price"><span>Price: </span></p>
+                                <p class="item-discount"><span>Discount: </span></p>
+                                <p class="item-rating"><span>Rating: </span></p>
+                                <p class="item-stock"><span>Stock: </span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-buttons">
+                        <button class="add-to-cart">ADD TO CART</button>
+                        <button class="details">DETAILS</button>
+                    </div>
+                </div>
+            </div>
+        </template>
     </body>
 </html>
