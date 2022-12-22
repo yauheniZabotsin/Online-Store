@@ -48,7 +48,7 @@ class App {
     }
 
     run() {
-        
+        this.view.viewProducts(prodData);
         App.renderNewPage('main-page');
         this.enableRouteChange();
     }
