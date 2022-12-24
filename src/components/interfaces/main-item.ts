@@ -515,7 +515,7 @@ filtersProd = `<div class="filters">
               <option value="rating-up">Rating (Low to High)</option>
           </select>
       </div>
-      <div class="stat">Found: 0</div>
+      <div class="stat">Found: 100</div>
       <div class="search-bar">
           <input type="search" placeholder="Search product" />
       </div>
