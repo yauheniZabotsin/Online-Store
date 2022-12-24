@@ -1,6 +1,6 @@
 import Page from "../../core/templates/page";
 import { DataViewer } from "../../components/app/dataviewer";
-import { filters } from "../../components/interfaces/filters";
+import { filtersProd } from "../../components/interfaces/main-item";
 
 class MainPages extends Page {
   static TextObject = {
@@ -16,7 +16,7 @@ class MainPages extends Page {
     // this.container.append(title);
     const filter = document.createElement("div");
     filter.className = "app-storage-page";
-    const filterMarkup = filters.filter;
+    const filterMarkup = filtersProd.filtersProd;
     filter.innerHTML = filterMarkup;
     this.container.append(filter);
     return this.container;
