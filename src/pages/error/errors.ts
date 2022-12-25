@@ -1,5 +1,6 @@
 import { title } from "process";
 import Page from "../../core/templates/page";
+import "../error/error.css";
 
 class ErrorPage extends Page {
   private errorType: string;
@@ -15,7 +16,8 @@ class ErrorPage extends Page {
 
   render() {
     const title = this.createHeaderTitle(ErrorPage.TextObject[this.errorType]);
-    this.container.append(title)
+    title.className = 'error-title';
+    this.container.append(title);
     return this.container;
   }
 }
