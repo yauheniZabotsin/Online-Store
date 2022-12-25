@@ -470,19 +470,15 @@ filtersProd = `<div class="filters">
   <div class="category">
       <h3 class="filter-title">Price</h3>
       <div class="out-data">
-          <div class="from-data">€10.00</div>
+          <div class="from-data">€ <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/></div>
           <!---->
           ⟷
-          <div class="to-data">€1749.00</div>
+          <div class="to-data">€ <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/></div>
           <!---->
       </div>
       <div class="multi-range">
-          <input type="range" min="0" max="48" class="ng-untouched ng-pristine ng-valid" /><input
-              type="range"
-              min="0"
-              max="48"
-              class="ng-untouched ng-pristine ng-valid"
-          />
+          <input type="range" min="0" max="48" id="fromSlider"/>
+          <input type="range" min="0" max="48" id="toSlider"/>
       </div>
   </div>
   <div class="category">
