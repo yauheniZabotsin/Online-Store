@@ -491,12 +491,8 @@ filtersProd = `<div class="filters">
           <!---->
       </div>
       <div class="multi-range">
-          <input type="range" min="0" max="48" class="ng-untouched ng-pristine ng-valid" /><input
-              type="range"
-              min="0"
-              max="48"
-              class="ng-untouched ng-pristine ng-valid"
-          />
+        <input type="range" min="0" max="75" id="fromSlider"/>
+        <input type="range" min="0" max="75" id="toSlider"/>
       </div>
   </div>
 </div>

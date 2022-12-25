@@ -184,6 +184,7 @@ input[type='checkbox'] {
 
 .out-data {
     margin-top: 5%;
+    margin-bottom: 5%;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -198,7 +199,6 @@ input[type='range'] {
     appearance: none;
     width: 96%;
     margin: 2%;
-    overflow: hidden;
     outline: none;
     background: linear-gradient(orange, orange) no-repeat center;
     background-size: 100% 2px;
@@ -487,14 +487,13 @@ input[type='number']::-webkit-outer-spin-button {
 input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
-    height: 34px;
-    width: 95%;
+    height: 2px;
     position: absolute;
-    background-color: transparent;
+    background-color: #c6c6c6;
     pointer-events: none;
 }
 
 #fromSlider {
-    height: 35px;
+    height: 0;
     z-index: 1;
 }
