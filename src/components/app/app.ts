@@ -5,10 +5,12 @@ import MainPages from '../../pages/main/main';
 import Page from '../../core/templates/page';
 import CartPage from '../../pages/cart/cart';
 import ErrorPage from '../../pages/error/errors';
+import ProductPage from '../../pages/product/product';
 
 export const enum PageIds {
-    MainPages = 'main-page',
-    CartPages = 'cart-page',
+    MainPages = 'main',
+    CartPages = 'cart',
+    ProductPages = 'product-details',
 }
 
 class App {
@@ -25,6 +27,8 @@ class App {
           page = new MainPages(idPage);
         } else if(idPage === PageIds.CartPages){
           page = new CartPage(idPage);
+        } else if(idPage === PageIds.ProductPages){
+          page = new ProductPage(idPage);          
         } else {
           page = new ErrorPage(idPage, '404');
         }
@@ -33,7 +37,8 @@ class App {
           const pageHTML = page.render();
           App.container.append(pageHTML);
           if(page instanceof MainPages) {
-            page.addEvents();
+            page.addEventsSlider();
+            page.addEventsModal();
           }
         }
     }
@@ -47,12 +52,12 @@ class App {
 
     constructor() {
         // this.view = new DataViewer();
-        this.initialPage = new MainPages("main-page");
+        this.initialPage = new MainPages("main");
     }
 
     run() {
         // this.view.viewProducts(prodData);
-        App.renderNewPage('main-page');
+        App.renderNewPage('main');
         this.enableRouteChange();
     }
 }

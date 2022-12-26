@@ -12,7 +12,15 @@ class MainPages extends Page {
     super(id);
   }
 
-  addEvents () {
+  addEventsModal () {
+    const productItem = document.querySelector('.product-item') as HTMLElement;
+    productItem.addEventListener("click", () => {
+      window.location.hash = "#product-details";
+    })
+    
+  }
+
+  addEventsSlider () {
     const fromSlider = document.querySelector<HTMLInputElement>('#fromSlider');
     const toSlider = document.querySelector<HTMLInputElement>('#toSlider');
     const fromInput = document.querySelector<HTMLInputElement>('#fromInput');
