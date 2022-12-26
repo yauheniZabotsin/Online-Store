@@ -12,7 +12,7 @@ export const enum PageIds {
 }
 
 class App {
-    view: DataViewer;
+    // view: DataViewer;
 
     private static container: HTMLElement = document.querySelector("main") as HTMLElement;
     private initialPage: MainPages;
@@ -46,12 +46,12 @@ class App {
     }
 
     constructor() {
-        this.view = new DataViewer();
+        // this.view = new DataViewer();
         this.initialPage = new MainPages("main-page");
     }
 
     run() {
-        this.view.viewProducts(prodData);
+        // this.view.viewProducts(prodData);
         App.renderNewPage('main-page');
         this.enableRouteChange();
     }

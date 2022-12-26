@@ -427,7 +427,6 @@ input[type='range'] {
     position: relative;
     min-height: 35px;
     margin-top: 4%;
-    margin-bottom: 3%;
 }
 
 .form_control {

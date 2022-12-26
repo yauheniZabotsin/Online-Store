@@ -476,12 +476,12 @@ filtersProd = `<div class="filters">
         </div>
       <div class="form_control">
         <div class="form_control_container">
-            <div class="form_control_container__time">€</div>
-            <input class="form_control_container__time__input" type="number" id="fromInput" value="0" min="0" max="100"/>
+            <div class="form_control_container__time">€ <input class="form_control_container__time__input" type="number" id="fromInput" value="0" min="0" max="100"/></div>
+            
         </div>
         <div class="form_control_container">
-            <div class="form_control_container__time">€</div>
-            <input class="form_control_container__time__input" type="number" id="toInput" value="100" min="0" max="100"/>
+            <div class="form_control_container__time">€ <input class="form_control_container__time__input" type="number" id="toInput" value="100" min="0" max="100"/></div>
+            
         </div>
       </div>
 </div>
@@ -496,8 +496,8 @@ filtersProd = `<div class="filters">
           <!---->
       </div>
       <div class="multi-range">
-        <input type="range" min="0" max="75" id="fromSlider"/>
-        <input type="range" min="0" max="75" id="toSlider"/>
+        <input type="range" min="0" max="75" id="fromSlider1"/>
+        <input type="range" min="0" max="75" id="toSlider1"/>
       </div>
   </div>
 </div>

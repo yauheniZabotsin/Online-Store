@@ -1,7 +1,7 @@
 export function controlFromInput(fromSlider: HTMLInputElement, fromInput: HTMLInputElement, toInput:HTMLInputElement, controlSlider: HTMLInputElement) {
     const [from, to] = getParsed(fromInput, toInput);
     fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
-    if (from > to) {
+    if (+from > +to) {
         fromSlider.value = to;
         fromInput.value = to;
     } else {
@@ -13,7 +13,7 @@ export function controlToInput(toSlider: HTMLInputElement, fromInput: HTMLInputE
     const [from, to] = getParsed(fromInput, toInput);
     fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
     setToggleAccessible(toInput);
-    if (from <= to) {
+    if (+from <= +to) {
         toSlider.value = to;
         toInput.value = to;
     } else {
@@ -24,7 +24,7 @@ export function controlToInput(toSlider: HTMLInputElement, fromInput: HTMLInputE
 export function controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, fromInput: HTMLInputElement) {
     const [from, to] = getParsed(fromSlider, toSlider);
     fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
-    if (from > to) {
+    if (+from > +to) {
         fromSlider.value = to;
         fromInput.value = to;
     } else {
@@ -36,7 +36,9 @@ export function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInpu
     const [from, to] = getParsed(fromSlider, toSlider);
     fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
     setToggleAccessible(toSlider);
-    if (from <= to) {
+    if (+from <= +to) {
+        // console.log("from",from);
+        // console.log("to",to);
         toSlider.value = to;
         toInput.value = to;
     } else {
@@ -55,6 +57,9 @@ export function fillSlider(from: HTMLInputElement, to: HTMLInputElement, sliderC
     const rangeDistance = Number(to.max) - Number(to.min);
     const fromPosition = Number(from.value) - Number(to.min);
     const toPosition = Number(to.value) - Number(to.min);
+    // console.log("rangeDistance ",rangeDistance);
+    // console.log("fromPosition ", fromPosition);
+    // console.log("toPosition ", toPosition)
     controlSlider.style.background = `linear-gradient(
     to right,
     ${sliderColor} 0%,
