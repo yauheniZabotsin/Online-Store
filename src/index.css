@@ -493,7 +493,8 @@ input[type='range'] {
     pointer-events: none;
 }
 
-#fromSlider {
+#fromSlider,
+#fromSlider1 {
     height: 0;
     z-index: 1;
 }

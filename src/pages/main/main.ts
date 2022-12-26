@@ -18,6 +18,11 @@ class MainPages extends Page {
     const fromInput = document.querySelector<HTMLInputElement>('#fromInput');
     const toInput = document.querySelector<HTMLInputElement>('#toInput');
 
+    const fromSlider1 = document.querySelector<HTMLInputElement>('#fromSlider1');
+    const toSlider1 = document.querySelector<HTMLInputElement>('#toSlider1');
+    const fromInput1 = document.querySelector<HTMLInputElement>('#fromInput1');
+    const toInput1 = document.querySelector<HTMLInputElement>('#toInput1');
+
     if(fromSlider && toSlider && fromInput && toInput) {
       fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
       setToggleAccessible(toSlider);
@@ -25,6 +30,15 @@ class MainPages extends Page {
       toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
       fromInput.oninput = () => controlFromInput(fromSlider, fromInput, toInput, toSlider);
       toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
+    }
+
+    if(fromSlider1 && toSlider1 && fromInput1 && toInput1) {
+      fillSlider(fromSlider1, toSlider1, '#C6C6C6', '#25daa5', toSlider1);
+      setToggleAccessible(toSlider1);
+      fromSlider1.oninput = () => controlFromSlider(fromSlider1, toSlider1, fromInput1);
+      toSlider1.oninput = () => controlToSlider(fromSlider1, toSlider1, toInput1);
+      fromInput1.oninput = () => controlFromInput(fromSlider1, fromInput1, toInput1, toSlider1);
+      toInput1.oninput = () => controlToInput(toSlider1, fromInput1, toInput1, toSlider1);
     }
   }
 

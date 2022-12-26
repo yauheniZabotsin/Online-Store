@@ -489,15 +489,15 @@ filtersProd = `<div class="filters">
   <div class="category">
       <h3 class="filter-title">Stock</h3>
       <div class="out-data">
-          <div class="from-data">2</div>
+      <input class="form_control_container__time__input" type="number" id="fromInput1" value="0" min="0" max="100"/>
           <!---->
           ⟷
-          <div class="to-data">150</div>
+          <input class="form_control_container__time__input" type="number" id="toInput1" value="100" min="0" max="100"/>
           <!---->
       </div>
-      <div class="multi-range">
-        <input type="range" min="0" max="75" id="fromSlider1"/>
-        <input type="range" min="0" max="75" id="toSlider1"/>
+      <div class="sliders_control">
+          <input id="fromSlider1" type="range" value="0" min="0" max="100"/>
+          <input id="toSlider1" type="range" value="100" min="0" max="100"/>
       </div>
   </div>
 </div>
