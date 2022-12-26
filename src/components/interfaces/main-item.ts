@@ -555,7 +555,7 @@ filtersProd = `<div class="filters">
               <div>.</div>
               <div>.</div>
           </div>
-          <div class="big-vm">
+          <div class="big-vm active-mode">
               <div>.</div>
               <div>.</div>
               <div>.</div>

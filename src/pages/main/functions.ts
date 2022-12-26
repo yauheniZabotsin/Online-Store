@@ -37,8 +37,6 @@ export function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInpu
     fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
     setToggleAccessible(toSlider);
     if (+from <= +to) {
-        // console.log("from",from);
-        // console.log("to",to);
         toSlider.value = to;
         toInput.value = to;
     } else {
@@ -57,9 +55,6 @@ export function fillSlider(from: HTMLInputElement, to: HTMLInputElement, sliderC
     const rangeDistance = Number(to.max) - Number(to.min);
     const fromPosition = Number(from.value) - Number(to.min);
     const toPosition = Number(to.value) - Number(to.min);
-    // console.log("rangeDistance ",rangeDistance);
-    // console.log("fromPosition ", fromPosition);
-    // console.log("toPosition ", toPosition)
     controlSlider.style.background = `linear-gradient(
     to right,
     ${sliderColor} 0%,

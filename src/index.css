@@ -321,6 +321,10 @@ input[type='range'] {
     user-select: none;
 }
 
+.active-mode {
+    box-shadow: 0 0 3px 1px #c45f07;
+    border: 1px solid rgb(235, 68, 68);
+}
 .products-items {
     padding: 0.5%;
     display: flex;
