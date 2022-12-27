@@ -18,7 +18,10 @@ class MainPages extends Page {
       const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
       window.location.hash = `#product-details/${id}`;
     })
-    
+  }
+
+  static getId(){
+    return window.location.hash.slice(1);
   }
 
   addEventsSlider () {

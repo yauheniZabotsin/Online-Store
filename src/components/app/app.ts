@@ -10,7 +10,6 @@ import ProductPage from '../../pages/product/product';
 export const enum PageIds {
     MainPages = 'main',
     CartPages = 'cart',
-    ProductPages = 'product-details/1',
 }
 
 class App {
@@ -27,7 +26,7 @@ class App {
           page = new MainPages(idPage);
         } else if(idPage === PageIds.CartPages){
           page = new CartPage(idPage);
-        } else if(idPage === PageIds.ProductPages){
+        } else if(idPage === MainPages.getId()){
           page = new ProductPage(idPage);          
         } else {
           page = new ErrorPage(idPage, '404');
