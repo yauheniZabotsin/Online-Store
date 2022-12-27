@@ -14,8 +14,9 @@ class MainPages extends Page {
 
   addEventsModal () {
     const productItem = document.querySelector('.product-item') as HTMLElement;
-    productItem.addEventListener("click", () => {
-      window.location.hash = "#product-details";
+    productItem.addEventListener("click", (e: Event) => {
+      const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
+      window.location.hash = `#product-details/${id}`;
     })
     
   }

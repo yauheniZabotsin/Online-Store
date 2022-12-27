@@ -10,7 +10,7 @@ import ProductPage from '../../pages/product/product';
 export const enum PageIds {
     MainPages = 'main',
     CartPages = 'cart',
-    ProductPages = 'product-details',
+    ProductPages = 'product-details/1',
 }
 
 class App {

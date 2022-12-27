@@ -577,7 +577,7 @@ filtersProd = `<div class="filters">
   </div>
   <div class="products-items">
       <app-product class="big-item"
-          ><div class="product-item">
+          ><div class="product-item" id="1">
               <div
                   class="item-wrapper"
                   style="

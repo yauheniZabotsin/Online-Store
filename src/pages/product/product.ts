@@ -11,7 +11,20 @@ class ProductPage extends Page {
     super(id);
   }
 
+  renderProductDetailItem(productDetailItem: HTMLElement,title: string, text:string){
+
+    const h3 = document.createElement("h3");
+    h3.textContent = title;
+    productDetailItem.append(h3);
+    const p = document.createElement("p");
+    p.textContent = text;
+    productDetailItem.append(p);
+  }
+
   render(): HTMLElement {
+    const hash = window.location.hash;
+    const id = +(window.location.hash.substring(+hash.indexOf("/")+1, +hash.length)) - 1;
+
     const productWrap = document.createElement("div");
     this.container.append(productWrap);
 
@@ -27,8 +40,8 @@ class ProductPage extends Page {
     productDetail.className = "product-detail";
     const productTitle = document.createElement("h2");
     productTitle.className = "product-title";
-    productTitle.textContent = prodData.products[0].title;
-    productDetail.appendChild(productTitle);
+    productTitle.textContent = prodData.products[id].title;
+    productDetail.append(productTitle);
     this.container.append(productDetail);
 
     const productData = document.createElement("div");
@@ -40,12 +53,52 @@ class ProductPage extends Page {
     for(let i = 1; i < 4; i++){
       const img = document.createElement("img");
       img.alt = "slide";
-      img.src = prodData.products[0].images[i];
+      img.src = prodData.products[id].images[i];
       slides.append(img);
     }
-    productPhotos.append(slides);
     productData.append(productPhotos);
+    productPhotos.append(slides);
+    productTitle.before(productData);  
+    
+
+    const grandPhoto = document.createElement("div");
+    grandPhoto.className = "grand-photo";
+    const grandPhotoImg = document.createElement("img");
+    grandPhotoImg.src = prodData.products[id].images[0];
+    grandPhoto.append(grandPhotoImg);
+    productPhotos.append(grandPhoto);
     this.container.append(productData);
+
+    const productInfo = document.createElement("div");
+    productInfo.className = "product-info";
+
+
+    const productDetailItem = document.createElement("div");
+    productDetailItem.className = "product-detail-item";
+    this.renderProductDetailItem(productDetailItem, "Description:", prodData.products[id].description);
+    this.renderProductDetailItem(productDetailItem, "Discount Percentage:", `${prodData.products[id].discountPercentage}`)
+    this.renderProductDetailItem(productDetailItem, "Rating:", `${prodData.products[id].rating}`)
+    this.renderProductDetailItem(productDetailItem, "Stock:", `${prodData.products[id].stock}`)
+    this.renderProductDetailItem(productDetailItem, "Brand:", prodData.products[id].brand)
+    this.renderProductDetailItem(productDetailItem, "Category:", prodData.products[id].category)
+    productInfo.append(productDetailItem);
+
+    productDetail.append(productData);
+    productData.append(productInfo);
+
+    const addToCart = document.createElement("div");
+    addToCart.className = "add-to-cart";
+    const cartButton = document.createElement("div");
+    cartButton.className = "cart-button";
+    cartButton.textContent = `€${prodData.products[id].price}.00`;
+    const btnCart = document.createElement("button");
+    btnCart.textContent = "ADD TO CART";
+    const btnBuy = document.createElement("button");
+    btnBuy.textContent = "BUY NOW";
+    cartButton.append(btnCart);
+    cartButton.append(btnBuy);
+    productData.append(addToCart);
+    addToCart.append(cartButton);
 
     return this.container;
   }
