@@ -13,10 +13,13 @@ class MainPages extends Page {
   }
 
   addEventsModal () {
-    const productItem = document.querySelector('.product-item') as HTMLElement;
-    productItem.addEventListener("click", (e: Event) => {
-      const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
-      window.location.hash = `#product-details/${id}`;
+    const productItem = document.querySelectorAll('.product-item');
+
+    productItem.forEach((item) => {
+      item.addEventListener("click", (e: Event) => {
+        const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
+        window.location.hash = `#product-details/${id}`;
+      })
     })
   }
 
