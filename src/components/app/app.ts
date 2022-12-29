@@ -39,6 +39,11 @@ class App {
             page.addEventsSlider();
             page.addEventsModal();
           }
+          if(page instanceof MainPages) {
+            page.addEventsSlider();
+            page.addEventsModal();
+            page.addEventBtn();
+          }
         }
     }
 

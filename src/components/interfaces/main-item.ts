@@ -600,7 +600,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -628,7 +628,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -656,7 +656,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -684,7 +684,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -712,7 +712,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -740,7 +740,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -768,7 +768,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -796,7 +796,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -824,7 +824,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -852,7 +852,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -880,7 +880,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -908,7 +908,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -936,7 +936,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -964,7 +964,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -992,7 +992,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1020,7 +1020,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1048,7 +1048,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1076,7 +1076,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1104,7 +1104,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1132,7 +1132,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1160,7 +1160,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1188,7 +1188,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1216,7 +1216,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1244,7 +1244,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1272,7 +1272,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1300,7 +1300,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1328,7 +1328,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1356,7 +1356,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1384,7 +1384,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1412,7 +1412,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1440,7 +1440,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1468,7 +1468,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1496,7 +1496,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1524,7 +1524,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1552,7 +1552,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1580,7 +1580,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1608,7 +1608,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1636,7 +1636,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1664,7 +1664,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1692,7 +1692,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1720,7 +1720,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1748,7 +1748,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1776,7 +1776,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1804,7 +1804,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1832,7 +1832,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1860,7 +1860,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1888,7 +1888,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1916,7 +1916,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1944,7 +1944,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -1972,7 +1972,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2000,7 +2000,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2028,7 +2028,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2056,7 +2056,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2084,7 +2084,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2112,7 +2112,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2140,7 +2140,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2168,7 +2168,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2196,7 +2196,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2224,7 +2224,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2252,7 +2252,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2280,7 +2280,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2308,7 +2308,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2336,7 +2336,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2364,7 +2364,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2392,7 +2392,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2420,7 +2420,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2448,7 +2448,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2476,7 +2476,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2504,7 +2504,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2532,7 +2532,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2560,7 +2560,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2588,7 +2588,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2616,7 +2616,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2644,7 +2644,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2672,7 +2672,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2700,7 +2700,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2728,7 +2728,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2756,7 +2756,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2784,7 +2784,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2812,7 +2812,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2840,7 +2840,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2868,7 +2868,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2896,7 +2896,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2924,7 +2924,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2952,7 +2952,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -2980,7 +2980,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3008,7 +3008,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3036,7 +3036,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3064,7 +3064,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3092,7 +3092,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3120,7 +3120,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3148,7 +3148,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3176,7 +3176,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3204,7 +3204,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3232,7 +3232,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3260,7 +3260,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3288,7 +3288,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3316,7 +3316,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3344,7 +3344,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
@@ -3372,7 +3372,7 @@ filtersProd = `<div class="filters">
                       <!---->
                   </div>
                   <div class="item-buttons">
-                      <button>ADD TO CART</button><button tabindex="0">DETAILS</button>
+                      <button class="btn-add">ADD TO CART</button><button class="btn-detalis" tabindex="0">DETAILS</button>
                   </div>
               </div>
           </div></app-product
