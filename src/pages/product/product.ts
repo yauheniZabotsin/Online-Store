@@ -1,8 +1,10 @@
 import Page from "../../core/templates/page";
 import "../product/product.css";
 import prodData from '../../components/data/data';
+import MainPages from "../main/main";
 
 class ProductPage extends Page {
+
   static TextObject = {
     ProductTitle: "product-details"
   };
@@ -91,8 +93,28 @@ class ProductPage extends Page {
     const cartButton = document.createElement("div");
     cartButton.className = "cart-button";
     cartButton.textContent = `€${prodData.products[id].price}.00`;
+
     const btnCart = document.createElement("button");
     btnCart.textContent = "ADD TO CART";
+    btnCart.addEventListener('click', () => {
+      const CartTotal = document.querySelector(".total-price span")  as HTMLElement;
+      let CartPrice = CartTotal.innerHTML.slice(1); 
+
+      const countCart = document.querySelector(".total_content") as HTMLElement;
+      let count = Number (countCart.textContent);
+
+      if(btnCart.textContent === "ADD TO CART"){
+        btnCart.textContent = "DROP FROM CART";
+        countCart.textContent = `${++count}`;
+        CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
+      }else{
+        btnCart.textContent = "ADD TO CART";
+        countCart.textContent = `${--count}`;
+        CartTotal.textContent = `€${+CartPrice - prodData.products[id].price}.00`;
+      }
+    })
+
+
     const btnBuy = document.createElement("button");
     btnBuy.textContent = "BUY NOW";
     cartButton.append(btnCart);

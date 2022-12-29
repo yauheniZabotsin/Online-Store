@@ -1,5 +1,6 @@
 import Page from "../../core/templates/page";
 import "../main/main.css";
+import prodData from "../../components/data/data";
 import { DataViewer } from "../../components/app/dataviewer";
 import { filtersProd } from "../../components/interfaces/main-item";
 import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, fillSlider, setToggleAccessible } from "./functions";
@@ -16,19 +17,28 @@ class MainPages extends Page {
   addEventBtn(){
     const btnAdd = document.querySelectorAll(".btn-add");
 
+    const countCart = document.querySelector(".total_content") as HTMLElement;
+    let count = Number (countCart.textContent);
+
     btnAdd.forEach((item) => {
       item.addEventListener("click", (e: Event) => {
+        const CartTotal = document.querySelector(".total-price span")  as HTMLElement;
+        let CartPrice = CartTotal.innerHTML.slice(1); 
+
+        const id = +((e.target as Element).closest('.product-item') as HTMLElement).id - 1;
         if(((e.target as Element).closest('.product-item') as HTMLElement).classList.contains('in-cart')){
           ((e.target as Element).closest('.product-item') as HTMLElement).classList.remove('in-cart');
           item.textContent = "ADD TO CART";
-          console.log("qqq")
+          countCart.textContent = `${--count}`;
+          CartTotal.textContent = `€${+CartPrice - prodData.products[id].price}.00`;
         }else{
           ((e.target as Element).closest('.product-item') as HTMLElement).classList.add('in-cart');
           item.textContent = "DROP FROM CART";
+          countCart.textContent = `${++count}`;
+          CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
         }
       })
     })
-    
   }
 
   addEventsModal () {
