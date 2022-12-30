@@ -25,17 +25,19 @@ class MainPages extends Page {
         const CartTotal = document.querySelector(".total-price span")  as HTMLElement;
         let CartPrice = CartTotal.innerHTML.slice(1); 
 
-        const id = +((e.target as Element).closest('.product-item') as HTMLElement).id - 1;
+        const idIndex = +((e.target as Element).closest('.product-item') as HTMLElement).id - 1;
         if(((e.target as Element).closest('.product-item') as HTMLElement).classList.contains('in-cart')){
           ((e.target as Element).closest('.product-item') as HTMLElement).classList.remove('in-cart');
           item.textContent = "ADD TO CART";
           countCart.textContent = `${--count}`;
-          CartTotal.textContent = `€${+CartPrice - prodData.products[id].price}.00`;
+          CartTotal.textContent = `€${+CartPrice - prodData.products[idIndex].price}.00`;
+          let isInCart = false;
         }else{
           ((e.target as Element).closest('.product-item') as HTMLElement).classList.add('in-cart');
           item.textContent = "DROP FROM CART";
           countCart.textContent = `${++count}`;
-          CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
+          CartTotal.textContent = `€${+CartPrice + prodData.products[idIndex].price}.00`;
+          let isInCart = true;
         }
       })
     })

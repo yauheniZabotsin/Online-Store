@@ -13,7 +13,7 @@ class ProductPage extends Page {
     super(id);
   }
 
-  renderProductDetailItem(productDetailItem: HTMLElement,title: string, text:string){
+  renderProductDetailItem(productDetailItem: HTMLElement, title: string, text: string) {
 
     const h3 = document.createElement("h3");
     h3.textContent = title;
@@ -25,14 +25,14 @@ class ProductPage extends Page {
 
   render(): HTMLElement {
     const hash = window.location.hash;
-    const id = +(window.location.hash.substring(+hash.indexOf("/")+1, +hash.length)) - 1;
+    const id = +(window.location.hash.substring(+hash.indexOf("/") + 1, +hash.length)) - 1;
 
     const productWrap = document.createElement("div");
     this.container.append(productWrap);
 
     const linkNavigation = document.createElement("div");
     linkNavigation.className = "link-navigation";
-    for(let i=0; i<4; i++){
+    for (let i = 0; i < 4; i++) {
       const link = document.createElement("a");
       linkNavigation.appendChild(link);
     }
@@ -52,7 +52,7 @@ class ProductPage extends Page {
     productPhotos.className = "product-photos";
     const slides = document.createElement("div");
     slides.className = "slides";
-    for(let i = 1; i < 4; i++){
+    for (let i = 1; i < 4; i++) {
       const img = document.createElement("img");
       img.alt = "slide";
       img.src = prodData.products[id].images[i];
@@ -60,8 +60,8 @@ class ProductPage extends Page {
     }
     productData.append(productPhotos);
     productPhotos.append(slides);
-    productTitle.before(productData);  
-    
+    productTitle.before(productData);
+
 
     const grandPhoto = document.createElement("div");
     grandPhoto.className = "grand-photo";
@@ -95,22 +95,25 @@ class ProductPage extends Page {
     cartButton.textContent = `€${prodData.products[id].price}.00`;
 
     const btnCart = document.createElement("button");
-    btnCart.textContent = "ADD TO CART";
+    let isInCart = true; //cюда
+    btnCart.textContent = isInCart ? "ADD TO CART" : "DROP FROM CART";
     btnCart.addEventListener('click', () => {
-      const CartTotal = document.querySelector(".total-price span")  as HTMLElement;
-      let CartPrice = CartTotal.innerHTML.slice(1); 
+      const CartTotal = document.querySelector(".total-price span") as HTMLElement;
+      let CartPrice = CartTotal.innerHTML.slice(1);
 
       const countCart = document.querySelector(".total_content") as HTMLElement;
-      let count = Number (countCart.textContent);
+      let count = Number(countCart.textContent);
 
-      if(btnCart.textContent === "ADD TO CART"){
+      if (isInCart) {
         btnCart.textContent = "DROP FROM CART";
         countCart.textContent = `${++count}`;
         CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
-      }else{
+        isInCart = false;
+      } else {
         btnCart.textContent = "ADD TO CART";
         countCart.textContent = `${--count}`;
         CartTotal.textContent = `€${+CartPrice - prodData.products[id].price}.00`;
+        isInCart = true;
       }
     })
 

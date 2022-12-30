@@ -1,0 +1,7 @@
+.cart-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: -moz-fit-content;
+    height: fit-content;
+}
