@@ -11,7 +11,7 @@ class ProductPage extends Page {
     super(id);
   }
 
-  renderProductDetailItem(productDetailItem: HTMLElement,title: string, text:string){
+  renderProductDetailItem(productDetailItem: HTMLElement, title: string, text:string){
 
     const h3 = document.createElement("h3");
     h3.textContent = title;
@@ -23,8 +23,9 @@ class ProductPage extends Page {
 
   render(): HTMLElement {
     const hash = window.location.hash;
+    console.log("hash: "+hash);
     const id = +(window.location.hash.substring(+hash.indexOf("/")+1, +hash.length)) - 1;
-
+    console.log("id: "+id);
     const productWrap = document.createElement("div");
     this.container.append(productWrap);
 
@@ -40,6 +41,7 @@ class ProductPage extends Page {
     productDetail.className = "product-detail";
     const productTitle = document.createElement("h2");
     productTitle.className = "product-title";
+    console.log("title: "+prodData.products[id].title);
     productTitle.textContent = prodData.products[id].title;
     productDetail.append(productTitle);
     this.container.append(productDetail);

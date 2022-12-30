@@ -346,9 +346,8 @@ input[type='range'] {
 }
 
 .big-item {
-    width: 25%;
-    padding: 1%;
-    /* padding-top: 20%; */
+    width: 23%;
+    padding-top: 20%;
 }
 
 .small-item {
@@ -356,7 +355,7 @@ input[type='range'] {
     padding-top: 12%;
 }
 
-.item-container {
+.product-item {
     width: 100%;
     height: 100%;
     position: absolute;

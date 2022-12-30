@@ -2,8 +2,10 @@ import Page from "../../core/templates/page";
 import { DataViewer } from "../../components/app/dataviewer";
 import { filtersProd } from "../../components/interfaces/main-item";
 import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, fillSlider, setToggleAccessible } from "./functions";
+import prodData from "../../components/data/data";
 
 class MainPages extends Page {
+
   static TextObject = {
     MainTitle: "Main Pages",
   };
@@ -18,6 +20,7 @@ class MainPages extends Page {
     productItem.forEach((item) => {
       item.addEventListener("click", (e: Event) => {
         const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
+        console.log("clickID: "+id);
         window.location.hash = `#product-details/${id}`;
       })
     })
@@ -58,8 +61,6 @@ class MainPages extends Page {
   }
 
   render () {
-    // const title = this.createHeaderTitle(MainPages.TextObject.MainTitle);
-    // this.container.append(title);
     const filter = document.createElement("div");
     filter.className = "app-storage-page";
     const filterMarkup = filtersProd.filtersProd;

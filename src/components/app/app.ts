@@ -13,13 +13,20 @@ export const enum PageIds {
 }
 
 class App {
-    // view: DataViewer;
-
     private static container: HTMLElement = document.querySelector("main") as HTMLElement;
     private initialPage: MainPages;
+    public view: DataViewer;
 
-    static renderNewPage(idPage: string){
+    
+    constructor() {
+      this.view = new DataViewer();
+      this.initialPage = new MainPages("main");
+  }
+
+
+    public renderNewPage(idPage: string) {
         App.container.innerHTML = '';
+
         let page: Page | null = null;
     
         if(idPage === PageIds.MainPages){
@@ -34,8 +41,11 @@ class App {
     
         if(page){
           const pageHTML = page.render();
+
           App.container.append(pageHTML);
+          
           if(page instanceof MainPages) {
+            this.view.viewProducts(prodData);
             page.addEventsSlider();
             page.addEventsModal();
           }
@@ -45,18 +55,12 @@ class App {
     private enableRouteChange(){
         window.addEventListener('hashchange', () => {
           const hash = window.location.hash.slice(1);
-          App.renderNewPage(hash);
+          this.renderNewPage(hash);
         })
     }
 
-    constructor() {
-        // this.view = new DataViewer();
-        this.initialPage = new MainPages("main");
-    }
-
     run() {
-        // this.view.viewProducts(prodData);
-        App.renderNewPage('main');
+        this.renderNewPage('main');
         this.enableRouteChange();
     }
 }

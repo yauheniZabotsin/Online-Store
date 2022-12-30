@@ -9,7 +9,7 @@ class Products {
         data.forEach((item: Product) => {
             const itemClone = <HTMLElement>itemTemplate.content.cloneNode(true);
             const itemDiv = <HTMLElement>itemClone.querySelector('.item');
-            const itemCont = <HTMLElement>itemClone.querySelector('.item-container');
+            const itemCont = <HTMLElement>itemClone.querySelector('.product-item');
             const itemText = <HTMLElement>itemClone.querySelector('.item-text');
             const itemTitle = <HTMLElement>itemClone.querySelector('.item-title');
             const itemInfo = <HTMLElement>itemClone.querySelector('.item-info');
@@ -22,6 +22,7 @@ class Products {
             const itemRating = <HTMLElement>itemClone.querySelector('.item-rating');
             const itemStock = <HTMLElement>itemClone.querySelector('.item-stock');
 
+            itemCont.setAttribute("id", item.id.toString());
             itemCont.style.backgroundImage = `url(${item.thumbnail})`;
             itemCont.style.backgroundPosition = 'top left';
             itemCont.style.backgroundRepeat = 'cover';
