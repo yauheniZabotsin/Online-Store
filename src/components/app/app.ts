@@ -10,10 +10,28 @@ import ProductPage from '../../pages/product/product';
 export const enum PageIds {
     MainPages = 'main',
     CartPages = 'cart',
+
 }
+
+export const isCart = {
+  isInCart: false,
+  getIsInCart: (): boolean => isCart.isInCart,
+  setIsInCart: (bool: boolean) => {
+      isCart.isInCart = bool;
+  },
+};
 
 class App {
     // view: DataViewer;
+
+    isInCart = false;
+    getIsInCart() {
+        return this.isInCart;
+    }
+
+    setIsInCart(bool: boolean) {
+        this.isInCart = bool;
+    }
 
     private static container: HTMLElement = document.querySelector("main") as HTMLElement;
     private initialPage: MainPages;
@@ -26,9 +44,14 @@ class App {
           page = new MainPages(idPage);
         } else if(idPage === PageIds.CartPages){
           page = new CartPage(idPage);
-        } else if(idPage === MainPages.getId()){
-          page = new ProductPage(idPage);          
-        } else {
+        } else if(window.location.hash.includes("#product-details")){
+          let productID = +window.location.hash.split("/")[1];
+          if(1 <= productID && productID <= 100){
+            page = new ProductPage(idPage);
+          }
+        } 
+        
+        if(page === null) {
           page = new ErrorPage(idPage, '404');
         }
     
@@ -39,6 +62,9 @@ class App {
             page.addEventsSlider();
             page.addEventsModal();
             page.addEventBtn();
+          }
+          if(page instanceof ProductPage) {
+            page.addEventImg();
           }
         }
     }

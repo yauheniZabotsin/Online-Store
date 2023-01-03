@@ -381,7 +381,7 @@ input[type='range'] {
 
 .item-info {
     color: wheat;
-    height: 150px;
+    height: 100%;
 }
 
 .item-info-item {

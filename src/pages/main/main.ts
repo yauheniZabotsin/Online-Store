@@ -5,6 +5,10 @@ import { DataViewer } from "../../components/app/dataviewer";
 import { filtersProd } from "../../components/interfaces/main-item";
 import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, fillSlider, setToggleAccessible } from "./functions";
 
+import { isCart } from "../../components/app/app";
+import CartPage from "../cart/cart";
+
+
 class MainPages extends Page {
   static TextObject = {
     MainTitle: "Main Pages",
@@ -15,6 +19,8 @@ class MainPages extends Page {
   }
 
   addEventBtn(){
+    const { getIsInCart, setIsInCart } = isCart;
+
     const btnAdd = document.querySelectorAll(".btn-add");
 
     const countCart = document.querySelector(".total_content") as HTMLElement;
@@ -31,13 +37,18 @@ class MainPages extends Page {
           item.textContent = "ADD TO CART";
           countCart.textContent = `${--count}`;
           CartTotal.textContent = `€${+CartPrice - prodData.products[idIndex].price}.00`;
-          let isInCart = false;
+          let isInCart = true;
+          setIsInCart(true);
         }else{
           ((e.target as Element).closest('.product-item') as HTMLElement).classList.add('in-cart');
           item.textContent = "DROP FROM CART";
           countCart.textContent = `${++count}`;
           CartTotal.textContent = `€${+CartPrice + prodData.products[idIndex].price}.00`;
-          let isInCart = true;
+
+          CartPage.Products.push(+((e.target as Element).closest('.product-item') as HTMLElement).id);
+
+          let isInCart = false;
+          setIsInCart(false);
         }
       })
     })
@@ -54,10 +65,6 @@ class MainPages extends Page {
         }
       })
     })
-  }
-
-  static getId(){
-    return window.location.hash.slice(1);
   }
 
   addEventsSlider () {

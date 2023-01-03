@@ -3,6 +3,8 @@ import "../product/product.css";
 import prodData from '../../components/data/data';
 import MainPages from "../main/main";
 
+import { isCart } from "../../components/app/app";
+
 class ProductPage extends Page {
 
   static TextObject = {
@@ -21,6 +23,18 @@ class ProductPage extends Page {
     const p = document.createElement("p");
     p.textContent = text;
     productDetailItem.append(p);
+  }
+
+  addEventImg(){
+    const imgs = document.querySelectorAll(".slides img");
+    const grandPhoto = <HTMLImageElement>document.querySelector(".grand-photo-img");
+
+    imgs.forEach((img) => {
+      img.addEventListener("click", (e: Event) => {
+        console.log(img)
+      })
+    })
+
   }
 
   render(): HTMLElement {
@@ -66,6 +80,7 @@ class ProductPage extends Page {
     const grandPhoto = document.createElement("div");
     grandPhoto.className = "grand-photo";
     const grandPhotoImg = document.createElement("img");
+    grandPhotoImg.className = "grand-photo-img"
     grandPhotoImg.src = prodData.products[id].images[0];
     grandPhoto.append(grandPhotoImg);
     productPhotos.append(grandPhoto);
@@ -95,7 +110,10 @@ class ProductPage extends Page {
     cartButton.textContent = `€${prodData.products[id].price}.00`;
 
     const btnCart = document.createElement("button");
-    let isInCart = true; //cюда
+
+    const { getIsInCart, setIsInCart } = isCart;
+
+    let isInCart = getIsInCart(); //cюда
     btnCart.textContent = isInCart ? "ADD TO CART" : "DROP FROM CART";
     btnCart.addEventListener('click', () => {
       const CartTotal = document.querySelector(".total-price span") as HTMLElement;
