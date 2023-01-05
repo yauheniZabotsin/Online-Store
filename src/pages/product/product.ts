@@ -1,6 +1,6 @@
 import Page from "../../core/templates/page";
 import "../product/product.css";
-import prodData from '../../components/data/data';
+import prodData from '../../components/data/products';
 
 class ProductPage extends Page {
   static TextObject = {

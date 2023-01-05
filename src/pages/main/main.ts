@@ -2,7 +2,7 @@ import Page from "../../core/templates/page";
 import { DataViewer } from "../../components/app/dataviewer";
 import { filtersProd } from "../../components/interfaces/main-item";
 import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, fillSlider, setToggleAccessible } from "./functions";
-import prodData from "../../components/data/data";
+import prodData from "../../components/data/products";
 
 class MainPages extends Page {
 

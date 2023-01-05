@@ -1,4 +1,4 @@
-import prodData from '../data/data';
+import prodData from '../data/products';
 import { DataViewer } from './dataviewer';
 
 import MainPages from '../../pages/main/main';
@@ -6,6 +6,7 @@ import Page from '../../core/templates/page';
 import CartPage from '../../pages/cart/cart';
 import ErrorPage from '../../pages/error/errors';
 import ProductPage from '../../pages/product/product';
+import { brandData, categoryData } from '../data/filters';
 
 export const enum PageIds {
     MainPages = 'main',
@@ -46,6 +47,8 @@ class App {
           
           if(page instanceof MainPages) {
             this.view.viewProducts(prodData);
+            this.view.viewCategories(categoryData);
+            this.view.viewBrands(brandData);
             page.addEventsSlider();
             page.addEventsModal();
           }

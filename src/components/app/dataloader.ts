@@ -1,7 +1,7 @@
-import { Data, Product } from '../interfaces/interfaces';
+import { Data, Filter, Product } from '../interfaces/interfaces';
 
-class Products {
-    loadData(data: Data['products']): void {
+export class Products {
+    loadProducts(data: Data['products']): void {
         const fragment = document.createDocumentFragment();
         const prodCont = <HTMLElement>document.querySelector('.products-items');
         const itemTemplate = <HTMLTemplateElement>document.querySelector('.item-template');
@@ -22,7 +22,7 @@ class Products {
             const itemRating = <HTMLElement>itemClone.querySelector('.item-rating');
             const itemStock = <HTMLElement>itemClone.querySelector('.item-stock');
 
-            itemCont.setAttribute("id", item.id.toString());
+            itemCont.setAttribute('id', item.id.toString());
             itemCont.style.backgroundImage = `url(${item.thumbnail})`;
             itemCont.style.backgroundPosition = 'top left';
             itemCont.style.backgroundRepeat = 'cover';
@@ -41,4 +41,52 @@ class Products {
     }
 }
 
-export default Products;
+export class Categories {
+    loadCategories(data: Array<Filter>): void {
+        const fragment = document.createDocumentFragment();
+        const catList = <HTMLElement>document.querySelector('.categories');
+        const itemTemplate = <HTMLTemplateElement>document.querySelector('.filter-template');
+
+        data.forEach((item: Filter) => {
+            const itemClone = <HTMLElement>itemTemplate.content.cloneNode(true);
+            const itemDiv = <HTMLElement>itemClone.querySelector('.checkbox-line item-active');
+            const itemInput  = <HTMLElement>itemClone.querySelector('.filter-input');
+            const itemLabel = <HTMLElement>itemClone.querySelector('.filter-label');
+            const itemSpan = <HTMLElement>itemClone.querySelector('.filter-span');
+
+            itemInput.setAttribute('id', item.category);
+            itemLabel.setAttribute('for', item.category);
+            itemLabel.insertAdjacentText('beforeend', item.category);
+            itemSpan.insertAdjacentText('beforeend', item.amount);
+
+            fragment.append(itemClone);
+        });
+
+        catList.appendChild(fragment);
+    }
+}
+
+export class Brands {
+    loadBrands(data: Array<Filter>): void {
+        const fragment = document.createDocumentFragment();
+        const brandList = <HTMLElement>document.querySelector('.brands');
+        const itemTemplate = <HTMLTemplateElement>document.querySelector('.filter-template');
+
+        data.forEach((item: Filter) => {
+            const itemClone = <HTMLElement>itemTemplate.content.cloneNode(true);
+            const itemDiv = <HTMLElement>itemClone.querySelector('.checkbox-line item-active');
+            const itemInput  = <HTMLElement>itemClone.querySelector('.filter-input');
+            const itemLabel = <HTMLElement>itemClone.querySelector('.filter-label');
+            const itemSpan = <HTMLElement>itemClone.querySelector('.filter-span');
+
+            itemInput.setAttribute('id', item.category);
+            itemLabel.setAttribute('for', item.category);
+            itemLabel.insertAdjacentText('beforeend', item.category);
+            itemSpan.insertAdjacentText('beforeend', item.amount);
+
+            fragment.append(itemClone);
+        });
+
+        brandList.appendChild(fragment);
+    }
+}
