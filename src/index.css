@@ -29,14 +29,14 @@ body {
     justify-content: space-between;
 }
 
-.brand {
+.emblem {
     height: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.brand-name {
+.name {
     margin-left: 1rem;
     text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
     font-size: 160%;
@@ -143,10 +143,25 @@ body {
     margin-bottom: 5%;
     display: block;
 }
-.filter-title {
+
+.brand {
+  border: 1px solid orange;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 5%;
+  display: block;
+}
+
+.category-title {
     text-align: center;
     background-color: #181a1c;
     border-bottom: 1px solid orange;
+}
+
+.brand-title {
+  text-align: center;
+  background-color: #181a1c;
+  border-bottom: 1px solid orange;
 }
 
 .filter-list {

@@ -40,12 +40,11 @@ class App {
           page = new ErrorPage(idPage, '404');
         }
     
-        if(page){
+        if (page) {
           const pageHTML = page.render();
-
           App.container.append(pageHTML);
           
-          if(page instanceof MainPages) {
+          if (page instanceof MainPages) {
             this.view.viewProducts(prodData);
             this.view.viewCategories(categoryData);
             this.view.viewBrands(brandData);
@@ -55,7 +54,7 @@ class App {
         }
     }
 
-    private enableRouteChange(){
+    private enableRouteChange() {
         window.addEventListener('hashchange', () => {
           const hash = window.location.hash.slice(1);
           this.renderNewPage(hash);
