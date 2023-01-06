@@ -144,14 +144,14 @@ class ProductPage extends Page {
       if (btnCart.textContent === 'ADD TO CART') {
         btnCart.textContent = 'DROP FROM CART';
         countCart.textContent = `${++count}`;
-        CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
+        CartTotal.textContent = `€${+CartPrice + isCart[prodData.products[id].id]?.sumPrice}.00`;
         setIsInCart(String(productId), true);
       } else {
         btnCart.textContent = 'ADD TO CART';
         console.log(isCart[id]);
         console.log(isCart[CartPage.Products[id]]);
         countCart.textContent = `${count - isCart[prodData.products[id].id]?.count}`;
-        CartTotal.textContent = `€${+CartPrice - prodData.products[id].price}.00`;
+        CartTotal.textContent = `€${+CartPrice - isCart[prodData.products[id].id]?.sumPrice}.00`;
         setIsInCart(String(productId), false);
       }
       CartPage.Products = Object?.entries(isCart)
