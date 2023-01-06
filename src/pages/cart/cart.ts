@@ -101,8 +101,8 @@ class CartPage extends Page {
         btn2.textContent = '-';
         incDecControl.append(btn2);
         btn2.addEventListener('click', (e: Event) => {
-          if (isCart[CartPage.Products[i]].count !== undefined) isCart[CartPage.Products[i]].count -= 1;
-          if (isCart[CartPage.Products[i]]?.count <= 0) {
+          if (isCart[CartPage.Products[i]]?.count !== undefined) isCart[CartPage.Products[i]].count -= 1;
+          if (isCart[CartPage.Products[i]]?.count <= 0 || isCart[CartPage.Products[i]]?.count === undefined) {
             // delete isCart[CartPage.Products[i]];
 
             setIsInCart(String([CartPage.Products[i]]), false);
@@ -120,7 +120,9 @@ class CartPage extends Page {
             }
           }
 
-          spanPrice.textContent = ` ${isCart[CartPage.Products[i]].count} `;
+          if (isCart[CartPage.Products[i]]?.count !== undefined) {
+            spanPrice.textContent = ` ${isCart[CartPage.Products[i]].count} `;
+          }
         });
 
         numberControl.append(incDecControl);
