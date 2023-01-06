@@ -15,6 +15,7 @@ class CartPage extends Page {
   }
 
   render() {
+    const { getIsInCart, setIsInCart } = isCart;
     console.log('CartPage.Products', CartPage.Products);
 
     if (CartPage.Products.length > 0) {
@@ -89,20 +90,26 @@ class CartPage extends Page {
 
         btn1.addEventListener('click', () => {
           isCart[CartPage.Products[i]].count += 1;
-          spanPrice.textContent = ` ${isCart[CartPage.Products[i]].count} `;
+          spanPrice.textContent = ` ${isCart[CartPage.Products[i]]?.count} `;
         });
 
         const spanPrice = document.createElement('span');
-        spanPrice.textContent = ` ${isCart[CartPage.Products[i]].count} `; //TODO
+        spanPrice.textContent = ` ${isCart[CartPage.Products[i]]?.count} `; //TODO
         incDecControl.append(spanPrice);
 
         const btn2 = document.createElement('button');
         btn2.textContent = '-';
         incDecControl.append(btn2);
         btn2.addEventListener('click', (e: Event) => {
-          isCart[CartPage.Products[i]].count -= 1;
-          if (isCart[CartPage.Products[i]].count <= 0) {
+          if (isCart[CartPage.Products[i]].count !== undefined) isCart[CartPage.Products[i]].count -= 1;
+          if (isCart[CartPage.Products[i]]?.count <= 0) {
             delete isCart[CartPage.Products[i]];
+
+            setIsInCart(String([CartPage.Products[i]]), false);
+            CartPage.Products = Object?.entries(isCart)
+              .filter((item: any) => item[1].isInCart === true)
+              .map((item) => +item[0]);
+
             ((e.target as Element).closest('.cart-item') as HTMLElement).remove();
             if (document.querySelector('.cart-item') === null) {
               console.log();
