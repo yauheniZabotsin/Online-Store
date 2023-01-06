@@ -103,7 +103,7 @@ class CartPage extends Page {
         btn2.addEventListener('click', (e: Event) => {
           if (isCart[CartPage.Products[i]].count !== undefined) isCart[CartPage.Products[i]].count -= 1;
           if (isCart[CartPage.Products[i]]?.count <= 0) {
-            delete isCart[CartPage.Products[i]];
+            // delete isCart[CartPage.Products[i]];
 
             setIsInCart(String([CartPage.Products[i]]), false);
             CartPage.Products = Object?.entries(isCart)
