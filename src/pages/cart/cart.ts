@@ -89,13 +89,19 @@ class CartPage extends Page {
         incDecControl.append(btn1);
 
         const countCart = document.querySelector('.total_content') as HTMLElement;
+        const CartTotal = document.querySelector('.total-price span') as HTMLElement;
 
         btn1.addEventListener('click', () => {
-          isCart[CartPage.Products[i]].count += 1;
-          spanPrice.textContent = ` ${isCart[CartPage.Products[i]]?.count} `;
+          let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+          if (isCart[CartPage.Products[idIndex]]?.count !== undefined) isCart[CartPage.Products[idIndex]].count += 1;
+          spanPrice.textContent = ` ${isCart[CartPage.Products[idIndex]]?.count} `;
 
           let count = Number(countCart.textContent);
           countCart.textContent = `${++count}`;
+
+          let CartPrice = CartTotal.innerHTML.slice(1);
+
+          CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
         });
 
         const spanPrice = document.createElement('span');
@@ -109,18 +115,23 @@ class CartPage extends Page {
           let count = Number(countCart.textContent);
           countCart.textContent = `${--count}`;
 
-          if (isCart[CartPage.Products[i]]?.count !== undefined) isCart[CartPage.Products[i]].count -= 1;
-          if (isCart[CartPage.Products[i]]?.count <= 0 || isCart[CartPage.Products[i]]?.count === undefined) {
+          let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+
+          let CartPrice = CartTotal.innerHTML.slice(1);
+          CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+
+          if (isCart[CartPage.Products[idIndex]]?.count !== undefined) isCart[CartPage.Products[idIndex]].count -= 1;
+          if (
+            isCart[CartPage.Products[idIndex]]?.count <= 0 ||
+            isCart[CartPage.Products[idIndex]]?.count === undefined
+          ) {
             // delete isCart[CartPage.Products[i]];
-            console.log('id', CartPage.Products[i]);
-            console.log('index', i);
-            console.log('CartPage.Products До', CartPage.Products);
-            let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+
             setIsInCart(String(CartPage.Products[idIndex]), false);
             CartPage.Products = Object?.entries(isCart)
               .filter((item: any) => item[1].isInCart === true)
               .map((item) => +item[0]);
-            console.log('CartPage.Products После', CartPage.Products);
+
             ((e.target as Element).closest('.cart-item') as HTMLElement).remove();
             if (document.querySelector('.cart-item') === null) {
               console.log();
@@ -130,17 +141,14 @@ class CartPage extends Page {
               this.container.append(title);
             }
           }
-
-          if (isCart[CartPage.Products[i]]?.count !== undefined) {
-            spanPrice.textContent = ` ${isCart[CartPage.Products[i]].count} `;
-          }
+          spanPrice.textContent = ` ${isCart[CartPage.Products[idIndex]]?.count} `;
         });
 
         numberControl.append(incDecControl);
 
         const amountControl = document.createElement('div');
         amountControl.className = 'amount-control';
-        amountControl.textContent = ` €${prodData.products[CartPage.Products[i] - 1].price} `; //надо вставить
+        amountControl.textContent = `€${prodData.products[CartPage.Products[i] - 1].price}`; //надо вставить
         numberControl.append(amountControl);
 
         cartItem.append(numberControl);
