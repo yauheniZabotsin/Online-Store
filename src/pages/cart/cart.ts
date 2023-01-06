@@ -14,6 +14,8 @@ class CartPage extends Page {
     super(id);
   }
 
+  addEventLink(id: number) {}
+
   render() {
     const { getIsInCart, setIsInCart } = isCart;
     console.log('CartPage.Products', CartPage.Products);
@@ -43,6 +45,11 @@ class CartPage extends Page {
 
         const itemInfo = document.createElement('div');
         itemInfo.className = 'item-info';
+        itemInfo.addEventListener('click', () => {
+          let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+          window.location.hash = `#product-details/${CartPage.Products[idIndex]}`;
+        });
+
         const itemImg = document.createElement('img');
         itemImg.src = prodData.products[CartPage.Products[i] - 1].thumbnail; // надо вставить
         itemInfo.append(itemImg);
