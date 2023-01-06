@@ -100,15 +100,20 @@ class CartPage extends Page {
 
         btn1.addEventListener('click', () => {
           let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
-          if (isCart[CartPage.Products[idIndex]]?.count !== undefined) isCart[CartPage.Products[idIndex]].count += 1;
-          spanPrice.textContent = ` ${isCart[CartPage.Products[idIndex]]?.count} `;
+          if (
+            isCart[CartPage.Products[idIndex]]?.count !== undefined &&
+            isCart[CartPage.Products[idIndex]]?.count < prodData.products[CartPage.Products[idIndex] - 1].stock
+          ) {
+            isCart[CartPage.Products[idIndex]].count += 1;
+            spanPrice.textContent = ` ${isCart[CartPage.Products[idIndex]]?.count} `;
 
-          let count = Number(countCart.textContent);
-          countCart.textContent = `${++count}`;
+            let count = Number(countCart.textContent);
+            countCart.textContent = `${++count}`;
 
-          let CartPrice = CartTotal.innerHTML.slice(1);
+            let CartPrice = CartTotal.innerHTML.slice(1);
 
-          CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+            CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+          }
         });
 
         const spanPrice = document.createElement('span');
