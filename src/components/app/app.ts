@@ -15,7 +15,7 @@ export const enum PageIds {
 export const isCart: any = {
   getIsInCart: (id: string): boolean => isCart[id]?.isInCart,
   setIsInCart: (id: string, bool: boolean) => {
-    isCart[id] = { isInCart: bool, count: 1 };
+    isCart[id] = { isInCart: bool, count: 1, sumPrice: 0 };
   },
 };
 

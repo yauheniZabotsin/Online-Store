@@ -46,6 +46,7 @@ class MainPages extends Page {
           CartTotal.textContent = `€${+CartPrice - prodData.products[idIndex].price}.00`;
 
           setIsInCart(String(id), false);
+          isCart[id].sumPrice -= prodData.products[idIndex].price;
         } else {
           ((e.target as Element).closest('.product-item') as HTMLElement).classList.add('in-cart');
           item.textContent = 'DROP FROM CART';
@@ -53,6 +54,7 @@ class MainPages extends Page {
           CartTotal.textContent = `€${+CartPrice + prodData.products[idIndex].price}.00`;
 
           setIsInCart(String(id), true);
+          isCart[id].sumPrice += prodData.products[idIndex].price;
         }
 
         CartPage.Products = Object?.entries(isCart)
