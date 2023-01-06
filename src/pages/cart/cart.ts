@@ -88,9 +88,14 @@ class CartPage extends Page {
         btn1.textContent = '+';
         incDecControl.append(btn1);
 
+        const countCart = document.querySelector('.total_content') as HTMLElement;
+
         btn1.addEventListener('click', () => {
           isCart[CartPage.Products[i]].count += 1;
           spanPrice.textContent = ` ${isCart[CartPage.Products[i]]?.count} `;
+
+          let count = Number(countCart.textContent);
+          countCart.textContent = `${++count}`;
         });
 
         const spanPrice = document.createElement('span');
@@ -101,15 +106,21 @@ class CartPage extends Page {
         btn2.textContent = '-';
         incDecControl.append(btn2);
         btn2.addEventListener('click', (e: Event) => {
+          let count = Number(countCart.textContent);
+          countCart.textContent = `${--count}`;
+
           if (isCart[CartPage.Products[i]]?.count !== undefined) isCart[CartPage.Products[i]].count -= 1;
           if (isCart[CartPage.Products[i]]?.count <= 0 || isCart[CartPage.Products[i]]?.count === undefined) {
             // delete isCart[CartPage.Products[i]];
-
-            setIsInCart(String([CartPage.Products[i]]), false);
+            console.log('id', CartPage.Products[i]);
+            console.log('index', i);
+            console.log('CartPage.Products До', CartPage.Products);
+            let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+            setIsInCart(String(CartPage.Products[idIndex]), false);
             CartPage.Products = Object?.entries(isCart)
               .filter((item: any) => item[1].isInCart === true)
               .map((item) => +item[0]);
-
+            console.log('CartPage.Products После', CartPage.Products);
             ((e.target as Element).closest('.cart-item') as HTMLElement).remove();
             if (document.querySelector('.cart-item') === null) {
               console.log();
