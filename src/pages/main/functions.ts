@@ -75,3 +75,11 @@ export function setToggleAccessible(currentTarget: HTMLInputElement) {
       if(toSlider) toSlider.style.zIndex='0';
     }
 }
+
+export function convertArrayToNode(arr: Array<Element>) {
+    const fragment = document.createDocumentFragment();
+    arr.forEach((item: Element) => {
+        fragment.appendChild(item.cloneNode(true));
+    });
+    return fragment.childNodes;
+}

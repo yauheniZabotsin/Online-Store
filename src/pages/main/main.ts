@@ -1,35 +1,32 @@
 import Page from "../../core/templates/page";
-import { DataViewer } from "../../components/app/dataviewer";
-import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, fillSlider, setToggleAccessible } from "./functions";
-import prodData from "../../components/data/products";
+import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, convertArrayToNode, fillSlider, setToggleAccessible } from "./functions";
 
 class MainPages extends Page {
 
     static TextObject = {
-        MainTitle: "Main Pages",
+        MainTitle: 'Main Pages',
     };
 
     constructor(id: string) {
         super(id);
     }
 
-    addEventsModal () {
+    addEventsModal() {
         const productItem = document.querySelectorAll('.product-item');
 
-      productItem.forEach((item) => {
-          item.addEventListener("click", (e: Event) => {
-              const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
-              console.log("clickID: "+id);
-              window.location.hash = `#product-details/${id}`;
-          })
-      })
+        productItem.forEach((item) => {
+            item.addEventListener('click', (e: Event) => {
+                const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
+                window.location.hash = `#product-details/${id}`;
+            })
+        })
     }
 
     static getId(){
         return window.location.hash.slice(1);
     }
 
-    addEventsSlider () {
+    addEventsSlider() {
         const fromSlider = document.querySelector<HTMLInputElement>('#fromSlider');
         const toSlider = document.querySelector<HTMLInputElement>('#toSlider');
         const fromInput = document.querySelector<HTMLInputElement>('#fromInput');
@@ -57,7 +54,40 @@ class MainPages extends Page {
             fromInput1.oninput = () => controlFromInput(fromSlider1, fromInput1, toInput1, toSlider1);
             toInput1.oninput = () => controlToInput(toSlider1, fromInput1, toInput1, toSlider1);
         }
-  }
+    }
+
+    sortProducts(): void {
+        const optionSelector = document.querySelector('#option-selector') as HTMLSelectElement;
+        const priceHtoL = document.querySelector('#price-down') as HTMLOptionElement ;
+        const priceLtoH = document.querySelector('#price-up') as HTMLOptionElement;
+        const ratingHtoL = document.querySelector('#rating-down') as HTMLOptionElement;
+        const ratingLtoH = document.querySelector('#rating-up') as HTMLOptionElement;
+        const items = document.querySelectorAll('.item');
+        const itemsArr = Array.from(items);
+        
+        optionSelector.addEventListener('click', () => {
+            let options = optionSelector.querySelectorAll('option');
+            let count = options.length;
+            console.log(itemsArr);
+            console.log(options);
+            console.log(count);
+        });
+        
+        optionSelector.addEventListener('change', () => {
+            
+            if (optionSelector.value = 'price-down') {
+                itemsArr.sort((a, b) => {
+                    let aPrice = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+                    let bPrice = Number(b.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+                    if (aPrice > bPrice) return 1;
+                    if (aPrice < bPrice) return -1;
+                    return 0;
+                });
+                const result = convertArrayToNode(itemsArr);
+                console.log(result);
+            }
+        })
+    }
 
     render(): HTMLElement {
         const mainPage: HTMLElement = document.createElement('div');
@@ -216,6 +246,7 @@ class MainPages extends Page {
         stock.append(stockCont);
         stock.append(slidersControl1);
 
+        sortSelect.setAttribute('id', 'option-selector');
         sortProducts.className = 'sort-products';
         sortBar.className = 'sort-bar';
         option1.innerText = 'Sort options:';

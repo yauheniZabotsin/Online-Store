@@ -50,6 +50,7 @@ class App {
             this.view.viewBrands(brandData);
             page.addEventsSlider();
             page.addEventsModal();
+            page.sortProducts();
           }
         }
     }
