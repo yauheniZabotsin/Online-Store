@@ -47,6 +47,21 @@ class ProductPage extends Page {
     linkNavigation.className = 'link-navigation';
     for (let i = 0; i < 4; i++) {
       const link = document.createElement('a');
+
+      if (i === 0) {
+        link.innerHTML = 'STORE';
+        link.href = '#main';
+      } else if (i === 1) {
+        link.innerHTML = prodData.products[id].category;
+        linkNavigation.append((document.createElement('span').textContent = '>>'));
+      } else if (i === 2) {
+        link.innerHTML = prodData.products[id].brand;
+        linkNavigation.append((document.createElement('span').textContent = '>>'));
+      } else {
+        link.innerHTML = prodData.products[id].title;
+        linkNavigation.append((document.createElement('span').textContent = '>>'));
+      }
+
       linkNavigation.appendChild(link);
     }
     this.container.append(linkNavigation);
