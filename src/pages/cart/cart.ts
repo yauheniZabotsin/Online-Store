@@ -124,21 +124,23 @@ class CartPage extends Page {
         btn2.textContent = '-';
         incDecControl.append(btn2);
         btn2.addEventListener('click', (e: Event) => {
-          let count = Number(countCart.textContent);
-          countCart.textContent = `${--count}`;
-
           let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+          if (isCart[CartPage.Products[idIndex]]?.count !== undefined) {
+            isCart[CartPage.Products[idIndex]].count -= 1;
 
-          let CartPrice = CartTotal.innerHTML.slice(1);
-          CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+            let count = Number(countCart.textContent);
+            countCart.textContent = `${--count}`;
 
-          if (isCart[CartPage.Products[idIndex]]?.count !== undefined) isCart[CartPage.Products[idIndex]].count -= 1;
+            let CartPrice = CartTotal.innerHTML.slice(1);
+            CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+          }
+
           if (
             isCart[CartPage.Products[idIndex]]?.count <= 0 ||
             isCart[CartPage.Products[idIndex]]?.count === undefined
           ) {
             // delete isCart[CartPage.Products[i]];
-
+            isCart[CartPage.Products[idIndex]].count = 1;
             setIsInCart(String(CartPage.Products[idIndex]), false);
             CartPage.Products = Object?.entries(isCart)
               .filter((item: any) => item[1].isInCart === true)
@@ -146,7 +148,6 @@ class CartPage extends Page {
 
             ((e.target as Element).closest('.cart-item') as HTMLElement).remove();
             if (document.querySelector('.cart-item') === null) {
-              console.log();
               document.querySelector('.products-in-cart')?.classList.remove('products-in-cart');
               const title = this.createHeaderTitle(CartPage.TextObject.MainTitle);
               title.className = 'cart-title';
