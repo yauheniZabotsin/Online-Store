@@ -39,6 +39,7 @@ class ProductPage extends Page {
     const hash = window.location.hash;
     const id = +window.location.hash.substring(+hash.indexOf('/') + 1, +hash.length) - 1;
     const productId = id + 1;
+    console.log(id);
 
     const productWrap = document.createElement('div');
     this.container.append(productWrap);
@@ -145,13 +146,13 @@ class ProductPage extends Page {
         countCart.textContent = `${++count}`;
         CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
         setIsInCart(String(productId), true);
-        console.log('isCart', isCart);
       } else {
         btnCart.textContent = 'ADD TO CART';
-        countCart.textContent = `${--count}`;
+        console.log(isCart[id]);
+        console.log(isCart[CartPage.Products[id]]);
+        countCart.textContent = `${count - isCart[prodData.products[id].id]?.count}`;
         CartTotal.textContent = `€${+CartPrice - prodData.products[id].price}.00`;
         setIsInCart(String(productId), false);
-        console.log('isCart', isCart);
       }
       CartPage.Products = Object?.entries(isCart)
         .filter((item: any) => item[1].isInCart === true)
