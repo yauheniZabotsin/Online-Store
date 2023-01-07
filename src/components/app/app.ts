@@ -64,6 +64,9 @@ class App {
       if (page instanceof ProductPage) {
         page.addEventImg();
       }
+      if (page instanceof CartPage) {
+        page.addEventPromoCode();
+      }
     }
   }
 

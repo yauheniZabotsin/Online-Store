@@ -14,7 +14,69 @@ class CartPage extends Page {
     super(id);
   }
 
-  addEventPromoCode() {}
+  addEventPromoCode() {
+    const priceTotal = document.querySelector('.price-total') as HTMLElement;
+    const PriceText = priceTotal.querySelector('span');
+    let PriceNumber = Number(PriceText?.textContent?.slice(1));
+
+    const form = <HTMLFormElement>document.querySelector('form');
+    const search = <HTMLInputElement>document.querySelector('.promo-code input');
+
+    const promoCode = document.querySelector('.promo-code');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      if (search.value.toLocaleUpperCase() === 'RS' || search.value.toLocaleUpperCase() === 'EPM') {
+        const res = document.createElement('div');
+        res.className = 'res-promo';
+        res.textContent =
+          search.value.toLocaleUpperCase() === 'RS' ? 'Rolling Scopes School - 10% ' : 'EPAM Systems - 10% - ';
+        const spanRS = document.createElement('span');
+        spanRS.textContent = 'ADD';
+        res.append(spanRS);
+        promoCode?.after(res);
+
+        spanRS.addEventListener('click', (e) => {
+          (e.target as Element).closest('.res-promo')?.remove();
+          priceTotal.classList.add('old-price');
+
+          const totalPrice = document.createElement('div');
+          totalPrice.className = 'price-total';
+          totalPrice.id = 'newTotalPrice';
+          totalPrice.textContent = 'Total: ';
+          const totalPriceSpan = document.createElement('span');
+          totalPriceSpan.id = 'newPriceSpan';
+          totalPriceSpan.textContent = `${Math.round(PriceNumber * 0.9)}.00`;
+          totalPrice.append(totalPriceSpan);
+          priceTotal.after(totalPrice);
+
+          const appleCodes = document.createElement('div');
+          appleCodes.className = 'appl-codes';
+          const h3 = document.createElement('h3');
+          h3.textContent = 'Applied codes';
+          appleCodes.append(h3);
+
+          const appliedPromo = document.createElement('div');
+          appliedPromo.className = 'applied-promo';
+          appliedPromo.textContent =
+            search.value.toLocaleUpperCase() === 'RS' ? 'Rolling Scopes School - 10% ' : 'EPAM Systems - 10% - ';
+          const span = document.createElement('span');
+          span.textContent = 'DROP';
+          appliedPromo.append(span);
+          appleCodes.append(appliedPromo);
+
+          promoCode?.before(appleCodes);
+
+          span.addEventListener('click', (e) => {
+            priceTotal.classList.remove('old-price');
+            (e.target as Element).closest('.appl-codes')?.remove();
+            totalPrice.remove();
+          });
+        });
+      }
+    });
+  }
 
   render() {
     const { getIsInCart, setIsInCart } = isCart;
@@ -44,7 +106,7 @@ class CartPage extends Page {
       totalCart.append(h2);
 
       const totalCount = document.createElement('div');
-      totalCount.className = 'price-total';
+      totalCount.className = 'count-total';
       totalCount.textContent = 'Products: ';
       const totalCountSpan = document.createElement('span');
       totalCountSpan.textContent = countCart.textContent;
@@ -61,10 +123,12 @@ class CartPage extends Page {
 
       const promoCode = document.createElement('div');
       promoCode.className = 'promo-code';
+      const form = document.createElement('form');
       const input = document.createElement('input');
       input.type = 'search';
       input.placeholder = 'Enter promo code';
-      promoCode.append(input);
+      form.append(input);
+      promoCode.append(form);
       totalCart.append(promoCode);
 
       const promoSpan = document.createElement('span');
@@ -83,7 +147,7 @@ class CartPage extends Page {
 
         const itemIndex = document.createElement('div');
         itemIndex.className = 'item-i';
-        itemIndex.textContent = `${i + 1}`; // индекс выборного продукта массива
+        itemIndex.textContent = `${i + 1}`;
         cartItem.append(itemIndex);
 
         const itemInfo = document.createElement('div');
@@ -94,7 +158,7 @@ class CartPage extends Page {
         });
 
         const itemImg = document.createElement('img');
-        itemImg.src = prodData.products[CartPage.Products[i] - 1].thumbnail; // надо вставить
+        itemImg.src = prodData.products[CartPage.Products[i] - 1].thumbnail;
         itemInfo.append(itemImg);
         const itemDetailP = document.createElement('div');
         itemDetailP.className = 'item-detail-p';
@@ -103,22 +167,22 @@ class CartPage extends Page {
         const productTitle = document.createElement('div');
         productTitle.className = 'product-title';
         const h3 = document.createElement('h3');
-        h3.textContent = prodData.products[CartPage.Products[i] - 1].title; //надо вставить
+        h3.textContent = prodData.products[CartPage.Products[i] - 1].title;
         productTitle.append(h3);
         itemDetailP.append(productTitle);
 
         const productDescription = document.createElement('div');
         productDescription.className = 'product-description';
-        productDescription.textContent = ` ${prodData.products[CartPage.Products[i] - 1].description} `; //надо всавить
+        productDescription.textContent = ` ${prodData.products[CartPage.Products[i] - 1].description} `;
         itemDetailP.append(productDescription);
 
         const productOther = document.createElement('div');
         productOther.className = 'product-other';
         const div1 = document.createElement('div');
-        div1.textContent = `Rating: ${prodData.products[CartPage.Products[i] - 1].rating} `; //надо вставить
+        div1.textContent = `Rating: ${prodData.products[CartPage.Products[i] - 1].rating} `;
         productOther.append(div1);
         const div2 = document.createElement('div');
-        div2.textContent = `Discount: ${prodData.products[CartPage.Products[i] - 1].discountPercentage}%`; //надо вставить
+        div2.textContent = `Discount: ${prodData.products[CartPage.Products[i] - 1].discountPercentage}%`;
         productOther.append(div2);
 
         itemDetailP.append(productOther);
@@ -129,7 +193,7 @@ class CartPage extends Page {
 
         const stockControl = document.createElement('div');
         stockControl.className = 'stock-control';
-        stockControl.textContent = `Stock: ${prodData.products[CartPage.Products[i] - 1].stock} `; //надо вставить
+        stockControl.textContent = `Stock: ${prodData.products[CartPage.Products[i] - 1].stock} `;
         numberControl.append(stockControl);
 
         const incDecControl = document.createElement('div');
@@ -155,12 +219,18 @@ class CartPage extends Page {
 
             CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
+            // console.log('totalPriceSpan', totalPriceSpan);
+
+            const newPrice = document.getElementById('newPriceSpan') as HTMLElement;
+            console.log(newPrice);
+            newPrice.innerHTML = `${Math.round(+totalPriceSpan.textContent.slice(1) * 0.9)}.00`;
+
             isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
           }
         });
 
         const spanPrice = document.createElement('span');
-        spanPrice.textContent = ` ${isCart[CartPage.Products[i]]?.count} `; //TODO
+        spanPrice.textContent = ` ${isCart[CartPage.Products[i]]?.count} `;
         incDecControl.append(spanPrice);
 
         const btn2 = document.createElement('button');
@@ -195,6 +265,7 @@ class CartPage extends Page {
             ((e.target as Element).closest('.cart-item') as HTMLElement).remove();
             if (document.querySelector('.cart-item') === null) {
               document.querySelector('.products-in-cart')?.classList.remove('products-in-cart');
+              (document.querySelector('.total-cart') as HTMLElement).remove();
               const title = this.createHeaderTitle(CartPage.TextObject.MainTitle);
               title.className = 'cart-title';
               this.container.append(title);

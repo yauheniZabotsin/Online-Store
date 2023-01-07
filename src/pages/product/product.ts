@@ -39,7 +39,6 @@ class ProductPage extends Page {
     const hash = window.location.hash;
     const id = +window.location.hash.substring(+hash.indexOf('/') + 1, +hash.length) - 1;
     const productId = id + 1;
-    console.log(id);
 
     const productWrap = document.createElement('div');
     this.container.append(productWrap);
@@ -81,7 +80,7 @@ class ProductPage extends Page {
     productPhotos.className = 'product-photos';
     const slides = document.createElement('div');
     slides.className = 'slides';
-    for (let i = 1; i < 4; i++) {
+    for (let i = 0; i < prodData.products[id].images.length; i++) {
       const img = document.createElement('img');
       img.alt = 'slide';
       img.src = prodData.products[id].images[i];
