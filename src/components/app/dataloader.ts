@@ -1,10 +1,15 @@
 import { Data, Filter, Product } from '../interfaces/interfaces';
 
 export class Products {
+
     loadProducts(data: Data['products']): void {
         const fragment = document.createDocumentFragment();
-        const prodCont = <HTMLElement>document.querySelector('.products-items');
+        const products = <HTMLElement>document.querySelector('.products-items');
         const itemTemplate = <HTMLTemplateElement>document.querySelector('.item-template');
+
+        if (products.childNodes.length) {
+            products.innerHTML = '';
+        }
 
         data.forEach((item: Product) => {
             const itemClone = <HTMLElement>itemTemplate.content.cloneNode(true);
@@ -37,7 +42,7 @@ export class Products {
             fragment.append(itemClone);
         });
 
-        prodCont.appendChild(fragment);
+        products.appendChild(fragment);
     }
 }
 

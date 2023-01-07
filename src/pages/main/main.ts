@@ -1,7 +1,11 @@
+import { Products } from "../../components/app/dataloader";
+import prodData from "../../components/data/products";
+import { Data, Product } from "../../components/interfaces/interfaces";
 import Page from "../../core/templates/page";
 import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, convertArrayToNode, fillSlider, setToggleAccessible } from "./functions";
 
 class MainPages extends Page {
+    products: Products;
 
     static TextObject = {
         MainTitle: 'Main Pages',
@@ -9,16 +13,16 @@ class MainPages extends Page {
 
     constructor(id: string) {
         super(id);
+        this.products = new Products();
     }
 
     addEventsModal() {
         const productItem = document.querySelectorAll('.product-item');
-
         productItem.forEach((item) => {
             item.addEventListener('click', (e: Event) => {
                 const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
                 window.location.hash = `#product-details/${id}`;
-            })
+            });
         })
     }
 
@@ -58,34 +62,93 @@ class MainPages extends Page {
 
     sortProducts(): void {
         const optionSelector = document.querySelector('#option-selector') as HTMLSelectElement;
-        const priceHtoL = document.querySelector('#price-down') as HTMLOptionElement ;
-        const priceLtoH = document.querySelector('#price-up') as HTMLOptionElement;
-        const ratingHtoL = document.querySelector('#rating-down') as HTMLOptionElement;
-        const ratingLtoH = document.querySelector('#rating-up') as HTMLOptionElement;
-        const items = document.querySelectorAll('.item');
-        const itemsArr = Array.from(items);
-        
-        optionSelector.addEventListener('click', () => {
-            let options = optionSelector.querySelectorAll('option');
-            let count = options.length;
-            console.log(itemsArr);
-            console.log(options);
-            console.log(count);
-        });
         
         optionSelector.addEventListener('change', () => {
-            
-            if (optionSelector.value = 'price-down') {
-                itemsArr.sort((a, b) => {
-                    let aPrice = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
-                    let bPrice = Number(b.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+            if (optionSelector.value === 'price-down') {
+                let arr: Array<Product> = prodData.products;
+                arr.sort((a, b) => {
+                    let aPrice = a.price;
+                    let bPrice = b.price;
+                    if (aPrice < bPrice) return 1;
+                    if (aPrice > bPrice) return -1;
+                    return 0;
+                });
+                this.products.loadProducts(arr);
+                // window.location.hash += `?sort=${optionSelector.value}`;
+            }
+
+            if (optionSelector.value === 'price-up') {
+                let arr: Array<Product> = prodData.products;
+                arr.sort((a, b) => {
+                    let aPrice = a.price;
+                    let bPrice = b.price;
                     if (aPrice > bPrice) return 1;
                     if (aPrice < bPrice) return -1;
                     return 0;
                 });
-                const result = convertArrayToNode(itemsArr);
-                console.log(result);
+                this.products.loadProducts(arr);
             }
+
+            if (optionSelector.value === 'rating-down') {
+                let arr: Array<Product> = prodData.products;
+                arr.sort((a, b) => {
+                    let aRating = a.rating;
+                    let bRating= b.rating;
+                    if (aRating < bRating) return 1;
+                    if (aRating > bRating) return -1;
+                    return 0;
+                });
+                this.products.loadProducts(arr);
+            }
+
+            if (optionSelector.value === 'rating-up') {
+                let arr: Array<Product> = prodData.products;
+                arr.sort((a, b) => {
+                    let aRating = a.rating;
+                    let bRating = b.rating;
+                    if (aRating> bRating) return 1;
+                    if (aRating < bRating) return -1;
+                    return 0;
+                });
+                this.products.loadProducts(arr);
+            }
+        });
+    }
+
+    searchProducts(): void {
+        const searchInput = document.querySelector('#search-input');
+        searchInput?.addEventListener('input', (e) => {
+            const target = e.target as HTMLInputElement;
+            let value: string = target.value;
+            let result: Array<Product> = [];
+            const arr: Array<Product> = prodData.products;
+            const productsCont = document.querySelector('.products-items') as HTMLElement;
+            const notFound = document.querySelector('.not-found') as HTMLElement;
+
+            if (value && value.trim().length > 0) {
+                value = value.trim().toLowerCase();
+                result = arr.filter((item) => {
+                    if (item.title.toLowerCase().includes(value) ||
+                        item.brand.toLowerCase().includes(value) ||
+                        item.discountPercentage.toString().includes(value) ||
+                        item.rating.toString().includes(value) ||
+                        item.stock.toString().includes(value) ||
+                        item.category.toLowerCase().includes(value)
+                        ) return item;
+                })
+                if (result.length > 0) {
+                    productsCont.style.display = 'flex';
+                    notFound.style.display = 'none';
+                    this.products.loadProducts(result);
+                } else {
+                    productsCont.style.display = 'none';
+                    notFound.style.display = 'block';
+                }
+            } else {
+                productsCont.style.display = 'flex';
+                notFound.style.display = 'none';
+                this.products.loadProducts(arr);
+            } 
         })
     }
 
@@ -265,6 +328,7 @@ class MainPages extends Page {
         stat.innerText = 'Found: 100';
         stat.className = 'stat';
         searchBar.className = 'search-bar';
+        searchInput.setAttribute('id', 'search-input');
         searchInput.setAttribute('type', 'search');
         searchInput.setAttribute('placeholder', 'Search product');
         viewMode.className = 'view-mode';
@@ -273,6 +337,7 @@ class MainPages extends Page {
         bigVM.classList.add('active-mode');
         productsItems.className = 'products-items';
         notFound.className = 'not-found';
+        notFound.innerText = 'No products found 😏';
         sortSelect.append(option1);
         sortSelect.append(option2);
         sortSelect.append(option3);

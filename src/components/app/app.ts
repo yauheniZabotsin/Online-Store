@@ -17,13 +17,11 @@ class App {
     private static container: HTMLElement = document.querySelector("main") as HTMLElement;
     private initialPage: MainPages;
     public view: DataViewer;
-
     
     constructor() {
       this.view = new DataViewer();
       this.initialPage = new MainPages("main");
   }
-
 
     public renderNewPage(idPage: string) {
         App.container.innerHTML = '';
@@ -51,6 +49,7 @@ class App {
             page.addEventsSlider();
             page.addEventsModal();
             page.sortProducts();
+            page.searchProducts();
           }
         }
     }
