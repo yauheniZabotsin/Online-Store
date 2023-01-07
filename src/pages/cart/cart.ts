@@ -167,6 +167,47 @@ class CartPage extends Page {
         numberControl.append(amountControl);
 
         cartItem.append(numberControl);
+
+        const totalCart = document.createElement('div');
+        totalCart.className = 'total-cart';
+        cartWrapper.append(totalCart);
+
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Summary';
+        totalCart.append(h2);
+
+        const totalCount = document.createElement('div');
+        totalCount.className = 'price-total';
+        totalCount.textContent = 'Products: ';
+        const totalCountSpan = document.createElement('span');
+        totalCountSpan.textContent = countCart.textContent;
+        totalCount.append(totalCountSpan);
+        totalCart.append(totalCount);
+
+        const totalPrice = document.createElement('div');
+        totalPrice.className = 'price-total';
+        totalPrice.textContent = 'Total: ';
+        const totalPriceSpan = document.createElement('span');
+        totalPriceSpan.textContent = CartTotal.textContent;
+        totalPrice.append(totalPriceSpan);
+        totalCart.append(totalPrice);
+
+        const promoCode = document.createElement('div');
+        promoCode.className = 'promo-code';
+        const input = document.createElement('input');
+        input.type = 'search';
+        input.placeholder = 'Enter promo code';
+        promoCode.append(input);
+        totalCart.append(promoCode);
+
+        const promoSpan = document.createElement('span');
+        promoSpan.className = 'promo-ex';
+        promoSpan.textContent = "Promo for test: 'RS', 'EPM'";
+        totalCart.append(promoSpan);
+
+        const btnBuy = document.createElement('button');
+        btnBuy.textContent = 'BUY NOW';
+        totalCart.append(btnBuy);
       }
     } else {
       const title = this.createHeaderTitle(CartPage.TextObject.MainTitle);
