@@ -2,10 +2,14 @@ import { Products } from "../../components/app/dataloader";
 import prodData from "../../components/data/products";
 import { Data, Product } from "../../components/interfaces/interfaces";
 import Page from "../../core/templates/page";
-import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, convertArrayToNode, fillSlider, setToggleAccessible } from "./functions";
+import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, convertArrayToNode, fillSlider, filterCheckboxResults, getIdOfCheckedCheckboxes, setToggleAccessible } from "./functions";
 
 class MainPages extends Page {
     products: Products;
+    filterResult: any = [];
+    sortResult: Array<Product> = [];
+    searchResult: Array<Product> = [];
+    searchAmount: string = '100';
 
     static TextObject = {
         MainTitle: 'Main Pages',
@@ -14,6 +18,10 @@ class MainPages extends Page {
     constructor(id: string) {
         super(id);
         this.products = new Products();
+        this.filterResult;
+        this.searchResult;
+        this.sortResult;
+        this.searchAmount;
     }
 
     addEventsModal() {
@@ -60,74 +68,128 @@ class MainPages extends Page {
         }
     }
 
+    // filterProducts(): void {
+    //     const catCheckboxes = document.querySelectorAll('.category-input') as NodeListOf<HTMLInputElement>;
+    //     const brandCheckboxes = document.querySelectorAll('.brand-input') as NodeListOf<HTMLInputElement>;
+    //     const filters: { categories: Array<string>, brands: Array<string> } = {
+    //         categories: getIdOfCheckedCheckboxes(catCheckboxes),
+    //         brands: getIdOfCheckedCheckboxes(brandCheckboxes)
+    //     }
+
+    //     this.filterResult = filterCheckboxResults(filters);
+        
+    //     console.log(this.filterResult);
+    // }
+
     sortProducts(): void {
         const optionSelector = document.querySelector('#option-selector') as HTMLSelectElement;
-        
+        const arr: Array<Product> = prodData.products;
+
         optionSelector.addEventListener('change', () => {
             if (optionSelector.value === 'price-down') {
-                let arr: Array<Product> = prodData.products;
-                arr.sort((a, b) => {
-                    let aPrice = a.price;
-                    let bPrice = b.price;
-                    if (aPrice < bPrice) return 1;
-                    if (aPrice > bPrice) return -1;
-                    return 0;
-                });
-                this.products.loadProducts(arr);
+                if (this.searchResult.length > 0) {
+                    this.sortResult = this.searchResult.sort((a, b) => {
+                        let aPrice = a.price;
+                        let bPrice = b.price;
+                        if (aPrice < bPrice) return 1;
+                        if (aPrice > bPrice) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                } else {
+                    this.sortResult = arr.sort((a, b) => {
+                        let aPrice = a.price;
+                        let bPrice = b.price;
+                        if (aPrice < bPrice) return 1;
+                        if (aPrice > bPrice) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                }
                 // window.location.hash += `?sort=${optionSelector.value}`;
             }
 
             if (optionSelector.value === 'price-up') {
-                let arr: Array<Product> = prodData.products;
-                arr.sort((a, b) => {
-                    let aPrice = a.price;
-                    let bPrice = b.price;
-                    if (aPrice > bPrice) return 1;
-                    if (aPrice < bPrice) return -1;
-                    return 0;
-                });
-                this.products.loadProducts(arr);
+                if (this.searchResult.length > 0) {
+                    this.sortResult = this.searchResult.sort((a, b) => {
+                        let aPrice = a.price;
+                        let bPrice = b.price;
+                        if (aPrice > bPrice) return 1;
+                        if (aPrice < bPrice) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                } else {
+                    this.sortResult = arr.sort((a, b) => {
+                        let aPrice = a.price;
+                        let bPrice = b.price;
+                        if (aPrice > bPrice) return 1;
+                        if (aPrice < bPrice) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                }
             }
 
             if (optionSelector.value === 'rating-down') {
-                let arr: Array<Product> = prodData.products;
-                arr.sort((a, b) => {
-                    let aRating = a.rating;
-                    let bRating= b.rating;
-                    if (aRating < bRating) return 1;
-                    if (aRating > bRating) return -1;
-                    return 0;
-                });
-                this.products.loadProducts(arr);
+                if (this.searchResult.length > 0) {
+                    this.sortResult = this.searchResult.sort((a, b) => {
+                        let aRating = a.rating;
+                        let bRating= b.rating;
+                        if (aRating < bRating) return 1;
+                        if (aRating > bRating) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                } else {
+                    this.sortResult = arr.sort((a, b) => {
+                        let aRating = a.rating;
+                        let bRating= b.rating;
+                        if (aRating < bRating) return 1;
+                        if (aRating > bRating) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                }
             }
 
             if (optionSelector.value === 'rating-up') {
-                let arr: Array<Product> = prodData.products;
-                arr.sort((a, b) => {
-                    let aRating = a.rating;
-                    let bRating = b.rating;
-                    if (aRating> bRating) return 1;
-                    if (aRating < bRating) return -1;
-                    return 0;
-                });
-                this.products.loadProducts(arr);
+                if (this.searchResult.length > 0) {
+                    this.sortResult = this.searchResult.sort((a, b) => {
+                        let aRating = a.rating;
+                        let bRating = b.rating;
+                        if (aRating> bRating) return 1;
+                        if (aRating < bRating) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                } else {
+                    this.sortResult = arr.sort((a, b) => {
+                        let aRating = a.rating;
+                        let bRating = b.rating;
+                        if (aRating> bRating) return 1;
+                        if (aRating < bRating) return -1;
+                        return 0;
+                    });
+                    this.products.loadProducts(this.sortResult);
+                }
             }
         });
     }
 
     searchProducts(): void {
-        const searchInput = document.querySelector('#search-input');
-        searchInput?.addEventListener('input', (e) => {
+        const searchInput = document.querySelector('#search-input') as HTMLInputElement;
+        searchInput.addEventListener('input', (e) => {
             const target = e.target as HTMLInputElement;
             let value: string = target.value;
-            let result: Array<Product> = [];
             const arr: Array<Product> = prodData.products;
             const productsCont = document.querySelector('.products-items') as HTMLElement;
             const notFound = document.querySelector('.not-found') as HTMLElement;
+            const stat = document.querySelector('.stat') as HTMLElement;
 
             if (value && value.trim().length > 0) {
                 value = value.trim().toLowerCase();
-                result = arr.filter((item) => {
+                this.searchResult = arr.filter((item) => {
                     if (item.title.toLowerCase().includes(value) ||
                         item.brand.toLowerCase().includes(value) ||
                         item.discountPercentage.toString().includes(value) ||
@@ -135,19 +197,25 @@ class MainPages extends Page {
                         item.stock.toString().includes(value) ||
                         item.category.toLowerCase().includes(value)
                         ) return item;
-                })
-                if (result.length > 0) {
+                    })
+                if (this.searchResult.length > 0) {
                     productsCont.style.display = 'flex';
                     notFound.style.display = 'none';
-                    this.products.loadProducts(result);
+                    this.products.loadProducts(this.searchResult);
+                    this.searchAmount = this.searchResult.length.toString();
+                    stat.innerText = `Found: ${this.searchAmount}`;
                 } else {
                     productsCont.style.display = 'none';
                     notFound.style.display = 'block';
+                    this.searchAmount = '0';
+                    stat.innerText = `Found: ${this.searchAmount}`;
                 }
             } else {
                 productsCont.style.display = 'flex';
                 notFound.style.display = 'none';
                 this.products.loadProducts(arr);
+                this.searchAmount = arr.length.toString();
+                stat.innerText = `Found: ${this.searchAmount}`;
             } 
         })
     }
@@ -325,7 +393,7 @@ class MainPages extends Page {
         option4.setAttribute('value', 'rating-down');
         option5.innerText = 'Rating (Low to High)';
         option5.setAttribute('value', 'rating-up');
-        stat.innerText = 'Found: 100';
+        stat.innerText = `Found: ${this.searchAmount}`;
         stat.className = 'stat';
         searchBar.className = 'search-bar';
         searchInput.setAttribute('id', 'search-input');

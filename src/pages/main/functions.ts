@@ -1,3 +1,5 @@
+import { Product } from "../../components/interfaces/interfaces";
+
 export function controlFromInput(fromSlider: HTMLInputElement, fromInput: HTMLInputElement, toInput:HTMLInputElement, controlSlider: HTMLInputElement) {
     const [from, to] = getParsed(fromInput, toInput);
     fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
@@ -82,4 +84,88 @@ export function convertArrayToNode(arr: Array<Element>) {
         fragment.appendChild(item.cloneNode(true));
     });
     return fragment.childNodes;
+}
+
+export function getIdOfCheckedCheckboxes(checkboxes: NodeListOf<HTMLInputElement>) {
+    let classes: Array<string> = [];
+
+    if (checkboxes && checkboxes.length > 0) {
+        for (let i = 0; i < checkboxes.length; i++) {
+            let cb = checkboxes[i];
+            if (cb.checked) {
+                classes.push(cb.getAttribute("id")!);
+            }
+        }
+    }
+    return classes;
+}
+
+export function filterCheckboxResults(filters: { categories: Array<string>, brands: Array<string>}) {
+    let products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    let hiddenPoducts: Array<HTMLElement> = [];
+    
+    for (let i = 0; i < products.length; i++) {
+        let product = products[i];
+        let category = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1].textContent?.slice(10);
+        let brand = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[3].textContent?.slice(7);
+        
+        if (filters.categories.length > 0) {
+            let isHidden = true;
+            
+            for (let j = 0; j < filters.categories.length; j++) {
+                
+                let filter = filters.categories[j];
+                
+                if (filter === category) {
+                    isHidden = false;
+                    break;
+                }
+            }
+
+            if (isHidden) {
+                hiddenPoducts.push(product);
+            }
+        }
+
+        if (filters.brands.length > 0) {
+            let isHidden = true;
+
+            for (let j = 0; j < filters.brands.length; j++) {
+                let filter = filters.brands[j];
+
+                if (filter === brand) {
+                    isHidden = false;
+                    break;
+                }
+            }
+            
+            if (isHidden) {
+                hiddenPoducts.push(product);
+            }
+        }
+    }
+
+    for (let i = 0; i < products.length; i++) {
+        products[i].style.display = 'block';
+    }
+
+    if (hiddenPoducts.length <= 0) {
+        return;
+    }
+
+    for (let i = 0; i < hiddenPoducts.length; i++) {
+        hiddenPoducts[i].style.display = 'none';
+    }
+}
+
+export function filterProducts() {
+    const catCheckboxes = document.querySelectorAll('.category-input') as NodeListOf<HTMLInputElement>;
+    const brandCheckboxes = document.querySelectorAll('.brand-input') as NodeListOf<HTMLInputElement>;
+
+    const filters: { categories: Array<string>, brands: Array<string> } = {
+        categories: getIdOfCheckedCheckboxes(catCheckboxes),
+        brands: getIdOfCheckedCheckboxes(brandCheckboxes)
+    }
+    
+    const filterResult = filterCheckboxResults(filters);
 }
