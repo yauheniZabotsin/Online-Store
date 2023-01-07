@@ -113,6 +113,7 @@ class CartPage extends Page {
             let CartPrice = CartTotal.innerHTML.slice(1);
 
             CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+            isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
           }
         });
 
@@ -133,6 +134,7 @@ class CartPage extends Page {
 
             let CartPrice = CartTotal.innerHTML.slice(1);
             CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+            isCart[CartPage.Products[idIndex]].sumPrice -= prodData.products[CartPage.Products[idIndex] - 1].price;
           }
 
           if (
