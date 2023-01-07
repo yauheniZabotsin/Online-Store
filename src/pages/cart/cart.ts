@@ -219,10 +219,8 @@ class CartPage extends Page {
 
             CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
-            // console.log('totalPriceSpan', totalPriceSpan);
 
             const newPrice = document.getElementById('newPriceSpan') as HTMLElement;
-            console.log(newPrice);
             newPrice.innerHTML = `${Math.round(+totalPriceSpan.textContent.slice(1) * 0.9)}.00`;
 
             isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
@@ -248,6 +246,10 @@ class CartPage extends Page {
             let CartPrice = CartTotal.innerHTML.slice(1);
             CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
+
+            const newPrice = document.getElementById('newPriceSpan') as HTMLElement;
+            newPrice.innerHTML = `${Math.round(+totalPriceSpan.textContent.slice(1) * 0.9)}.00`;
+
             isCart[CartPage.Products[idIndex]].sumPrice -= prodData.products[CartPage.Products[idIndex] - 1].price;
           }
 
@@ -278,7 +280,7 @@ class CartPage extends Page {
 
         const amountControl = document.createElement('div');
         amountControl.className = 'amount-control';
-        amountControl.textContent = `€${prodData.products[CartPage.Products[i] - 1].price}`; //надо вставить
+        amountControl.textContent = `€${prodData.products[CartPage.Products[i] - 1].price}`;
         numberControl.append(amountControl);
 
         cartItem.append(numberControl);
