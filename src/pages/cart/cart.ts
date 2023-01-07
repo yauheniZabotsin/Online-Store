@@ -14,11 +14,13 @@ class CartPage extends Page {
     super(id);
   }
 
-  addEventLink(id: number) {}
+  addEventPromoCode() {}
 
   render() {
     const { getIsInCart, setIsInCart } = isCart;
-    console.log('CartPage.Products', CartPage.Products);
+
+    const countCart = document.querySelector('.total_content') as HTMLElement;
+    const CartTotal = document.querySelector('.total-price span') as HTMLElement;
 
     if (CartPage.Products.length > 0) {
       const cartWrapper = document.createElement('div');
@@ -32,6 +34,47 @@ class CartPage extends Page {
       const prodItems = document.createElement('div');
       prodItems.className = 'prod-items';
       productsInCart.append(prodItems);
+
+      const totalCart = document.createElement('div');
+      totalCart.className = 'total-cart';
+      cartWrapper.append(totalCart);
+
+      const h2 = document.createElement('h2');
+      h2.textContent = 'Summary';
+      totalCart.append(h2);
+
+      const totalCount = document.createElement('div');
+      totalCount.className = 'price-total';
+      totalCount.textContent = 'Products: ';
+      const totalCountSpan = document.createElement('span');
+      totalCountSpan.textContent = countCart.textContent;
+      totalCount.append(totalCountSpan);
+      totalCart.append(totalCount);
+
+      const totalPrice = document.createElement('div');
+      totalPrice.className = 'price-total';
+      totalPrice.textContent = 'Total: ';
+      const totalPriceSpan = document.createElement('span');
+      totalPriceSpan.textContent = CartTotal.textContent;
+      totalPrice.append(totalPriceSpan);
+      totalCart.append(totalPrice);
+
+      const promoCode = document.createElement('div');
+      promoCode.className = 'promo-code';
+      const input = document.createElement('input');
+      input.type = 'search';
+      input.placeholder = 'Enter promo code';
+      promoCode.append(input);
+      totalCart.append(promoCode);
+
+      const promoSpan = document.createElement('span');
+      promoSpan.className = 'promo-ex';
+      promoSpan.textContent = "Promo for test: 'RS', 'EPM'";
+      totalCart.append(promoSpan);
+
+      const btnBuy = document.createElement('button');
+      btnBuy.textContent = 'BUY NOW';
+      totalCart.append(btnBuy);
 
       for (let i = 0; i < CartPage.Products.length; i++) {
         const cartItem = document.createElement('div');
@@ -95,9 +138,6 @@ class CartPage extends Page {
         btn1.textContent = '+';
         incDecControl.append(btn1);
 
-        const countCart = document.querySelector('.total_content') as HTMLElement;
-        const CartTotal = document.querySelector('.total-price span') as HTMLElement;
-
         btn1.addEventListener('click', () => {
           let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
           if (
@@ -109,10 +149,12 @@ class CartPage extends Page {
 
             let count = Number(countCart.textContent);
             countCart.textContent = `${++count}`;
+            totalCountSpan.textContent = countCart.textContent;
 
             let CartPrice = CartTotal.innerHTML.slice(1);
 
             CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+            totalPriceSpan.textContent = CartTotal.textContent;
             isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
           }
         });
@@ -131,9 +173,11 @@ class CartPage extends Page {
 
             let count = Number(countCart.textContent);
             countCart.textContent = `${--count}`;
+            totalCountSpan.textContent = countCart.textContent;
 
             let CartPrice = CartTotal.innerHTML.slice(1);
             CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
+            totalPriceSpan.textContent = CartTotal.textContent;
             isCart[CartPage.Products[idIndex]].sumPrice -= prodData.products[CartPage.Products[idIndex] - 1].price;
           }
 
@@ -167,47 +211,6 @@ class CartPage extends Page {
         numberControl.append(amountControl);
 
         cartItem.append(numberControl);
-
-        const totalCart = document.createElement('div');
-        totalCart.className = 'total-cart';
-        cartWrapper.append(totalCart);
-
-        const h2 = document.createElement('h2');
-        h2.textContent = 'Summary';
-        totalCart.append(h2);
-
-        const totalCount = document.createElement('div');
-        totalCount.className = 'price-total';
-        totalCount.textContent = 'Products: ';
-        const totalCountSpan = document.createElement('span');
-        totalCountSpan.textContent = countCart.textContent;
-        totalCount.append(totalCountSpan);
-        totalCart.append(totalCount);
-
-        const totalPrice = document.createElement('div');
-        totalPrice.className = 'price-total';
-        totalPrice.textContent = 'Total: ';
-        const totalPriceSpan = document.createElement('span');
-        totalPriceSpan.textContent = CartTotal.textContent;
-        totalPrice.append(totalPriceSpan);
-        totalCart.append(totalPrice);
-
-        const promoCode = document.createElement('div');
-        promoCode.className = 'promo-code';
-        const input = document.createElement('input');
-        input.type = 'search';
-        input.placeholder = 'Enter promo code';
-        promoCode.append(input);
-        totalCart.append(promoCode);
-
-        const promoSpan = document.createElement('span');
-        promoSpan.className = 'promo-ex';
-        promoSpan.textContent = "Promo for test: 'RS', 'EPM'";
-        totalCart.append(promoSpan);
-
-        const btnBuy = document.createElement('button');
-        btnBuy.textContent = 'BUY NOW';
-        totalCart.append(btnBuy);
       }
     } else {
       const title = this.createHeaderTitle(CartPage.TextObject.MainTitle);
