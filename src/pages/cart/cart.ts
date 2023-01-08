@@ -15,9 +15,8 @@ class CartPage extends Page {
   }
 
   addEventPromoCode() {
-    const priceTotal = document.querySelector('.price-total') as HTMLElement;
-    const PriceText = priceTotal.querySelector('span');
-    let PriceNumber = Number(PriceText?.textContent?.slice(1));
+    let count = 0;
+    let codePrice;
 
     const form = <HTMLFormElement>document.querySelector('form');
     const search = <HTMLInputElement>document.querySelector('.promo-code input');
@@ -26,53 +25,84 @@ class CartPage extends Page {
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+      const newPrice = document.querySelectorAll('.newTotalPrice span');
+      const priceTotal = document.querySelector('.price-total') as HTMLElement;
+      const PriceText = priceTotal.querySelector('span');
+      let PriceNumber = Number(PriceText?.textContent?.slice(1));
 
       if (search.value.toLocaleUpperCase() === 'RS' || search.value.toLocaleUpperCase() === 'EPM') {
         const res = document.createElement('div');
         res.className = 'res-promo';
         res.textContent =
           search.value.toLocaleUpperCase() === 'RS' ? 'Rolling Scopes School - 10% ' : 'EPAM Systems - 10% - ';
-        const spanRS = document.createElement('span');
-        spanRS.textContent = 'ADD';
-        res.append(spanRS);
+        const spanAdd = document.createElement('span');
+        spanAdd.textContent = 'ADD';
+        res.append(spanAdd);
         promoCode?.after(res);
 
-        spanRS.addEventListener('click', (e) => {
-          (e.target as Element).closest('.res-promo')?.remove();
-          priceTotal.classList.add('old-price');
+        spanAdd.addEventListener('click', (e) => {
+          if (count < 9) {
+            count++;
+            (e.target as Element).closest('.res-promo')?.remove();
+            priceTotal.classList.add('old-price');
 
-          const totalPrice = document.createElement('div');
-          totalPrice.className = 'price-total';
-          totalPrice.id = 'newTotalPrice';
-          totalPrice.textContent = 'Total: ';
-          const totalPriceSpan = document.createElement('span');
-          totalPriceSpan.id = 'newPriceSpan';
-          totalPriceSpan.textContent = `${Math.round(PriceNumber * 0.9)}.00`;
-          totalPrice.append(totalPriceSpan);
-          priceTotal.after(totalPrice);
+            const totalPrice = document.createElement('div');
+            totalPrice.className = 'newTotalPrice';
+            totalPrice.id = 'newTotalPrice';
+            totalPrice.textContent = 'Total: ';
+            const totalPriceSpan = document.createElement('span');
+            totalPriceSpan.id = 'newPriceSpan';
+            codePrice = (10 - count) / 10;
+            totalPriceSpan.textContent = `€${Math.round(PriceNumber * codePrice)}.00`;
+            totalPrice.append(totalPriceSpan);
+            priceTotal.after(totalPrice);
 
-          const appleCodes = document.createElement('div');
-          appleCodes.className = 'appl-codes';
-          const h3 = document.createElement('h3');
-          h3.textContent = 'Applied codes';
-          appleCodes.append(h3);
+            if (count > 1) {
+              totalPrice.style.display = 'none';
+              for (let i = 0; i < newPrice.length; i++) {
+                newPrice[i].innerHTML = `€${Math.round(PriceNumber * codePrice)}.00`;
+              }
+            }
 
-          const appliedPromo = document.createElement('div');
-          appliedPromo.className = 'applied-promo';
-          appliedPromo.textContent =
-            search.value.toLocaleUpperCase() === 'RS' ? 'Rolling Scopes School - 10% ' : 'EPAM Systems - 10% - ';
-          const span = document.createElement('span');
-          span.textContent = 'DROP';
-          appliedPromo.append(span);
-          appleCodes.append(appliedPromo);
+            const appleCodes = document.createElement('div');
+            appleCodes.className = 'appl-codes';
+            const h3 = document.createElement('h3');
+            h3.textContent = 'Applied codes';
+            appleCodes.append(h3);
 
-          promoCode?.before(appleCodes);
+            const appliedPromo = document.createElement('div');
+            appliedPromo.className = 'applied-promo';
+            appliedPromo.textContent =
+              search.value.toLocaleUpperCase() === 'RS' ? 'Rolling Scopes School - 10% ' : 'EPAM Systems - 10% - ';
+            const span = document.createElement('span');
+            span.textContent = 'DROP';
+            appliedPromo.append(span);
+            appleCodes.append(appliedPromo);
 
-          span.addEventListener('click', (e) => {
-            priceTotal.classList.remove('old-price');
-            (e.target as Element).closest('.appl-codes')?.remove();
-            totalPrice.remove();
-          });
+            promoCode?.before(appleCodes);
+
+            span.addEventListener('click', (e) => {
+              count--;
+
+              const newPrice = document.querySelectorAll('.newTotalPrice span');
+              codePrice = (10 - count) / 10;
+              for (let i = 0; i < newPrice.length; i++) {
+                newPrice[i].innerHTML = `€${Math.round(PriceNumber * codePrice)}.00`;
+              }
+              if (count < 1) {
+                priceTotal.classList.remove('old-price');
+                totalPrice.remove();
+                if (count === 0) {
+                  const newPrice = document.querySelectorAll('.newTotalPrice');
+                  for (let i = 0; i < newPrice.length; i++) {
+                    newPrice[i].remove();
+                  }
+                }
+              }
+
+              (e.target as Element).closest('.appl-codes')?.remove();
+            });
+          }
         });
       }
     });
@@ -220,8 +250,11 @@ class CartPage extends Page {
             CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
 
-            const newPrice = document.getElementById('newPriceSpan') as HTMLElement;
-            newPrice.innerHTML = `${Math.round(+totalPriceSpan.textContent.slice(1) * 0.9)}.00`;
+            const newPrice = document.querySelectorAll('.newTotalPrice span');
+            let codePrice = (10 - newPrice.length) / 10;
+            for (let i = 0; i < newPrice.length; i++) {
+              newPrice[i].innerHTML = `€${Math.round(+totalPriceSpan.textContent.slice(1) * codePrice)}.00`;
+            }
 
             isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
           }
@@ -247,8 +280,11 @@ class CartPage extends Page {
             CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
 
-            const newPrice = document.getElementById('newPriceSpan') as HTMLElement;
-            newPrice.innerHTML = `${Math.round(+totalPriceSpan.textContent.slice(1) * 0.9)}.00`;
+            const newPrice = document.querySelectorAll('.newTotalPrice span');
+            let codePrice = (10 - newPrice.length) / 10;
+            for (let i = 0; i < newPrice.length; i++) {
+              newPrice[i].innerHTML = `€${Math.round(+totalPriceSpan.textContent.slice(1) * codePrice)}.00`;
+            }
 
             isCart[CartPage.Products[idIndex]].sumPrice -= prodData.products[CartPage.Products[idIndex] - 1].price;
           }

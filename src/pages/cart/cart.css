@@ -140,7 +140,8 @@
 }
 
 .price-total,
-.count-total {
+.count-total,
+.newTotalPrice {
   width: 90%;
   font-size: 170%;
   color: wheat;
@@ -148,7 +149,8 @@
   margin: 4%;
 }
 .price-total span,
-.count-total span {
+.count-total span,
+.newTotalPrice span {
   font-size: 100%;
 }
 
