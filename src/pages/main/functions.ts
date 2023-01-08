@@ -1,83 +1,5 @@
 import { Product } from "../../components/interfaces/interfaces";
 
-export function controlFromInput(fromSlider: HTMLInputElement, fromInput: HTMLInputElement, toInput:HTMLInputElement, controlSlider: HTMLInputElement) {
-    const [from, to] = getParsed(fromInput, toInput);
-    fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
-    if (+from > +to) {
-        fromSlider.value = to;
-        fromInput.value = to;
-    } else {
-        fromSlider.value = from;
-    }
-}
-
-export function controlToInput(toSlider: HTMLInputElement, fromInput: HTMLInputElement, toInput: HTMLInputElement, controlSlider: HTMLInputElement) {
-    const [from, to] = getParsed(fromInput, toInput);
-    fillSlider(fromInput, toInput, '#C6C6C6', '#25daa5', controlSlider);
-    setToggleAccessible(toInput);
-    if (+from <= +to) {
-        toSlider.value = to;
-        toInput.value = to;
-    } else {
-        toInput.value = from;
-    }
-}
-
-export function controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, fromInput: HTMLInputElement) {
-    const [from, to] = getParsed(fromSlider, toSlider);
-    fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
-    if (+from > +to) {
-        fromSlider.value = to;
-        fromInput.value = to;
-    } else {
-        fromInput.value = from;
-    }
-}
-
-export function controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, toInput: HTMLInputElement) {
-    const [from, to] = getParsed(fromSlider, toSlider);
-    fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
-    setToggleAccessible(toSlider);
-    if (+from <= +to) {
-        toSlider.value = to;
-        toInput.value = to;
-    } else {
-        toInput.value = from;
-        toSlider.value = from;
-    }
-}
-
-export function getParsed(currentFrom: HTMLInputElement, currentTo: HTMLInputElement) {
-    const from = parseInt(currentFrom.value, 10);
-    const to = parseInt(currentTo.value, 10);
-    return [String(from), String(to)];
-}
-
-export function fillSlider(from: HTMLInputElement, to: HTMLInputElement, sliderColor: string, rangeColor: string, controlSlider: HTMLInputElement) {
-    const rangeDistance = Number(to.max) - Number(to.min);
-    const fromPosition = Number(from.value) - Number(to.min);
-    const toPosition = Number(to.value) - Number(to.min);
-    controlSlider.style.background = `linear-gradient(
-    to right,
-    ${sliderColor} 0%,
-    ${sliderColor} ${(fromPosition / rangeDistance) * 100}%,
-    ${rangeColor} ${(fromPosition / rangeDistance) * 100}%,
-    ${rangeColor} ${(toPosition / rangeDistance) * 100}%, 
-    ${sliderColor} ${(toPosition / rangeDistance) * 100}%, 
-    ${sliderColor} 100%)`;
-}
-
-export function setToggleAccessible(currentTarget: HTMLInputElement) {
-    const toSlider = document.querySelector<HTMLInputElement>('#toSlider');
-    if (Number(currentTarget.value) <= 0) {
-        if(toSlider) {
-          toSlider.style.zIndex = '2';
-        }
-    } else {
-      if(toSlider) toSlider.style.zIndex='0';
-    }
-}
-
 export function convertArrayToNode(arr: Array<Element>) {
     const fragment = document.createDocumentFragment();
     arr.forEach((item: Element) => {
@@ -102,18 +24,19 @@ export function getIdOfCheckedCheckboxes(checkboxes: NodeListOf<HTMLInputElement
 
 export function filterCheckboxResults(filters: { categories: Array<string>, brands: Array<string>}) {
     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
-    let hiddenPoducts: Array<HTMLElement> = [];
+    const prodCont = document.querySelector('.products-items') as HTMLElement;
+    let hiddenProducts: Array<HTMLElement> = [];
+    const notFound = document.querySelector('.not-found') as HTMLElement;
     
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
         let category = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1].textContent?.slice(10);
         let brand = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[3].textContent?.slice(7);
-        
+
         if (filters.categories.length > 0) {
             let isHidden = true;
             
             for (let j = 0; j < filters.categories.length; j++) {
-                
                 let filter = filters.categories[j];
                 
                 if (filter === category) {
@@ -123,7 +46,7 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
             }
 
             if (isHidden) {
-                hiddenPoducts.push(product);
+                hiddenProducts.push(product);
             }
         }
 
@@ -140,7 +63,7 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
             }
             
             if (isHidden) {
-                hiddenPoducts.push(product);
+                hiddenProducts.push(product);
             }
         }
     }
@@ -149,12 +72,24 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
         products[i].style.display = 'block';
     }
 
-    if (hiddenPoducts.length <= 0) {
+    if (hiddenProducts.length <= 0) {
         return;
     }
 
-    for (let i = 0; i < hiddenPoducts.length; i++) {
-        hiddenPoducts[i].style.display = 'none';
+    for (let i = 0; i < hiddenProducts.length; i++) {
+        hiddenProducts[i].style.display = 'none';
+    }
+
+    let check = products.filter((item) => {
+        if (item.style.display === 'block') return item;
+    })
+
+    if (check.length <= 0) {
+        prodCont.style.display = 'none';
+        notFound.style.display = 'block';
+    } else {
+        prodCont.style.display = 'flex';
+        notFound.style.display = 'none';
     }
 }
 
@@ -228,5 +163,208 @@ export function sortProducts() {
 
         products.forEach(node => node.parentNode?.removeChild(node));
         result.forEach(product => prodCont!.append(product));
+    }
+}
+
+export function searchProducts() {
+    const searchInput = document.querySelector('#search-input') as HTMLInputElement;
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const prodCont = document.querySelector('.products-items') as HTMLElement;
+    const notFound = document.querySelector('.not-found') as HTMLElement;
+    let value: string = searchInput.value;
+    let hiddenProducts: Array<HTMLElement> = [];
+    let result = [];
+
+    for (let i = 0; i < products.length; i++) {
+        let product = products[i];
+        let title = product.childNodes[1].childNodes[1].childNodes[1].textContent?.toLowerCase()
+        let category = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1].textContent?.slice(10);
+        let brand = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[3].textContent?.toLowerCase().slice(7);
+        let price = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7).toString();
+        let rating = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[9].textContent?.slice(8).toString();
+        let discount = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[7].textContent?.slice(10).toString();
+        let stock = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[11].textContent?.slice(7).toString();
+        console.log(title);
+
+        if (value && value.trim().length > 0) {
+            let isHidden = true;
+            
+            if (title!.includes(value) ||
+                brand!.includes(value) ||
+                discount!.includes(value) ||
+                rating!.includes(value) ||
+                stock!.includes(value) ||
+                category!.includes(value) ||
+                price!.includes(value)) {
+                isHidden = false;
+                continue;
+            }
+
+            if (isHidden) {
+                hiddenProducts.push(product);
+            }
+        }
+    }
+
+    for (let i = 0; i < products.length; i++) {
+        products[i].style.display = 'block';
+    }
+
+    if (hiddenProducts.length <= 0) {
+        return;
+    }
+
+    for (let i = 0; i < hiddenProducts.length; i++) {
+        hiddenProducts[i].style.display = 'none';
+    }
+
+    let check = products.filter((item) => {
+        if (item.style.display === 'block') return item;
+    })
+
+    if (check.length <= 0) {
+        prodCont.style.display = 'none';
+        notFound.style.display = 'block';
+    } else {
+        prodCont.style.display = 'flex';
+        notFound.style.display = 'none';
+    }
+}
+
+export function filterPrice() {
+    const rangeInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const prodCont = document.querySelector('.products-items') as HTMLElement;
+    const notFound = document.querySelector('.not-found') as HTMLElement;
+    const fromValue  = document.querySelector('.from-data') as HTMLElement;
+    const toValue = document.querySelector('.to-data') as HTMLElement;
+    let minVal = parseInt(rangeInput[0].value);
+    let maxVal = parseInt(rangeInput[1].value);
+    let hiddenProducts: Array<HTMLElement> = [];
+    
+    fromValue.textContent = `€${minVal}`;
+    toValue.textContent = `€${maxVal}`;
+
+    for (let i = 0; i < products.length; i++) {
+        let product = products[i];
+        let price = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7);
+
+        if (minVal <= maxVal) {
+            let isHidden = true;
+
+            if (Number(price) >= minVal && Number(price) <= maxVal) {
+              isHidden = false;
+              continue;
+            }
+            
+            if (isHidden) {
+                hiddenProducts.push(product);
+            }
+          
+        } else {
+            let isHidden = true;
+            
+            if (Number(price) <= minVal && Number(price) >= maxVal) {
+              isHidden = false;
+              continue;
+            }
+            
+            if (isHidden) {
+                hiddenProducts.push(product);
+            }
+        }
+    }
+
+    for (let i = 0; i < products.length; i++) {
+        products[i].style.display = 'block';
+    }
+
+    if (hiddenProducts.length <= 0) {
+        return;
+    }
+
+    for (let i = 0; i < hiddenProducts.length; i++) {
+        hiddenProducts[i].style.display = 'none';
+    }
+
+    let check = products.filter((item) => {
+        if (item.style.display === 'block') return item;
+    })
+
+    if (check.length <= 0) {
+        prodCont.style.display = 'none';
+        notFound.style.display = 'block';
+    } else {
+        prodCont.style.display = 'flex';
+        notFound.style.display = 'none';
+    }
+}
+
+export function filterStock() {
+    const rangeInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range2 input'));
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const prodCont = document.querySelector('.products-items') as HTMLElement;
+    const notFound = document.querySelector('.not-found') as HTMLElement;
+    const fromValue  = document.querySelector('.from-data2') as HTMLElement;
+    const toValue = document.querySelector('.to-data2') as HTMLElement;
+    let minVal = parseInt(rangeInput[0].value);
+    let maxVal = parseInt(rangeInput[1].value);
+    let hiddenProducts: Array<HTMLElement> = [];
+  
+    fromValue.textContent = `${minVal}`;
+    toValue.textContent = `${maxVal}`;
+
+    for (let i = 0; i < products.length; i++) {
+        let product = products[i];
+        let stock = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[11].textContent?.slice(7);
+
+        if (minVal <= maxVal) {
+            let isHidden = true;
+
+            if (Number(stock) >= minVal && Number(stock) <= maxVal) {
+                isHidden = false;
+                continue;
+            }
+          
+            if (isHidden) {
+                hiddenProducts.push(product);
+            }
+        
+        } else {
+            let isHidden = true;
+          
+            if (Number(stock) <= minVal && Number(stock) >= maxVal) {
+                isHidden = false;
+                continue;
+            }
+          
+            if (isHidden) {
+                hiddenProducts.push(product);
+            }
+        }
+    }
+
+    for (let i = 0; i < products.length; i++) {
+        products[i].style.display = 'block';
+    }
+
+    if (hiddenProducts.length <= 0) {
+        return;
+    }
+
+    for (let i = 0; i < hiddenProducts.length; i++) {
+        hiddenProducts[i].style.display = 'none';
+    }
+
+    let check = products.filter((item) => {
+        if (item.style.display === 'block') return item;
+    })
+
+    if (check.length <= 0) {
+        prodCont.style.display = 'none';
+        notFound.style.display = 'block';
+    } else {
+        prodCont.style.display = 'flex';
+        notFound.style.display = 'none';
     }
 }

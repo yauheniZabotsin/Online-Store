@@ -47,9 +47,9 @@ class App {
             this.view.viewProducts(prodData);
             this.view.viewCategories(categoryData);
             this.view.viewBrands(brandData);
-            page.addEventsSlider();
+            // page.addEventsSlider();
             page.addEventsModal();
-            page.searchProducts();
+            // page.showPR();
           }
         }
     }

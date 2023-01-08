@@ -88,7 +88,7 @@ export class Brands {
             const itemSpan = <HTMLElement>itemClone.querySelector('.filter-span');
 
             itemInput.setAttribute('id', item.category);
-            itemInput.onchange = function(){filterProducts()};  
+            itemInput.onchange = function(){filterProducts()};
             itemInput.classList.add('brand-input');
             itemLabel.setAttribute('for', item.category);
             itemLabel.insertAdjacentText('beforeend', item.category);

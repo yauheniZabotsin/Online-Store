@@ -2,15 +2,10 @@ import { Products } from "../../components/app/dataloader";
 import prodData from "../../components/data/products";
 import { Data, Product } from "../../components/interfaces/interfaces";
 import Page from "../../core/templates/page";
-import { controlFromInput, controlFromSlider, controlToInput, controlToSlider, convertArrayToNode, fillSlider, filterCheckboxResults, getIdOfCheckedCheckboxes, setToggleAccessible } from "./functions";
-import { sortProducts } from "./functions";
+import { sortProducts, searchProducts, filterPrice, filterStock } from "./functions";
 
 class MainPages extends Page {
     products: Products;
-    filterResult: any = [];
-    sortResult: Array<Product> = [];
-    searchResult: Array<Product> = [];
-    searchAmount: string = '100';
 
     static TextObject = {
         MainTitle: 'Main Pages',
@@ -19,10 +14,6 @@ class MainPages extends Page {
     constructor(id: string) {
         super(id);
         this.products = new Products();
-        this.filterResult;
-        this.searchResult;
-        this.sortResult;
-        this.searchAmount;
     }
 
     addEventsModal() {
@@ -39,175 +30,6 @@ class MainPages extends Page {
         return window.location.hash.slice(1);
     }
 
-    addEventsSlider() {
-        const fromSlider = document.querySelector<HTMLInputElement>('#fromSlider');
-        const toSlider = document.querySelector<HTMLInputElement>('#toSlider');
-        const fromInput = document.querySelector<HTMLInputElement>('#fromInput');
-        const toInput = document.querySelector<HTMLInputElement>('#toInput');
-
-        const fromSlider1 = document.querySelector<HTMLInputElement>('#fromSlider1');
-        const toSlider1 = document.querySelector<HTMLInputElement>('#toSlider1');
-        const fromInput1 = document.querySelector<HTMLInputElement>('#fromInput1');
-        const toInput1 = document.querySelector<HTMLInputElement>('#toInput1');
-
-        if (fromSlider && toSlider && fromInput && toInput) {
-            fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
-            setToggleAccessible(toSlider);
-            fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput);
-            toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
-            fromInput.oninput = () => controlFromInput(fromSlider, fromInput, toInput, toSlider);
-            toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
-        }
-
-        if (fromSlider1 && toSlider1 && fromInput1 && toInput1) {
-            fillSlider(fromSlider1, toSlider1, '#C6C6C6', '#25daa5', toSlider1);
-            setToggleAccessible(toSlider1);
-            fromSlider1.oninput = () => controlFromSlider(fromSlider1, toSlider1, fromInput1);
-            toSlider1.oninput = () => controlToSlider(fromSlider1, toSlider1, toInput1);
-            fromInput1.oninput = () => controlFromInput(fromSlider1, fromInput1, toInput1, toSlider1);
-            toInput1.oninput = () => controlToInput(toSlider1, fromInput1, toInput1, toSlider1);
-        }
-    }
-
-    // sortProducts(): void {
-    //     const optionSelector = document.querySelector('#option-selector') as HTMLSelectElement;
-    //     const arr: Array<Product> = prodData.products;
-
-    //     optionSelector.addEventListener('change', () => {
-    //         if (optionSelector.value === 'price-down') {
-    //             if (this.searchResult.length > 0) {
-    //                 this.sortResult = this.searchResult.sort((a, b) => {
-    //                     let aPrice = a.price;
-    //                     let bPrice = b.price;
-    //                     if (aPrice < bPrice) return 1;
-    //                     if (aPrice > bPrice) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             } else {
-    //                 this.sortResult = arr.sort((a, b) => {
-    //                     let aPrice = a.price;
-    //                     let bPrice = b.price;
-    //                     if (aPrice < bPrice) return 1;
-    //                     if (aPrice > bPrice) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             }
-    //             // window.location.hash += `?sort=${optionSelector.value}`;
-    //         }
-
-    //         if (optionSelector.value === 'price-up') {
-    //             if (this.searchResult.length > 0) {
-    //                 this.sortResult = this.searchResult.sort((a, b) => {
-    //                     let aPrice = a.price;
-    //                     let bPrice = b.price;
-    //                     if (aPrice > bPrice) return 1;
-    //                     if (aPrice < bPrice) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             } else {
-    //                 this.sortResult = arr.sort((a, b) => {
-    //                     let aPrice = a.price;
-    //                     let bPrice = b.price;
-    //                     if (aPrice > bPrice) return 1;
-    //                     if (aPrice < bPrice) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             }
-    //         }
-
-    //         if (optionSelector.value === 'rating-down') {
-    //             if (this.searchResult.length > 0) {
-    //                 this.sortResult = this.searchResult.sort((a, b) => {
-    //                     let aRating = a.rating;
-    //                     let bRating= b.rating;
-    //                     if (aRating < bRating) return 1;
-    //                     if (aRating > bRating) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             } else {
-    //                 this.sortResult = arr.sort((a, b) => {
-    //                     let aRating = a.rating;
-    //                     let bRating= b.rating;
-    //                     if (aRating < bRating) return 1;
-    //                     if (aRating > bRating) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             }
-    //         }
-
-    //         if (optionSelector.value === 'rating-up') {
-    //             if (this.searchResult.length > 0) {
-    //                 this.sortResult = this.searchResult.sort((a, b) => {
-    //                     let aRating = a.rating;
-    //                     let bRating = b.rating;
-    //                     if (aRating> bRating) return 1;
-    //                     if (aRating < bRating) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             } else {
-    //                 this.sortResult = arr.sort((a, b) => {
-    //                     let aRating = a.rating;
-    //                     let bRating = b.rating;
-    //                     if (aRating> bRating) return 1;
-    //                     if (aRating < bRating) return -1;
-    //                     return 0;
-    //                 });
-    //                 this.products.loadProducts(this.sortResult);
-    //             }
-    //         }
-    //     });
-    // }
-
-    searchProducts(): void {
-        const searchInput = document.querySelector('#search-input') as HTMLInputElement;
-        searchInput.addEventListener('input', (e) => {
-            const target = e.target as HTMLInputElement;
-            let value: string = target.value;
-            const arr: Array<Product> = prodData.products;
-            const productsCont = document.querySelector('.products-items') as HTMLElement;
-            const notFound = document.querySelector('.not-found') as HTMLElement;
-            const stat = document.querySelector('.stat') as HTMLElement;
-
-            if (value && value.trim().length > 0) {
-                value = value.trim().toLowerCase();
-                this.searchResult = arr.filter((item) => {
-                    if (item.title.toLowerCase().includes(value) ||
-                        item.brand.toLowerCase().includes(value) ||
-                        item.discountPercentage.toString().includes(value) ||
-                        item.rating.toString().includes(value) ||
-                        item.stock.toString().includes(value) ||
-                        item.category.toLowerCase().includes(value)
-                        ) return item;
-                    })
-                if (this.searchResult.length > 0) {
-                    productsCont.style.display = 'flex';
-                    notFound.style.display = 'none';
-                    this.products.loadProducts(this.searchResult);
-                    this.searchAmount = this.searchResult.length.toString();
-                    stat.innerText = `Found: ${this.searchAmount}`;
-                } else {
-                    productsCont.style.display = 'none';
-                    notFound.style.display = 'block';
-                    this.searchAmount = '0';
-                    stat.innerText = `Found: ${this.searchAmount}`;
-                }
-            } else {
-                productsCont.style.display = 'flex';
-                notFound.style.display = 'none';
-                this.products.loadProducts(arr);
-                this.searchAmount = arr.length.toString();
-                stat.innerText = `Found: ${this.searchAmount}`;
-            } 
-        })
-    }
-
     render(): HTMLElement {
         const mainPage: HTMLElement = document.createElement('div');
         const filters: HTMLElement = document.createElement('div');
@@ -221,27 +43,22 @@ class MainPages extends Page {
         const brand: HTMLElement = document.createElement('div');
         const brandTitle: HTMLElement = document.createElement('h3');
         const brandList: HTMLElement = document.createElement('div');
-        const price: HTMLElement = document.createElement('div');
-        const priceTitle: HTMLElement = document.createElement('h3'); 
-        const priceCont: HTMLElement = document.createElement('div');
-        const slidersControl: HTMLElement = document.createElement('div');
-        const fromSlider: HTMLElement = document.createElement('input');
-        const toSlider: HTMLElement = document.createElement('input');
-        const formControl: HTMLElement = document.createElement('div');
-        const formControlCont1: HTMLElement = document.createElement('div');
-        const formControlCont2: HTMLElement = document.createElement('div');
-        const formControlTime1: HTMLElement = document.createElement('div');
-        const formControlTime2: HTMLElement = document.createElement('div');
-        const timeInput1: HTMLElement = document.createElement('input');
-        const timeInput2: HTMLElement = document.createElement('input');
-        const stock: HTMLElement = document.createElement('div');
-        const stockTitle: HTMLElement = document.createElement('h3');
-        const stockCont: HTMLElement = document.createElement('div');
-        const slidersControl1: HTMLElement = document.createElement('div');
-        const timeInput3: HTMLElement = document.createElement('input');
-        const timeInput4: HTMLElement = document.createElement('input');
-        const fromSlider1: HTMLElement = document.createElement('input');
-        const toSlider1: HTMLElement = document.createElement('input');
+        const priceSlider: HTMLElement = document.createElement('div');
+        const priceSliderTitle: HTMLElement = document.createElement('h3');
+        const priceSliderData: HTMLElement = document.createElement('div');
+        const priceSliderFromData: HTMLElement = document.createElement('div');
+        const priceSliderToData: HTMLElement = document.createElement('div');
+        const priceSliderRange: HTMLElement = document.createElement('div');
+        const priceSliderFromInput: HTMLElement = document.createElement('input');
+        const priceSliderToInput: HTMLElement = document.createElement('input');
+        const stockSlider: HTMLElement = document.createElement('div');
+        const stockSliderTitle: HTMLElement = document.createElement('h3');
+        const stockSliderData: HTMLElement = document.createElement('div');
+        const stockSliderFromData: HTMLElement = document.createElement('div');
+        const stockSliderToData: HTMLElement = document.createElement('div');
+        const stockSliderRange: HTMLElement = document.createElement('div');
+        const stockSliderFromInput: HTMLElement = document.createElement('input');
+        const stockSliderToInput: HTMLElement = document.createElement('input');
 
         const productSort: HTMLElement = document.createElement('div');
         const sortBar: HTMLElement = document.createElement('div');
@@ -282,88 +99,59 @@ class MainPages extends Page {
         brand.append(brandTitle);
         brand.append(brandList);
 
-        price.className = 'category';
-        priceTitle.className = 'filter-title';
-        priceTitle.innerText = 'Price';
-        priceCont.className = 'range_container';
-        slidersControl.className = 'sliders_control';
-        fromSlider.setAttribute('id', 'fromSlider');
-        fromSlider.setAttribute('type', 'range');
-        fromSlider.setAttribute('value', '0');
-        fromSlider.setAttribute('min', '0');
-        fromSlider.setAttribute('max', '100');
-        toSlider.setAttribute('id', 'toSlider');
-        toSlider.setAttribute('type', 'range');
-        toSlider.setAttribute('value', '100');
-        toSlider.setAttribute('min', '0');
-        toSlider.setAttribute('max', '100');
-        formControl.className = 'form_control';
-        formControlCont1.className = 'form_control_container';
-        formControlCont2.className = 'form_control_container';
-        formControlTime1.className = 'form_control_container__time';
-        formControlTime2.className = 'form_control_container__time';
-        formControlTime1.innerText = '€';
-        formControlTime2.innerText = '€';
-        timeInput1.className = 'form_control_container__time__input';
-        timeInput1.setAttribute('type', 'number');
-        timeInput1.setAttribute('id', 'fromInput');
-        timeInput1.setAttribute('value', '0');
-        timeInput1.setAttribute('min', '0');
-        timeInput1.setAttribute('max', '100');
-        timeInput2.className = 'form_control_container__time__input';
-        timeInput2.setAttribute('type', 'number');
-        timeInput2.setAttribute('id', 'toInput');
-        timeInput2.setAttribute('value', '100');
-        timeInput2.setAttribute('min', '0');
-        timeInput2.setAttribute('max', '100');
-        formControlTime1.append(timeInput1);
-        formControlTime2.append(timeInput2);
-        formControlCont1.append(formControlTime1);
-        formControlCont2.append(formControlTime2);
-        formControl.append(formControlCont1);
-        formControl.append(formControlCont2);
-        slidersControl.append(fromSlider);
-        slidersControl.append(toSlider);
-        priceCont.append(slidersControl);
-        price.append(priceTitle);
-        price.append(priceCont);
-        price.append(formControl);
-
-        stock.className = 'category';
-        stockTitle.className = 'filter-title'
-        stockTitle.innerText = 'Stock';
-        stockCont.className = 'out-data';
-        slidersControl1.className = 'sliders_control';
-        timeInput3.className = 'form_control_container__time__input';
-        timeInput3.setAttribute('type', 'number');
-        timeInput3.setAttribute('id', 'fromInput1');
-        timeInput3.setAttribute('value', '0');
-        timeInput3.setAttribute('min', '0');
-        timeInput3.setAttribute('max', '100');
-        timeInput4.className = 'form_control_container__time__input';
-        timeInput4.setAttribute('type', 'number');
-        timeInput4.setAttribute('id', 'toInput1');
-        timeInput4.setAttribute('value', '100');
-        timeInput4.setAttribute('min', '0');
-        timeInput4.setAttribute('max', '100');
-        fromSlider1.setAttribute('id', 'fromSlider1');
-        fromSlider1.setAttribute('type', 'range');
-        fromSlider1.setAttribute('value', '0');
-        fromSlider1.setAttribute('min', '0');
-        fromSlider1.setAttribute('max', '100');
-        toSlider1.setAttribute('id', 'toSlider1');
-        toSlider1.setAttribute('type', 'range');
-        toSlider1.setAttribute('value', '100');
-        toSlider1.setAttribute('min', '0');
-        toSlider1.setAttribute('max', '100');
-        slidersControl1.append(fromSlider1);
-        slidersControl1.append(toSlider1);
-        stockCont.append(timeInput3);
-        stockCont.append('⟷');
-        stockCont.append(timeInput4);
-        stock.append(stockTitle);
-        stock.append(stockCont);
-        stock.append(slidersControl1);
+        priceSlider.className = 'category';
+        priceSliderTitle.className = 'filter-title';
+        priceSliderTitle.innerText = 'Price';
+        priceSliderData.className = 'out-data';
+        priceSliderFromData.className = 'from-data';
+        priceSliderFromData.textContent = '€10'
+        priceSliderToData.className = 'to-data';
+        priceSliderToData.textContent = '€1749'
+        priceSliderRange.className = 'multi-range';
+        priceSliderFromInput.setAttribute('type', 'range');
+        priceSliderFromInput.setAttribute('min', '10');
+        priceSliderFromInput.setAttribute('max', '1749');
+        priceSliderFromInput.setAttribute('value', '10');
+        priceSliderFromInput.onchange = function(){filterPrice()}
+        priceSliderToInput.setAttribute('type', 'range');
+        priceSliderToInput.setAttribute('min', '10');
+        priceSliderToInput.setAttribute('max', '1749');
+        priceSliderToInput.setAttribute('value', '1749');
+        priceSliderToInput.onchange = function(){filterPrice()}
+        priceSliderRange.append(priceSliderFromInput);
+        priceSliderRange.append(priceSliderToInput);
+        priceSliderData.append(priceSliderFromData);
+        priceSliderData.append(' ⟷ ');
+        priceSliderData.append(priceSliderToData);
+        priceSlider.append(priceSliderTitle);
+        priceSlider.append(priceSliderData);
+        priceSlider.append(priceSliderRange);
+        
+        stockSlider.className = 'category';
+        stockSliderTitle.className = 'filter-title'
+        stockSliderTitle.innerText = 'Stock';
+        stockSliderData.className = 'out-data';
+        stockSliderFromData.className = 'from-data2';
+        stockSliderToData.className = 'to-data2';
+        stockSliderRange.className = 'multi-range2';
+        stockSliderFromInput.setAttribute('type', 'range');
+        stockSliderFromInput.setAttribute('min', '0');
+        stockSliderFromInput.setAttribute('max', '75');
+        stockSliderFromInput.setAttribute('value', '0');
+        stockSliderFromInput.onchange = function(){filterStock()}
+        stockSliderToInput.setAttribute('type', 'range');
+        stockSliderToInput.setAttribute('min', '0');
+        stockSliderToInput.setAttribute('max', '75');
+        stockSliderToInput.setAttribute('value', '75');
+        stockSliderToInput.onchange = function(){filterStock()}
+        stockSliderRange.append(stockSliderFromInput);
+        stockSliderRange.append(stockSliderToInput);
+        stockSliderData.append(stockSliderFromData);
+        stockSliderData.append(' ⟷ ');
+        stockSliderData.append(stockSliderToData);
+        stockSlider.append(stockSliderTitle);
+        stockSlider.append(stockSliderData);
+        stockSlider.append(stockSliderRange);
 
         sortSelect.setAttribute('id', 'option-selector');
         productSort.className = 'sort-products';
@@ -381,12 +169,13 @@ class MainPages extends Page {
         option4.setAttribute('value', 'rating-down');
         option5.innerText = 'Rating (Low to High)';
         option5.setAttribute('value', 'rating-up');
-        stat.innerText = `Found: ${this.searchAmount}`;
+        // stat.innerText = `Found: ${this.searchAmount}`;
         stat.className = 'stat';
         searchBar.className = 'search-bar';
         searchInput.setAttribute('id', 'search-input');
         searchInput.setAttribute('type', 'search');
         searchInput.setAttribute('placeholder', 'Search product');
+        searchInput.oninput = function(){searchProducts()};
         viewMode.className = 'view-mode';
         smallVM.className = 'smaill-vm';
         bigVM.className = 'big-vm';
@@ -415,8 +204,8 @@ class MainPages extends Page {
         filters.append(resetDiv);
         filters.append(category);
         filters.append(brand);
-        filters.append(price);
-        filters.append(stock);
+        filters.append(priceSlider);
+        filters.append(stockSlider);
         products.append(productSort);
         products.append(productsItems);
         products.append(notFound);

@@ -199,21 +199,22 @@ input[type='checkbox'] {
 
 .out-data {
     margin-top: 5%;
-    margin-bottom: 5%;
     width: 100%;
     display: flex;
     justify-content: space-around;
     color: wheat;
 }
+
 .multi-range {
     position: relative;
-    height: 3rem;
+    height: 2rem;
 }
 input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
     width: 96%;
     margin: 2%;
+    /* overflow: hidden; */
     outline: none;
     background: linear-gradient(orange, orange) no-repeat center;
     background-size: 100% 2px;
@@ -221,6 +222,22 @@ input[type='range'] {
 }
 .multi-range input[type='range'] {
     position: absolute;
+}
+.multi-range input[type='range']:nth-child(2) {
+    background: none;
+}
+
+.multi-range2 {
+  position: relative;
+  height: 2rem;
+}
+
+.multi-range2 input[type='range'] {
+  position: absolute;
+}
+
+.multi-range2 input[type='range']:nth-child(2) {
+  background: none;
 }
 
 /**************************/
@@ -519,4 +536,18 @@ input[type='range'] {
 #fromSlider1 {
     height: 0;
     z-index: 1;
+}
+
+.filter-title {
+    text-align: center;
+    background-color: #181a1c;
+    border-bottom: 1px solid orange;
+}
+
+.from-data {
+    color: wheat;
+}
+
+.to-data {
+    color: wheat;
 }
