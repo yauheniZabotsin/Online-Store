@@ -1,5 +1,5 @@
-import { Data, Product } from "../interfaces/interfaces";
-import Products from "./dataloader";
+import { Data, Product } from '../interfaces/interfaces';
+import Products from './dataloader';
 
 export class DataViewer {
     products: Products;
