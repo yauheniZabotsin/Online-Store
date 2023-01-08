@@ -60,6 +60,7 @@ class App {
         page.addEventsSlider();
         page.addEventsModal();
         page.addEventBtn();
+        page.linkToCart();
       }
       if (page instanceof ProductPage) {
         page.addEventImg();

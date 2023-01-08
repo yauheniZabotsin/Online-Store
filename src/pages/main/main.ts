@@ -24,6 +24,14 @@ class MainPages extends Page {
     super(id);
   }
 
+  linkToCart() {
+    const cart = document.querySelector('.cart') as HTMLElement;
+
+    cart.addEventListener('click', (e: Event) => {
+      window.location.hash = 'cart';
+    });
+  }
+
   addEventBtn() {
     const { getIsInCart, setIsInCart } = isCart;
 
