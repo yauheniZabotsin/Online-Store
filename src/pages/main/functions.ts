@@ -101,7 +101,7 @@ export function getIdOfCheckedCheckboxes(checkboxes: NodeListOf<HTMLInputElement
 }
 
 export function filterCheckboxResults(filters: { categories: Array<string>, brands: Array<string>}) {
-    let products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     let hiddenPoducts: Array<HTMLElement> = [];
     
     for (let i = 0; i < products.length; i++) {
@@ -168,4 +168,65 @@ export function filterProducts() {
     }
     
     const filterResult = filterCheckboxResults(filters);
+}
+
+export function sortProducts() {
+    const optionSelector = document.querySelector('#option-selector') as HTMLSelectElement;
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const prodCont = document.querySelector('.products-items');
+    let result = [];
+
+    if (optionSelector.value === 'price-down') {
+        result = products.sort((a, b) => {
+            let aPrice = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+            let bPrice = Number(b.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+            if (aPrice < bPrice) return 1;
+            if (aPrice > bPrice) return -1;
+            return 0;
+        });
+        
+        products.forEach(node => node.parentNode?.removeChild(node));
+        result.forEach(product => prodCont!.append(product));
+    }
+
+    if (optionSelector.value === 'price-up') {
+        result = products.sort((a, b) => {
+            let aPrice = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+            let bPrice = Number(b.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
+            if (aPrice > bPrice) return 1;
+            if (aPrice < bPrice) return -1;
+            return 0;
+        });
+
+        products.forEach(node => node.parentNode?.removeChild(node));
+        result.forEach(product => prodCont!.append(product));
+    }
+
+
+    if (optionSelector.value === 'rating-down') {
+        result = products.sort((a, b) => {
+            let aRating = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[9].textContent?.slice(8));
+            let bRating = Number(b.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[9].textContent?.slice(8));
+            if (aRating < bRating) return 1;
+            if (aRating > bRating) return -1;
+            return 0;
+        });
+
+        products.forEach(node => node.parentNode?.removeChild(node));
+        result.forEach(product => prodCont!.append(product));
+    }
+    
+
+    if (optionSelector.value === 'rating-up') {
+        result = products.sort((a, b) => {
+            let aRating = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[9].textContent?.slice(8));
+            let bRating = Number(b.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[9].textContent?.slice(8));
+            if (aRating > bRating) return 1;
+            if (aRating < bRating) return -1;
+            return 0;
+        });
+
+        products.forEach(node => node.parentNode?.removeChild(node));
+        result.forEach(product => prodCont!.append(product));
+    }
 }

@@ -7,7 +7,7 @@ import CartPage from '../../pages/cart/cart';
 import ErrorPage from '../../pages/error/errors';
 import ProductPage from '../../pages/product/product';
 import { brandData, categoryData } from '../data/filters';
-import { filterProducts } from '../../pages/main/functions';
+// import { filterProducts } from '../../pages/main/functions';
 
 export const enum PageIds {
     MainPages = 'main',
@@ -49,8 +49,6 @@ class App {
             this.view.viewBrands(brandData);
             page.addEventsSlider();
             page.addEventsModal();
-            // page.filterProducts();
-            page.sortProducts();
             page.searchProducts();
           }
         }
