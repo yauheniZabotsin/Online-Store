@@ -129,9 +129,7 @@ class ProductPage extends Page {
 
     const { getIsInCart, setIsInCart } = isCart;
 
-    let isInCart = getIsInCart(String(productId)); //cюда
-    console.log(`isInCart: ${productId}`, isInCart);
-    console.log('isCart', isCart);
+    let isInCart = getIsInCart(String(productId));
     btnCart.textContent = !isInCart ? 'ADD TO CART' : 'DROP FROM CART';
     btnCart.addEventListener('click', () => {
       const CartTotal = document.querySelector('.total-price span') as HTMLElement;
@@ -149,8 +147,6 @@ class ProductPage extends Page {
         isCart[prodData.products[id].id].sumPrice += prodData.products[id].price;
       } else {
         btnCart.textContent = 'ADD TO CART';
-        console.log(isCart[id]);
-        console.log(isCart[CartPage.Products[id]]);
         countCart.textContent = `${count - isCart[prodData.products[id].id]?.count}`;
         CartTotal.textContent = `€${+CartPrice - isCart[prodData.products[id].id]?.sumPrice}.00`;
         setIsInCart(String(productId), false);

@@ -108,8 +108,6 @@ class MainPages extends Page {
   }
 
   render() {
-    // const title = this.createHeaderTitle(MainPages.TextObject.MainTitle);
-    // this.container.append(title);
     const filter = document.createElement('div');
     filter.className = 'app-storage-page';
     const filterMarkup = filtersProd.filtersProd;
