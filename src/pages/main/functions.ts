@@ -32,16 +32,15 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
         let product = products[i];
         let category = categoriesItems[i].textContent?.slice(10);
         let brand = brandsItems[i].textContent?.slice(7);
-        console.log(product);
 
         if (filters.categories.length > 0) {
             let isHidden = true;
-            console.log(isHidden);
+
             for (let j = 0; j < filters.categories.length; j++) {
                 let filter = filters.categories[j];
                 
                 if (filter === category) {
-                    // console.log(product);
+                    console.log(product);
                     isHidden = false;
                     break;
                 }
