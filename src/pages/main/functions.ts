@@ -101,6 +101,7 @@ export function filterProducts() {
     }
 
     filterCheckboxResults(filters);
+    getItemsAmount();
 }
 
 export function sortProducts() {
@@ -204,6 +205,7 @@ export function searchProducts() {
 
     for (let i = 0; i < products.length; i++) {
         products[i].style.display = 'block';
+        getItemsAmount();
     }
 
     if (hiddenProducts.length <= 0) {
@@ -212,6 +214,7 @@ export function searchProducts() {
 
     for (let i = 0; i < hiddenProducts.length; i++) {
         hiddenProducts[i].style.display = 'none';
+        getItemsAmount();
     }
 
     let check = products.filter((item) => {
@@ -273,6 +276,7 @@ export function filterPrice() {
 
     for (let i = 0; i < products.length; i++) {
         products[i].style.display = 'block';
+        getItemsAmount();
     }
 
     if (hiddenProducts.length <= 0) {
@@ -281,6 +285,7 @@ export function filterPrice() {
 
     for (let i = 0; i < hiddenProducts.length; i++) {
         hiddenProducts[i].style.display = 'none';
+        getItemsAmount();
     }
 
     let check = products.filter((item) => {
@@ -342,6 +347,7 @@ export function filterStock() {
 
     for (let i = 0; i < products.length; i++) {
         products[i].style.display = 'block';
+        getItemsAmount();
     }
 
     if (hiddenProducts.length <= 0) {
@@ -350,6 +356,7 @@ export function filterStock() {
 
     for (let i = 0; i < hiddenProducts.length; i++) {
         hiddenProducts[i].style.display = 'none';
+        getItemsAmount();
     }
 
     let check = products.filter((item) => {

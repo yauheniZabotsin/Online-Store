@@ -17,6 +17,7 @@ class MainPages extends Page {
     }
 
     addEventsModal() {
+        console.log(window.location);
         const productItem = document.querySelectorAll('.product-item');
         productItem.forEach((item) => {
             item.addEventListener('click', (e: Event) => {
@@ -24,16 +25,6 @@ class MainPages extends Page {
                 window.location.hash = `#product-details/${id}`;
             });
         })
-    }
-
-    getItemsAmount() {
-        const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
-        const stat = document.querySelector('.stat') as HTMLElement;
-
-        let amount: number = products.filter((product) => product.style.display === 'block').length;
-        console.log(amount);
-        
-        stat.textContent = `Found: ${amount.toString()}`;
     }
 
     static getId(){
