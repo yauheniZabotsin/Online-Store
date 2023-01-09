@@ -40,6 +40,7 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
                 let filter = filters.categories[j];
                 
                 if (filter === category) {
+                    console.log(product);
                     isHidden = false;
                     break;
                 }
@@ -388,7 +389,6 @@ export function getItemsAmount() {
     const stat = document.querySelector('.stat') as HTMLElement;
 
     let amount: number = products.filter((product) => product.style.display === 'block').length;
-    console.log(amount);
     
     stat.textContent = `Found: ${amount.toString()}`;
 }
