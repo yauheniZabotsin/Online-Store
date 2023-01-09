@@ -172,7 +172,7 @@ export function searchProducts() {
     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
-    let value: string = searchInput.value;
+    let value: string = searchInput.value.toLowerCase();
     let hiddenProducts: Array<HTMLElement> = [];
     const titles: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-title'));
     const categories: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
