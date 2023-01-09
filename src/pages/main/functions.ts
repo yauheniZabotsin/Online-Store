@@ -1,5 +1,3 @@
-import { Product } from "../../components/interfaces/interfaces";
-
 export function convertArrayToNode(arr: Array<Element>) {
     const fragment = document.createDocumentFragment();
     arr.forEach((item: Element) => {
@@ -27,7 +25,7 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     let hiddenProducts: Array<HTMLElement> = [];
     const notFound = document.querySelector('.not-found') as HTMLElement;
-    
+
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
         let category = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1].textContent?.slice(10);
@@ -101,8 +99,8 @@ export function filterProducts() {
         categories: getIdOfCheckedCheckboxes(catCheckboxes),
         brands: getIdOfCheckedCheckboxes(brandCheckboxes)
     }
-    
-    const filterResult = filterCheckboxResults(filters);
+
+    filterCheckboxResults(filters);
 }
 
 export function sortProducts() {
@@ -110,7 +108,7 @@ export function sortProducts() {
     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     const prodCont = document.querySelector('.products-items');
     let result = [];
-
+    
     if (optionSelector.value === 'price-down') {
         result = products.sort((a, b) => {
             let aPrice = Number(a.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[5].textContent?.slice(7));
@@ -173,8 +171,7 @@ export function searchProducts() {
     const notFound = document.querySelector('.not-found') as HTMLElement;
     let value: string = searchInput.value;
     let hiddenProducts: Array<HTMLElement> = [];
-    let result = [];
-
+    
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
         let title = product.childNodes[1].childNodes[1].childNodes[1].textContent?.toLowerCase()
@@ -184,7 +181,6 @@ export function searchProducts() {
         let rating = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[9].textContent?.slice(8).toString();
         let discount = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[7].textContent?.slice(10).toString();
         let stock = product.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[11].textContent?.slice(7).toString();
-        console.log(title);
 
         if (value && value.trim().length > 0) {
             let isHidden = true;
@@ -241,7 +237,7 @@ export function filterPrice() {
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
     let hiddenProducts: Array<HTMLElement> = [];
-    
+
     fromValue.textContent = `€${minVal}`;
     toValue.textContent = `€${maxVal}`;
 
@@ -310,7 +306,7 @@ export function filterStock() {
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
     let hiddenProducts: Array<HTMLElement> = [];
-  
+
     fromValue.textContent = `${minVal}`;
     toValue.textContent = `${maxVal}`;
 
@@ -367,4 +363,14 @@ export function filterStock() {
         prodCont.style.display = 'flex';
         notFound.style.display = 'none';
     }
+}
+
+export function getItemsAmount() {
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const stat = document.querySelector('.stat') as HTMLElement;
+
+    let amount: number = products.filter((product) => product.style.display === 'block').length;
+    console.log(amount);
+    
+    stat.textContent = `Found: ${amount.toString()}`;
 }

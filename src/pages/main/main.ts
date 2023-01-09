@@ -6,7 +6,7 @@ import { sortProducts, searchProducts, filterPrice, filterStock } from "./functi
 
 class MainPages extends Page {
     products: Products;
-
+    
     static TextObject = {
         MainTitle: 'Main Pages',
     };
@@ -24,6 +24,16 @@ class MainPages extends Page {
                 window.location.hash = `#product-details/${id}`;
             });
         })
+    }
+
+    getItemsAmount() {
+        const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+        const stat = document.querySelector('.stat') as HTMLElement;
+
+        let amount: number = products.filter((product) => product.style.display === 'block').length;
+        console.log(amount);
+        
+        stat.textContent = `Found: ${amount.toString()}`;
     }
 
     static getId(){
@@ -132,7 +142,9 @@ class MainPages extends Page {
         stockSliderTitle.innerText = 'Stock';
         stockSliderData.className = 'out-data';
         stockSliderFromData.className = 'from-data2';
+        stockSliderFromData.textContent = '2';
         stockSliderToData.className = 'to-data2';
+        stockSliderToData.textContent = '150';
         stockSliderRange.className = 'multi-range2';
         stockSliderFromInput.setAttribute('type', 'range');
         stockSliderFromInput.setAttribute('min', '0');
@@ -169,7 +181,7 @@ class MainPages extends Page {
         option4.setAttribute('value', 'rating-down');
         option5.innerText = 'Rating (Low to High)';
         option5.setAttribute('value', 'rating-up');
-        // stat.innerText = `Found: ${this.searchAmount}`;
+        stat.innerText = `Found: 100`;
         stat.className = 'stat';
         searchBar.className = 'search-bar';
         searchInput.setAttribute('id', 'search-input');

@@ -28,6 +28,7 @@ export class Products {
             const itemRating = <HTMLElement>itemClone.querySelector('.item-rating');
             const itemStock = <HTMLElement>itemClone.querySelector('.item-stock');
 
+            itemDiv.setAttribute('style', 'display:block');
             itemCont.setAttribute('id', item.id.toString());
             itemCont.style.backgroundImage = `url(${item.thumbnail})`;
             itemCont.style.backgroundPosition = 'top left';
