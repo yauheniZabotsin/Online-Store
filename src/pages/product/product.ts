@@ -154,6 +154,7 @@ class ProductPage extends Page {
       CartPage.Products = Object?.entries(isCart)
         .filter((item: any) => item[1].isInCart === true)
         .map((item) => +item[0]);
+      localStorage.setItem('CartPage.Products', JSON.stringify(CartPage.Products));
     });
 
     const btnBuy = document.createElement('button');

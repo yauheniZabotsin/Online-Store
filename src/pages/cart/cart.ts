@@ -8,6 +8,8 @@ class CartPage extends Page {
     MainTitle: 'Cart is Empty',
   };
 
+  // public local: string = JSON.parse(localStorage.getItem('CartPage.Products'));
+
   public static Products: number[] = [];
 
   constructor(id: string) {
@@ -299,6 +301,7 @@ class CartPage extends Page {
             CartPage.Products = Object?.entries(isCart)
               .filter((item: any) => item[1].isInCart === true)
               .map((item) => +item[0]);
+            localStorage.setItem('CartPage.Products', JSON.stringify(CartPage.Products));
 
             ((e.target as Element).closest('.cart-item') as HTMLElement).remove();
             if (document.querySelector('.cart-item') === null) {

@@ -39,6 +39,8 @@
 
 .product-data {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
   padding: 0.5%;
 }
@@ -106,7 +108,7 @@
 } */
 
 .cart-button {
-  width: 90%;
+  width: 100%;
   font-size: 200%;
   color: wheat;
   text-shadow: 0 0 10px rgb(184 24 24), 0 0 20px red, 0 0 30px red, 0 0 40px red;
