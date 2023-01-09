@@ -1,6 +1,6 @@
 import Page from '../../core/templates/page';
 import '../cart/cart.css';
-import prodData from '../../components/data/data';
+import prodData from '../../components/data/products';
 import { isCart } from '../../components/app/app';
 
 class CartPage extends Page {

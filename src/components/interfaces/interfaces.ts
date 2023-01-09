@@ -18,3 +18,8 @@ export interface Data {
     skip: number;
     limit: number;
 }
+
+export interface Filter {
+  category: string;
+  amount: string;
+}
