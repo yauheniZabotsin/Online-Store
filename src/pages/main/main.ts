@@ -1,31 +1,80 @@
-import { Products } from "../../components/app/dataloader";
-import prodData from "../../components/data/products";
-import { Data, Product } from "../../components/interfaces/interfaces";
-import Page from "../../core/templates/page";
-import { sortProducts, searchProducts, filterPrice, filterStock } from "./functions";
+import Page from '../../core/templates/page';
+import '../main/main.css';
+import prodData from '../../components/data/products';
+import { filterPrice, filterStock, searchProducts, sortProducts } from './functions';
+
+import { isCart } from '../../components/app/app';
+import CartPage from '../cart/cart';
 
 class MainPages extends Page {
-    products: Products;
-    
-    static TextObject = {
-        MainTitle: 'Main Pages',
-    };
+  static TextObject = {
+    MainTitle: 'Main Pages',
+  };
 
-    constructor(id: string) {
-        super(id);
-        this.products = new Products();
-    }
+  constructor(id: string) {
+    super(id);
+  }
 
-    addEventsModal() {
-        console.log(window.location);
-        const productItem = document.querySelectorAll('.product-item');
-        productItem.forEach((item) => {
-            item.addEventListener('click', (e: Event) => {
-                const id = ((e.target as Element).closest('.product-item') as HTMLElement).id
-                window.location.hash = `#product-details/${id}`;
-            });
-        })
-    }
+  linkToCart() {
+    const cart = document.querySelector('.cart') as HTMLElement;
+
+    cart.addEventListener('click', (e: Event) => {
+      window.location.hash = 'cart';
+    });
+  }
+
+  addEventBtn() {
+    const { getIsInCart, setIsInCart } = isCart;
+
+    const btnAdd = document.querySelectorAll('.btn-add');
+
+    const countCart = document.querySelector('.total_content') as HTMLElement;
+    let count = Number(countCart.textContent);
+
+    btnAdd.forEach((item) => {
+      item.addEventListener('click', (e: Event) => {
+        const CartTotal = document.querySelector('.total-price span') as HTMLElement;
+        let CartPrice = CartTotal.innerHTML.slice(1);
+
+        const idIndex = +((e.target as Element).closest('.product-item') as HTMLElement).id - 1;
+        const id = ((e.target as Element).closest('.product-item') as HTMLElement).id;
+        if (((e.target as Element).closest('.product-item') as HTMLElement).classList.contains('in-cart')) {
+          ((e.target as Element).closest('.product-item') as HTMLElement).classList.remove('in-cart');
+          item.textContent = 'ADD TO CART';
+          countCart.textContent = `${--count}`;
+          CartTotal.textContent = `€${+CartPrice - prodData.products[idIndex].price}.00`;
+
+          setIsInCart(String(id), false);
+          isCart[id].sumPrice -= prodData.products[idIndex].price;
+        } else {
+          ((e.target as Element).closest('.product-item') as HTMLElement).classList.add('in-cart');
+          item.textContent = 'DROP FROM CART';
+          countCart.textContent = `${++count}`;
+          CartTotal.textContent = `€${+CartPrice + prodData.products[idIndex].price}.00`;
+
+          setIsInCart(String(id), true);
+          isCart[id].sumPrice += prodData.products[idIndex].price;
+        }
+
+        CartPage.Products = Object?.entries(isCart)
+          .filter((item: any) => item[1].isInCart === true)
+          .map((item) => +item[0]);
+      });
+    });
+  }
+
+  addEventsModal() {
+    const productItem = document.querySelectorAll('.product-item');
+
+    productItem.forEach((item) => {
+      item.addEventListener('click', (e: Event) => {
+        if (!(e.target as Element).classList.contains('btn-add')) {
+          const id = ((e.target as Element).closest('.product-item') as HTMLElement).id;
+          window.location.hash = `#product-details/${id}`;
+        }
+      });
+    });
+  }
 
     static getId(){
         return window.location.hash.slice(1);
@@ -144,8 +193,8 @@ class MainPages extends Page {
         stockSliderFromInput.onchange = function(){filterStock()}
         stockSliderToInput.setAttribute('type', 'range');
         stockSliderToInput.setAttribute('min', '0');
-        stockSliderToInput.setAttribute('max', '75');
-        stockSliderToInput.setAttribute('value', '75');
+        stockSliderToInput.setAttribute('max', '150');
+        stockSliderToInput.setAttribute('value', '150');
         stockSliderToInput.onchange = function(){filterStock()}
         stockSliderRange.append(stockSliderFromInput);
         stockSliderRange.append(stockSliderToInput);
