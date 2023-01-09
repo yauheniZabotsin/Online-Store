@@ -25,13 +25,13 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     let hiddenProducts: Array<HTMLElement> = [];
     const notFound = document.querySelector('.not-found') as HTMLElement;
-    const categories: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
-    const brands: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
+    const categoriesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
+    const brandsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let category = categories[i].textContent?.slice(10);
-        let brand = brands[i].textContent?.slice(7);
+        let category = categoriesItems[i].textContent?.slice(10);
+        let brand = brandsItems[i].textContent?.slice(7);
 
         if (filters.categories.length > 0) {
             let isHidden = true;
@@ -172,25 +172,25 @@ export function searchProducts() {
     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
-    let value: string = searchInput.value.toLowerCase();
+    let value: string = searchInput.value;
     let hiddenProducts: Array<HTMLElement> = [];
     const titles: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-title'));
-    const categories: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
-    const brands: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
-    const prices: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-price'));
-    const ratings: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-rating'));
-    const discounts: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-discount'));
-    const stocks: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
+    const categoriesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
+    const brandsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
+    const pricesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-price'));
+    const ratingsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-rating'));
+    const discountsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-discount'));
+    const stocksItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
         let title = titles[i].textContent?.toLowerCase()
-        let category = categories[i].textContent?.slice(10);
-        let brand = brands[i].textContent?.toLowerCase().slice(7);
-        let price = prices[i].textContent?.slice(7).toString();
-        let rating = ratings[i].textContent?.slice(8).toString();
-        let discount = discounts[i].textContent?.slice(10).toString();
-        let stock = stocks[i].textContent?.slice(7).toString();
+        let category = categoriesItems[i].textContent?.slice(10);
+        let brand = brandsItems[i].textContent?.toLowerCase().slice(7);
+        let price = pricesItems[i].textContent?.slice(7).toString();
+        let rating = ratingsItems[i].textContent?.slice(8).toString();
+        let discount = discountsItems[i].textContent?.slice(10).toString();
+        let stock = stocksItems[i].textContent?.slice(7).toString();
 
         if (value && value.trim().length > 0) {
             let isHidden = true;
@@ -249,14 +249,14 @@ export function filterPrice() {
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
     let hiddenProducts: Array<HTMLElement> = [];
-    const prices: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-price'));
+    const pricesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-price'));
 
     fromValue.textContent = `€${minVal}`;
     toValue.textContent = `€${maxVal}`;
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let price = prices[i].textContent?.slice(7);
+        let price = pricesItems[i].textContent?.slice(7);
 
         if (minVal <= maxVal) {
             let isHidden = true;
@@ -321,14 +321,14 @@ export function filterStock() {
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
     let hiddenProducts: Array<HTMLElement> = [];
-    const stocks: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
+    const stocksItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
 
     fromValue.textContent = `${minVal}`;
     toValue.textContent = `${maxVal}`;
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let stock = stocks[i].textContent?.slice(7);
+        let stock = stocksItems[i].textContent?.slice(7);
 
         if (minVal <= maxVal) {
             let isHidden = true;
