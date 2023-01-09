@@ -38,7 +38,7 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
 
             for (let j = 0; j < filters.categories.length; j++) {
                 let filter = filters.categories[j];
-                
+                console.log(filter);
                 if (filter === category) {
                     console.log(product);
                     isHidden = false;
