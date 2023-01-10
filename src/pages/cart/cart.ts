@@ -246,14 +246,21 @@ class CartPage extends Page {
             isCart[CartPage.Products[idIndex]].count += 1;
             spanPrice.textContent = ` ${isCart[CartPage.Products[idIndex]]?.count} `;
 
+            const countCart = document.querySelector('.total_content') as HTMLElement;
+            const CartTotal = document.querySelector('.total-price span') as HTMLElement;
             let count = Number(countCart.textContent);
             countCart.textContent = `${++count}`;
             totalCountSpan.textContent = countCart.textContent;
+            localStorage.setItem('count', JSON.stringify(countCart.textContent));
+            localStorage.setItem('price', JSON.stringify(totalCountSpan.textContent));
 
             let CartPrice = CartTotal.innerHTML.slice(1);
 
             CartTotal.textContent = `€${+CartPrice + prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
+
+            localStorage.setItem('count', JSON.stringify(countCart.textContent));
+            localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
 
             const newPrice = document.querySelectorAll('.newTotalPrice span');
             let codePrice = (10 - newPrice.length) / 10;
@@ -278,6 +285,8 @@ class CartPage extends Page {
           if (isCart[CartPage.Products[idIndex]]?.count !== undefined) {
             isCart[CartPage.Products[idIndex]].count -= 1;
 
+            const countCart = document.querySelector('.total_content') as HTMLElement;
+            const CartTotal = document.querySelector('.total-price span') as HTMLElement;
             let count = Number(countCart.textContent);
             countCart.textContent = `${--count}`;
             totalCountSpan.textContent = countCart.textContent;
@@ -285,6 +294,9 @@ class CartPage extends Page {
             let CartPrice = CartTotal.innerHTML.slice(1);
             CartTotal.textContent = `€${+CartPrice - prodData.products[CartPage.Products[idIndex] - 1].price}.00`;
             totalPriceSpan.textContent = CartTotal.textContent;
+
+            localStorage.setItem('count', JSON.stringify(countCart.textContent));
+            localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
 
             const newPrice = document.querySelectorAll('.newTotalPrice span');
             let codePrice = (10 - newPrice.length) / 10;
