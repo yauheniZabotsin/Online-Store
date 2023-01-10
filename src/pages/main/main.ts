@@ -23,10 +23,10 @@ class MainPages extends Page {
 
     let localCount = localStorage.getItem('count') || '';
 
-    // if (localPrice) {
-    //   Price.textContent = JSON.parse(localPrice);
-    //   totalCount.textContent = JSON.parse(localCount);
-    // }
+    if (localPrice) {
+      Price.textContent = JSON.parse(localPrice);
+      totalCount.textContent = JSON.parse(localCount);
+    }
   }
 
   linkToCart() {
