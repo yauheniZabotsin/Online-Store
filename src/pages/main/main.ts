@@ -223,14 +223,14 @@ class MainPages extends Page {
     stockSliderToData.textContent = '150';
     stockSliderRange.className = 'multi-range2';
     stockSliderFromInput.setAttribute('type', 'range');
-    stockSliderFromInput.setAttribute('min', '0');
-    stockSliderFromInput.setAttribute('max', '75');
-    stockSliderFromInput.setAttribute('value', '0');
+    stockSliderFromInput.setAttribute('min', '2');
+    stockSliderFromInput.setAttribute('max', '150');
+    stockSliderFromInput.setAttribute('value', '2');
     stockSliderFromInput.onchange = function () {
       filterStock();
     };
     stockSliderToInput.setAttribute('type', 'range');
-    stockSliderToInput.setAttribute('min', '0');
+    stockSliderToInput.setAttribute('min', '2');
     stockSliderToInput.setAttribute('max', '150');
     stockSliderToInput.setAttribute('value', '150');
     stockSliderToInput.onchange = function () {
