@@ -30,7 +30,7 @@ export class Products {
 
             itemDiv.setAttribute('style', 'display:block');
             itemCont.setAttribute('id', item.id.toString());
-            itemCont.style.backgroundImage = `url(${item.thumbnail})`;
+            itemCont.style.background = `url(${item.thumbnail}) 0% 0% / cover`;
             itemCont.style.backgroundPosition = 'top left';
             itemCont.style.backgroundRepeat = 'cover';
             itemTitle.textContent = item.title;

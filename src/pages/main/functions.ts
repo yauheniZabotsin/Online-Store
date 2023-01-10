@@ -392,3 +392,34 @@ export function getItemsAmount() {
     
     stat.textContent = `Found: ${amount.toString()}`;
 }
+
+
+// export function switchToSmall() {
+//     const switchBtn = document.querySelector('.small-vm') as HTMLElement;
+//     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+//     const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
+
+//     switchBtn.addEventListener('click', () => {
+//         products.forEach((product) => {
+//             product.classList.remove('big-item');
+//         });
+//         itemInfo.forEach((info) => {
+//             info.style.display = 'none';
+//         })
+//     })
+// }
+
+// export function switchToBig() {
+//   const switchBtn = document.querySelector('.big-vm') as HTMLElement;
+//   const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+//   const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
+
+//   switchBtn.addEventListener('click', () => {
+//       products.forEach((product) => {
+//           product.classList.add('big-item');
+//       });
+//       itemInfo.forEach((info) => {
+//           info.style.display = 'block';
+//       })
+//   })
+// }

@@ -1,10 +1,13 @@
 import Page from '../../core/templates/page';
 import '../cart/cart.css';
+import '../cart/modalBuy.css';
 import prodData from '../../components/data/products';
 import { isCart } from '../../components/app/app';
 
 import { setIsInCart } from '../../components/app/app';
 import { getIsInCart } from '../../components/app/app';
+
+import { modalHTML } from './modalHTML';
 
 class CartPage extends Page {
   static TextObject = {
@@ -17,6 +20,19 @@ class CartPage extends Page {
 
   constructor(id: string) {
     super(id);
+  }
+
+  addModalBuy() {
+    const modal = document.createElement('div');
+    const modalMarkup = modalHTML;
+    modal.innerHTML = modalMarkup;
+    modal.addEventListener('click', (e: Event) => {
+      if (!(e.target as Element).closest('.modal-content')) {
+        Page.isBtnBuy = false;
+        modal.style.display = 'none';
+      }
+    });
+    this.container.append(modal);
   }
 
   addEventPromoCode() {
@@ -115,7 +131,6 @@ class CartPage extends Page {
 
   render() {
     // const { getIsInCart, setIsInCart } = isCart;
-
     const countCart = document.querySelector('.total_content') as HTMLElement;
     const CartTotal = document.querySelector('.total-price span') as HTMLElement;
 
@@ -173,6 +188,15 @@ class CartPage extends Page {
 
       const btnBuy = document.createElement('button');
       btnBuy.textContent = 'BUY NOW';
+      btnBuy.addEventListener('click', (e: Event) => {
+        Page.isBtnBuy = true;
+        this.addModalBuy();
+      });
+      if (Page.isBtnBuy) {
+        Page.isBtnBuy = true;
+        this.addModalBuy();
+      }
+
       totalCart.append(btnBuy);
 
       for (let i = 0; i < CartPage.Products.length; i++) {

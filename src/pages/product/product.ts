@@ -170,6 +170,32 @@ class ProductPage extends Page {
 
     const btnBuy = document.createElement('button');
     btnBuy.textContent = 'BUY NOW';
+    btnBuy.addEventListener('click', (e: Event) => {
+      Page.isBtnBuy = true;
+      const btnCart = document.querySelector('.cart-button button') as HTMLInputElement;
+
+      const CartTotal = document.querySelector('.total-price span') as HTMLElement;
+      let CartPrice = CartTotal.innerHTML.slice(1);
+
+      const countCart = document.querySelector('.total_content') as HTMLElement;
+      let count = Number(countCart.textContent);
+
+      if (btnCart.textContent === 'ADD TO CART') {
+        countCart.textContent = `${++count}`;
+        CartTotal.textContent = `€${+CartPrice + prodData.products[id].price}.00`;
+        setIsInCart(String(productId), true);
+
+        localStorage.setItem('count', JSON.stringify(countCart.textContent));
+        localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
+        localStorage.setItem('isCart', JSON.stringify(isCart));
+
+        CartPage.Products = Object?.entries(isCart)
+          .filter((item: any) => item[1].isInCart === true)
+          .map((item) => +item[0]);
+        localStorage.setItem('CartPage.Products', JSON.stringify(CartPage.Products));
+      }
+      window.location.hash = 'cart';
+    });
     cartButton.append(btnCart);
     cartButton.append(btnBuy);
     productData.append(addToCart);

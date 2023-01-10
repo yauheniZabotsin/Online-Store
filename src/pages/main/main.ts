@@ -52,9 +52,7 @@ class MainPages extends Page {
 
   addEventBtn() {
     // const { getIsInCart, setIsInCart } = isCart;
-
     const btnAdd = document.querySelectorAll('.add-to-cart');
-
     const countCart = document.querySelector('.total_content') as HTMLElement;
     let count = Number(countCart.textContent);
 
@@ -112,6 +110,46 @@ class MainPages extends Page {
     });
   }
 
+  switchToSmall() {
+    const switchToSmallBtn = document.querySelector('.small-vm') as HTMLElement;
+    const switchToBigBtn = document.querySelector('.big-vm') as HTMLElement;
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
+
+    switchToSmallBtn.addEventListener('click', () => {
+      switchToSmallBtn.classList.add('active-mode');
+      switchToBigBtn.classList.remove('active-mode');
+      products.forEach((product) => {
+        product.classList.remove('big-item');
+      });
+      itemInfo.forEach((info) => {
+        info.style.display = 'none';
+      });
+    });
+  }
+
+  switchToBig() {
+    const switchToSmallBtn = document.querySelector('.small-vm') as HTMLElement;
+    const switchToBigBtn = document.querySelector('.big-vm') as HTMLElement;
+    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
+
+    switchToBigBtn.addEventListener('click', () => {
+      switchToBigBtn.classList.add('active-mode');
+      switchToSmallBtn.classList.remove('active-mode');
+      products.forEach((product) => {
+        product.classList.add('big-item');
+      });
+      itemInfo.forEach((info) => {
+        info.style.display = 'block';
+      });
+    });
+  }
+
+  static getId() {
+    return window.location.hash.slice(1);
+  }
+
   render(): HTMLElement {
     const mainPage: HTMLElement = document.createElement('div');
     const filters: HTMLElement = document.createElement('div');
@@ -158,6 +196,7 @@ class MainPages extends Page {
     const bigVM: HTMLElement = document.createElement('div');
     const productsItems: HTMLElement = document.createElement('div');
     const notFound: HTMLElement = document.createElement('div');
+    const dot: HTMLElement = document.createElement('div');
 
     resetDiv.className = 'reset-total';
     resetBtn.innerText = 'Reset Filters';
@@ -270,13 +309,15 @@ class MainPages extends Page {
     searchInput.oninput = function () {
       searchProducts();
     };
+
     viewMode.className = 'view-mode';
-    smallVM.className = 'smaill-vm';
+    smallVM.className = 'small-vm';
     bigVM.className = 'big-vm';
     bigVM.classList.add('active-mode');
     productsItems.className = 'products-items';
     notFound.className = 'not-found';
     notFound.innerText = 'No products found 😏';
+    dot.innerText = '.';
     sortSelect.append(option1);
     sortSelect.append(option2);
     sortSelect.append(option3);
@@ -284,6 +325,12 @@ class MainPages extends Page {
     sortSelect.append(option5);
     sortBar.append(sortSelect);
     searchBar.append(searchInput);
+    for (let i = 16; i > 0; i--) {
+      bigVM.append(dot.cloneNode(true));
+    }
+    for (let i = 36; i > 0; i--) {
+      smallVM.append(dot.cloneNode(true));
+    }
     viewMode.append(smallVM);
     viewMode.append(bigVM);
     productSort.append(sortBar);
