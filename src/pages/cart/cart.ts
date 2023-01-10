@@ -8,9 +8,9 @@ class CartPage extends Page {
     MainTitle: 'Cart is Empty',
   };
 
-  // public local: string = JSON.parse(localStorage.getItem('CartPage.Products'));
+  public static local: string = JSON.parse(localStorage.getItem('CartPage.Products') || '[]');
 
-  public static Products: number[] = [];
+  public static Products: any = CartPage.local ? CartPage.local : [];
 
   constructor(id: string) {
     super(id);

@@ -18,14 +18,14 @@ class MainPages extends Page {
   addLocalStorage() {
     const Price = document.querySelector('.total-price span') as HTMLElement;
     const totalCount = document.querySelector('.total_content') as HTMLElement;
+
     let localPrice = localStorage.getItem('price');
-    let localCount = String(localStorage.getItem('count'));
+
+    let localCount = localStorage.getItem('count') || '';
+
     // if (localPrice) {
-    //   Price.innerHTML = localPrice;
-    //   totalCount.innerHTML = localCount;
-    // } else {
-    //   Price.innerHTML = '€0.00';
-    //   totalCount.innerHTML = '0't;
+    //   Price.textContent = JSON.parse(localPrice);
+    //   totalCount.textContent = JSON.parse(localCount);
     // }
   }
 
@@ -41,10 +41,10 @@ class MainPages extends Page {
     const item = document.querySelectorAll('.item');
     const btnAdd = document.querySelectorAll('.add-to-cart');
 
-    for (let i = 0; i < CartPage.Products.length; i++) {
-      item[i].classList.add('in-cart');
-      btnAdd[i].textContent = 'DROP FROM CART';
-    }
+    CartPage.Products.forEach((id: number) => {
+      item[id - 1].classList.add('in-cart');
+      btnAdd[id - 1].textContent = 'DROP FROM CART';
+    });
   }
 
   addEventBtn() {

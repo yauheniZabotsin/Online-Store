@@ -145,11 +145,18 @@ class ProductPage extends Page {
         setIsInCart(String(productId), true);
 
         isCart[prodData.products[id].id].sumPrice += prodData.products[id].price;
+
+        localStorage.setItem('count', JSON.stringify(countCart.textContent));
+        localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
       } else {
         btnCart.textContent = 'ADD TO CART';
         countCart.textContent = `${count - isCart[prodData.products[id].id]?.count}`;
         CartTotal.textContent = `€${+CartPrice - isCart[prodData.products[id].id]?.sumPrice}.00`;
         setIsInCart(String(productId), false);
+
+        localStorage.setItem('count', JSON.stringify(countCart.textContent));
+        localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
+
       }
       CartPage.Products = Object?.entries(isCart)
         .filter((item: any) => item[1].isInCart === true)
