@@ -30,16 +30,15 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let category = categoriesItems[i].textContent?.slice(10);
-        let brand = brandsItems[i].textContent?.slice(7);
+        let category = categoriesItems[i].textContent?.slice(9);
+        let brand = brandsItems[i].textContent?.slice(6);
 
         if (filters.categories.length > 0) {
             let isHidden = true;
 
             for (let j = 0; j < filters.categories.length; j++) {
                 let filter = filters.categories[j];
-                console.log(filter);
-                console.log(category);
+
                 if (filter === category) {
                     console.log(product);
                     isHidden = false;
@@ -116,8 +115,8 @@ export function sortProducts() {
     
     if (optionSelector.value === 'price-down') {
         result = products.sort((a, b) => {
-            let aPrice = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(7));
-            let bPrice = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(7));
+            let aPrice = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(6));
+            let bPrice = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(6));
             if (aPrice < bPrice) return 1;
             if (aPrice > bPrice) return -1;
             return 0;
@@ -129,8 +128,8 @@ export function sortProducts() {
 
     if (optionSelector.value === 'price-up') {
         result = products.sort((a, b) => {
-            let aPrice = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(7));
-            let bPrice = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(7));
+            let aPrice = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(6));
+            let bPrice = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[2].textContent?.slice(6));
             if (aPrice > bPrice) return 1;
             if (aPrice < bPrice) return -1;
             return 0;
@@ -143,8 +142,8 @@ export function sortProducts() {
 
     if (optionSelector.value === 'rating-down') {
         result = products.sort((a, b) => {
-            let aRating = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(8));
-            let bRating = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(8));
+            let aRating = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(7));
+            let bRating = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(7));
             if (aRating < bRating) return 1;
             if (aRating > bRating) return -1;
             return 0;
@@ -157,8 +156,8 @@ export function sortProducts() {
 
     if (optionSelector.value === 'rating-up') {
         result = products.sort((a, b) => {
-            let aRating = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(8));
-            let bRating = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(8));
+            let aRating = Number(a.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(7));
+            let bRating = Number(b.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[4].textContent?.slice(7));
             if (aRating > bRating) return 1;
             if (aRating < bRating) return -1;
             return 0;
@@ -187,12 +186,12 @@ export function searchProducts() {
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
         let title = titles[i].textContent?.toLowerCase()
-        let category = categoriesItems[i].textContent?.slice(10);
-        let brand = brandsItems[i].textContent?.toLowerCase().slice(7);
-        let price = pricesItems[i].textContent?.slice(7).toString();
-        let rating = ratingsItems[i].textContent?.slice(8).toString();
-        let discount = discountsItems[i].textContent?.slice(10).toString();
-        let stock = stocksItems[i].textContent?.slice(7).toString();
+        let category = categoriesItems[i].textContent?.slice(9);
+        let brand = brandsItems[i].textContent?.toLowerCase().slice(6);
+        let price = pricesItems[i].textContent?.slice(6).toString();
+        let rating = ratingsItems[i].textContent?.slice(7).toString();
+        let discount = discountsItems[i].textContent?.slice(9).toString();
+        let stock = stocksItems[i].textContent?.slice(6).toString();
 
         if (value && value.trim().length > 0) {
             let isHidden = true;
@@ -258,7 +257,7 @@ export function filterPrice() {
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let price = pricesItems[i].textContent?.slice(7);
+        let price = pricesItems[i].textContent?.slice(6);
 
         if (minVal <= maxVal) {
             let isHidden = true;
@@ -330,7 +329,7 @@ export function filterStock() {
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let stock = stocksItems[i].textContent?.slice(7);
+        let stock = stocksItems[i].textContent?.slice(6);
 
         if (minVal <= maxVal) {
             let isHidden = true;
