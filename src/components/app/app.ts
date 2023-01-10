@@ -68,6 +68,7 @@ class App {
       }
 
       if (page instanceof CartPage) {
+        // page.addModalBuy();
         page.addEventPromoCode();
       }
     }
