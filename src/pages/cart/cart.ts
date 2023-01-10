@@ -3,6 +3,9 @@ import '../cart/cart.css';
 import prodData from '../../components/data/products';
 import { isCart } from '../../components/app/app';
 
+import { setIsInCart } from '../../components/app/app';
+import { getIsInCart } from '../../components/app/app';
+
 class CartPage extends Page {
   static TextObject = {
     MainTitle: 'Cart is Empty',
@@ -111,7 +114,7 @@ class CartPage extends Page {
   }
 
   render() {
-    const { getIsInCart, setIsInCart } = isCart;
+    // const { getIsInCart, setIsInCart } = isCart;
 
     const countCart = document.querySelector('.total_content') as HTMLElement;
     const CartTotal = document.querySelector('.total-price span') as HTMLElement;
@@ -260,6 +263,7 @@ class CartPage extends Page {
 
             isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
           }
+          localStorage.setItem('isCart', JSON.stringify(isCart));
         });
 
         const spanPrice = document.createElement('span');
@@ -313,6 +317,7 @@ class CartPage extends Page {
             }
           }
           spanPrice.textContent = ` ${isCart[CartPage.Products[idIndex]]?.count} `;
+          localStorage.setItem('isCart', JSON.stringify(isCart));
         });
 
         numberControl.append(incDecControl);

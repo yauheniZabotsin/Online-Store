@@ -12,24 +12,19 @@ export const enum PageIds {
   CartPages = 'cart',
 }
 
-export const isCart: any = {
-  getIsInCart: (id: string): boolean => isCart[id]?.isInCart,
-  setIsInCart: (id: string, bool: boolean) => {
-    isCart[id] = { isInCart: bool, count: 1, sumPrice: 0 };
-  },
-};
+export function getIsInCart(id: string): boolean {
+  return isCart[id]?.isInCart;
+}
+
+export function setIsInCart(id: string, bool: boolean) {
+  return (isCart[id] = { isInCart: bool, count: 1, sumPrice: 0 });
+}
+
+let localIsCart: string = JSON.parse(localStorage.getItem('isCart') || '0');
+
+export const isCart: any = localIsCart ? localIsCart : {};
 
 class App {
-  isInCart = false;
-
-  getIsInCart() {
-    return this.isInCart;
-  }
-
-  setIsInCart(bool: boolean) {
-    this.isInCart = bool;
-  }
-
   private static container: HTMLElement = document.querySelector('main') as HTMLElement;
   private initialPage: MainPages;
   public view: DataViewer;

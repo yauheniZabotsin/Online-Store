@@ -3,6 +3,9 @@ import '../main/main.css';
 import prodData from '../../components/data/products';
 import { filterPrice, filterStock, searchProducts, sortProducts } from './functions';
 
+import { setIsInCart } from '../../components/app/app';
+import { getIsInCart } from '../../components/app/app';
+
 import { isCart } from '../../components/app/app';
 import CartPage from '../cart/cart';
 
@@ -48,7 +51,7 @@ class MainPages extends Page {
   }
 
   addEventBtn() {
-    const { getIsInCart, setIsInCart } = isCart;
+    // const { getIsInCart, setIsInCart } = isCart;
 
     const btnAdd = document.querySelectorAll('.add-to-cart');
 
@@ -73,6 +76,7 @@ class MainPages extends Page {
 
           localStorage.setItem('count', JSON.stringify(countCart.textContent));
           localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
+          localStorage.setItem('isCart', JSON.stringify(isCart));
         } else {
           ((e.target as Element).closest('.item') as HTMLElement).classList.add('in-cart');
           item.textContent = 'DROP FROM CART';
@@ -84,6 +88,7 @@ class MainPages extends Page {
 
           localStorage.setItem('count', JSON.stringify(countCart.textContent));
           localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
+          localStorage.setItem('isCart', JSON.stringify(isCart));
         }
 
         CartPage.Products = Object?.entries(isCart)
