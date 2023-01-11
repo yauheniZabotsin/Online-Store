@@ -8,7 +8,9 @@ let result: Array<Product> = [];
 export function reloadProducts(data: Data['products']): void {
     const fragment = document.createDocumentFragment();
     const products = <HTMLElement>document.querySelector('.products-items');
+    const productArr: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     const itemTemplate = <HTMLTemplateElement>document.querySelector('.item-template');
+    const notFound = document.querySelector('.not-found') as HTMLElement;
 
     if (products.childNodes.length) {
         products.innerHTML = '';
@@ -47,6 +49,14 @@ export function reloadProducts(data: Data['products']): void {
     });
 
     products.appendChild(fragment);
+    getItemsAmount();
+    if (!productArr.length) {
+        products.style.display = 'none';
+        notFound.style.display = 'block';
+    } else {
+        notFound.style.display = 'none';
+        products.style.display = 'flex';
+    }
 }
 
 export function convertArrayToNode(arr: Array<Element>) {
@@ -73,16 +83,15 @@ export function getIdOfCheckedCheckboxes(checkboxes: NodeListOf<HTMLInputElement
 
 export function filterCheckboxResults(filters: { categories: Array<string>, brands: Array<string>}) {
     const products: Array<Product> = prodData.products;
-    const prodCont = document.querySelector('.products-items') as HTMLElement;
-    const notFound = document.querySelector('.not-found') as HTMLElement;
-    const categoriesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
-    const brandsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
     const resultCat: Array<Product> = [];
     const resultBrand: Array<Product> = [];
     const searchInput = document.querySelector('#search-input') as HTMLInputElement;
     const priceInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
+    const stockInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range2 input'));
     let minVal = parseInt(priceInput[0].value);
     let maxVal = parseInt(priceInput[1].value);
+    let minStockVal = parseInt(stockInput[0].value);
+    let maxStockVal = parseInt(stockInput[1].value);
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
@@ -130,16 +139,16 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
         }
     }
     
+    if (minStockVal > 2 || maxStockVal < 150) {
+        if (minStockVal <= maxStockVal) {
+            result = result.filter((item) => item.stock >= minStockVal && item.stock <= maxStockVal);
+        } else {
+            result = result.filter((item) => item.stock <= minStockVal && item.stock >= maxStockVal);
+        }
+    }
+
     reloadProducts(result);
     if (searchInput.value) searchProducts();
-    
-    // if (result.length <= 0) {
-    //     prodCont.style.display = 'none';
-    //     notFound.style.display = 'block';
-    // } else {
-    //     prodCont.style.display = 'flex';
-    //     notFound.style.display = 'none';
-    // }
 }
 
 export function filterProducts() {
@@ -152,7 +161,6 @@ export function filterProducts() {
     }
 
     filterCheckboxResults(filters);
-    getItemsAmount();
 }
 
 export function sortProducts() {
@@ -225,8 +233,11 @@ export function searchProducts() {
     const fromValue  = document.querySelector('.from-data') as HTMLElement;
     const toValue = document.querySelector('.to-data') as HTMLElement;
     const priceInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
+    const stockInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range2 input'));
     let minVal = parseInt(priceInput[0].value);
     let maxVal = parseInt(priceInput[1].value);
+    let minStockVal = parseInt(stockInput[0].value);
+    let maxStockVal = parseInt(stockInput[1].value);
 
     if (minVal > 10 || maxVal < 1749) {
         if (minVal <= maxVal) {
@@ -236,60 +247,40 @@ export function searchProducts() {
         }
     }
 
+    if (minStockVal > 2 || maxStockVal < 150) {
+        if (minStockVal <= maxStockVal) {
+            products = products.filter((item) => item.stock >= minStockVal && item.stock <= maxStockVal);
+        } else {
+            products = products.filter((item) => item.stock <= minStockVal && item.stock >= maxStockVal);
+        }
+    }
+
     products = products.filter((product) => Object.values(product).some((item) => {
         return item.toString().toLowerCase().includes(value);
     }));
     
     reloadProducts(products);
-
-    if (result.length <= 0) {
-        prodCont.style.display = 'none';
-        notFound.style.display = 'block';
-    } else {
-        prodCont.style.display = 'flex';
-        notFound.style.display = 'none';
-    }
 }
 
 export function filterPrice() {
     const searchInput = document.querySelector('#search-input') as HTMLInputElement;
     const rangeInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
-    let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
     const fromValue  = document.querySelector('.from-data') as HTMLElement;
     const toValue = document.querySelector('.to-data') as HTMLElement;
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
-
     fromValue.textContent = `€${minVal}`;
     toValue.textContent = `€${maxVal}`;
 
-    if (minVal <= maxVal) {
-        products = products.filter((item) => item.price >= minVal && item.price <= maxVal);
-    } else {
-        products = products.filter((item) => item.price <= minVal && item.price >= maxVal);
-    }
-    
-    // if (result.length)
-
-    if (searchInput.value) {
-        products = products.filter((product) => Object.values(product).some((item) => {
-        return item.toString().toLowerCase().includes(searchInput.value);
-    }));
-    }
-
-    reloadProducts(products);
-    // if (result.length <= 0) {
-    //     prodCont.style.display = 'none';
-    //     notFound.style.display = 'block';
-    // } else {
-    //     prodCont.style.display = 'flex';
-    //     notFound.style.display = 'none';
-    // }
+    filterProducts();
+    reloadProducts(result);
+    if (searchInput.value) searchProducts();
 }
 
 export function filterStock() {
+    const searchInput = document.querySelector('#search-input') as HTMLInputElement;
     const rangeInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range2 input'));
     const products: Array<Product> = prodData.products;
     const prodCont = document.querySelector('.products-items') as HTMLElement;
@@ -298,48 +289,18 @@ export function filterStock() {
     const toValue = document.querySelector('.to-data2') as HTMLElement;
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
-    let hiddenProducts: Array<HTMLElement> = [];
     const stocksItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
-    let filterStockResult: Array<Product> = [];
-
     fromValue.textContent = `${minVal}`;
     toValue.textContent = `${maxVal}`;
 
-    for (let i = 0; i < products.length; i++) {
-        let product = products[i];
-        let stock = product.stock;
-
-        if (minVal <= maxVal) {
-
-            if (Number(stock) >= minVal && Number(stock) <= maxVal) {
-                filterStockResult.push(product);
-            }
-        } else {
-
-            if (Number(stock) <= minVal && Number(stock) >= maxVal) {
-                filterStockResult.push(product);
-            }
-        }
-    }
-
-    if (result.length > 0) result = result.filter((item) => filterStockResult.includes(item));
-    
+    filterProducts();
     reloadProducts(result);
-    
-    // if (result.length <= 0) {
-    //     prodCont.style.display = 'none';
-    //     notFound.style.display = 'block';
-    // } else {
-    //     prodCont.style.display = 'flex';
-    //     notFound.style.display = 'none';
-    // }
+    if (searchInput.value) searchProducts();
 }
 
 export function getItemsAmount() {
     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     const stat = document.querySelector('.stat') as HTMLElement;
-
-    let amount: number = products.filter((product) => product.style.display === 'block').length;
     
-    stat.textContent = `Found: ${amount.toString()}`;
+    stat.textContent = `Found: ${products.length.toString()}`;
 }

@@ -202,6 +202,7 @@ class MainPages extends Page {
     resetBtn.innerText = 'Reset Filters';
     copyBtn.innerText = 'Copy Link';
     resetBtn.className = 'btn';
+    resetBtn.classList.add('btn-reset');
     copyBtn.className = 'btn';
     resetDiv.append(resetBtn);
     resetDiv.append(copyBtn);

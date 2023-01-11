@@ -62,7 +62,14 @@ class App {
               page.linkToCart();
               page.addClassInCart();
               page.switchToSmall();
-              page.switchToBig();             
+              page.switchToBig();
+            //   const resetBtn = document.querySelector('.btn-reset') as HTMLButtonElement;
+            //   resetBtn.addEventListener('click', () => {
+
+            //       this.view.viewProducts(prodData);
+            //       this.view.viewCategories(categoryData);
+            //       this.view.viewBrands(brandData);
+            //   })
           }
 
           if (page instanceof ProductPage) {
@@ -72,6 +79,7 @@ class App {
           if (page instanceof CartPage) {
               page.addEventPromoCode();
           }
+
       }
   }
 
@@ -88,12 +96,7 @@ class App {
     }
 
     resetFiltersAndProducts() {
-        const resetBtn = document.querySelector('.btn-reset') as HTMLButtonElement;
-        resetBtn.addEventListener('click', () => {
-            this.view.viewProducts(prodData);
-            this.view.viewCategories(categoryData);
-            this.view.viewBrands(brandData);
-        })
+
     }
 
     run() {
