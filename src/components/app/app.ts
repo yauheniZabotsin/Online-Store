@@ -63,13 +63,6 @@ class App {
               page.addClassInCart();
               page.switchToSmall();
               page.switchToBig();
-            //   const resetBtn = document.querySelector('.btn-reset') as HTMLButtonElement;
-            //   resetBtn.addEventListener('click', () => {
-
-            //       this.view.viewProducts(prodData);
-            //       this.view.viewCategories(categoryData);
-            //       this.view.viewBrands(brandData);
-            //   })
           }
 
           if (page instanceof ProductPage) {

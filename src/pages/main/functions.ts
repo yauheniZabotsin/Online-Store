@@ -2,7 +2,6 @@ import { DataViewer } from "../../components/app/dataviewer";
 import prodData from "../../components/data/products";
 import { Data, Product } from "../../components/interfaces/interfaces";
 
-
 let result: Array<Product> = [];
 
 export function reloadProducts(data: Data['products']): void {
@@ -14,6 +13,7 @@ export function reloadProducts(data: Data['products']): void {
     const brandsDivs: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.brands div'));
     const categoriesInputs: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.category-input'));
     const brandsInputs: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.brand-input'));
+    const productItem: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.product-item'));
     checkCbs(categoriesInputs, categoriesDivs);
     checkCbs(brandsInputs, brandsDivs);
 
@@ -56,6 +56,7 @@ export function reloadProducts(data: Data['products']): void {
     products.appendChild(fragment);
     sortProducts();
     getItemsAmount();
+    addEventsModal();
     let productsCheck = Array.from(document.querySelectorAll('.item'));
     
     if (!productsCheck.length) {
@@ -329,4 +330,17 @@ export function getItemsAmount() {
     const stat = document.querySelector('.stat') as HTMLElement;
     
     stat.textContent = `Found: ${products.length.toString()}`;
+}
+
+export function addEventsModal() {
+  const productItem: Array<HTMLElement> = Array.from(document.querySelectorAll('.product-item'));
+
+  productItem.forEach((item) => {
+      item.addEventListener('click', (e: Event) => {
+          if (!(e.target as Element).classList.contains('add-to-cart')) {
+              const id = ((e.target as Element).closest('.product-item') as HTMLElement).id;
+              window.location.hash = `#product-details/${id}`;
+          }
+      });
+  });
 }
