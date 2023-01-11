@@ -351,65 +351,11 @@ export function addEventsModal() {
   });
 }
 
-export function addEventBtn() {
-    const btnAdd = document.querySelectorAll('.add-to-cart');
-    const countCart = document.querySelector('.total_content') as HTMLElement;
-    let count = Number(countCart.textContent);
-
-    btnAdd.forEach((item) => {
-        item.addEventListener('click', (e: Event) => {
-            const CartTotal = document.querySelector('.total-price span') as HTMLElement;
-            let CartPrice = CartTotal.innerHTML.slice(1);
-
-            const idIndex = +((e.target as Element).closest('.product-item') as HTMLElement).id - 1;
-            const id = ((e.target as Element).closest('.product-item') as HTMLElement).id;
-            if (((e.target as Element).closest('.item') as HTMLElement).classList.contains('in-cart')) {
-                ((e.target as Element).closest('.item') as HTMLElement).classList.remove('in-cart');
-                item.textContent = 'ADD TO CART';
-                countCart.textContent = `${--count}`;
-                CartTotal.textContent = `€${+CartPrice - prodData.products[idIndex].price}.00`;
-
-                setIsInCart(String(id), false);
-                isCart[id].sumPrice -= prodData.products[idIndex].price;
-
-                localStorage.setItem('count', JSON.stringify(countCart.textContent));
-                localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
-                localStorage.setItem('isCart', JSON.stringify(isCart));
-            } else {
-                ((e.target as Element).closest('.item') as HTMLElement).classList.add('in-cart');
-                item.textContent = 'DROP FROM CART';
-                countCart.textContent = `${++count}`;
-                CartTotal.textContent = `€${+CartPrice + prodData.products[idIndex].price}.00`;
-
-                setIsInCart(String(id), true);
-                isCart[id].sumPrice += prodData.products[idIndex].price;
-
-                localStorage.setItem('count', JSON.stringify(countCart.textContent));
-                localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
-                localStorage.setItem('isCart', JSON.stringify(isCart));
-            }
-
-            CartPage.Products = Object?.entries(isCart)
-                .filter((item: any) => item[1].isInCart === true)
-                .map((item) => +item[0]);
-            localStorage.setItem('CartPage.Products', JSON.stringify(CartPage.Products));
-        });
-    });
-}
-
-export function getIsInCart(id: string): boolean {
-    return isCart[id]?.isInCart;
-}
-
-export function setIsInCart(id: string, bool: boolean) {
-    return (isCart[id] = { isInCart: bool, count: 1, sumPrice: 0 });
-}
-
 export function linkToCart() {
   const cart = document.querySelector('.cart') as HTMLElement;
 
   cart.addEventListener('click', (e: Event) => {
-      window.location.hash = 'cart';
+    window.location.hash = 'cart';
   });
 }
 
@@ -418,7 +364,62 @@ export function addClassInCart() {
   const btnAdd = document.querySelectorAll('.add-to-cart');
 
   CartPage.Products.forEach((id: number) => {
-      item[id - 1].classList.add('in-cart');
-      btnAdd[id - 1].textContent = 'DROP FROM CART';
+    item[id - 1].classList.add('in-cart');
+    btnAdd[id - 1].textContent = 'DROP FROM CART';
   });
+}
+
+export function addEventBtn() {
+  const btnAdd = document.querySelectorAll('.add-to-cart');
+
+  btnAdd.forEach((item) => {
+    item.addEventListener('click', (e: Event) => {
+      const countCart = document.querySelector('.total_content') as HTMLElement;
+      let count = Number(countCart.textContent);
+
+      const CartTotal = document.querySelector('.total-price span') as HTMLElement;
+      let CartPrice = CartTotal.innerHTML.slice(1);
+
+      const idIndex = +((e.target as Element).closest('.product-item') as HTMLElement).id - 1;
+      const id = ((e.target as Element).closest('.product-item') as HTMLElement).id;
+      if (((e.target as Element).closest('.item') as HTMLElement).classList.contains('in-cart')) {
+        ((e.target as Element).closest('.item') as HTMLElement).classList.remove('in-cart');
+        item.textContent = 'ADD TO CART';
+        countCart.textContent = `${count - isCart[id]?.count}`;
+        CartTotal.textContent = `€${+CartPrice - isCart[id]?.sumPrice}.00`;
+
+        setIsInCart(String(id), false);
+        isCart[id].sumPrice -= prodData.products[idIndex].price;
+
+        localStorage.setItem('count', JSON.stringify(countCart.textContent));
+        localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
+        localStorage.setItem('isCart', JSON.stringify(isCart));
+      } else {
+        ((e.target as Element).closest('.item') as HTMLElement).classList.add('in-cart');
+        item.textContent = 'DROP FROM CART';
+        countCart.textContent = `${++count}`;
+        CartTotal.textContent = `€${+CartPrice + prodData.products[idIndex].price}.00`;
+
+        setIsInCart(String(id), true);
+        isCart[id].sumPrice += prodData.products[idIndex].price;
+
+        localStorage.setItem('count', JSON.stringify(countCart.textContent));
+        localStorage.setItem('price', JSON.stringify(CartTotal.textContent));
+        localStorage.setItem('isCart', JSON.stringify(isCart));
+      }
+
+      CartPage.Products = Object?.entries(isCart)
+        .filter((item: any) => item[1].isInCart === true)
+        .map((item) => +item[0]);
+      localStorage.setItem('CartPage.Products', JSON.stringify(CartPage.Products));
+    });
+  });
+}
+
+export function getIsInCart(id: string): boolean {
+    return isCart[id]?.isInCart;
+}
+
+export function setIsInCart(id: string, bool: boolean) {
+    return (isCart[id] = { isInCart: bool, count: 1, sumPrice: 0 });
 }
