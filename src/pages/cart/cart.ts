@@ -200,6 +200,8 @@ class CartPage extends Page {
       totalCart.append(btnBuy);
 
       for (let i = 0; i < CartPage.Products.length; i++) {
+        let idIndex = CartPage.Products[i] ? i : CartPage.Products.length - 1;
+
         const cartItem = document.createElement('div');
         cartItem.className = 'cart-item';
         prodItems.append(cartItem);
@@ -293,6 +295,8 @@ class CartPage extends Page {
             }
 
             isCart[CartPage.Products[idIndex]].sumPrice += prodData.products[CartPage.Products[idIndex] - 1].price;
+            const amount = document.querySelectorAll('.amount-control');
+            amount[idIndex].textContent = `€${isCart[CartPage.Products[idIndex]].sumPrice}`;
           }
           localStorage.setItem('isCart', JSON.stringify(isCart));
         });
@@ -329,6 +333,8 @@ class CartPage extends Page {
             }
 
             isCart[CartPage.Products[idIndex]].sumPrice -= prodData.products[CartPage.Products[idIndex] - 1].price;
+            const amount = document.querySelectorAll('.amount-control');
+            amount[idIndex].textContent = `€${isCart[CartPage.Products[idIndex]].sumPrice}`;
           }
 
           if (
@@ -360,7 +366,7 @@ class CartPage extends Page {
 
         const amountControl = document.createElement('div');
         amountControl.className = 'amount-control';
-        amountControl.textContent = `€${prodData.products[CartPage.Products[i] - 1].price}`;
+        amountControl.textContent = `€${isCart[CartPage.Products[idIndex]].sumPrice}`;
         numberControl.append(amountControl);
 
         cartItem.append(numberControl);
