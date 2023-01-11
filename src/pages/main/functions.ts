@@ -10,6 +10,12 @@ export function reloadProducts(data: Data['products']): void {
     const products = <HTMLElement>document.querySelector('.products-items');
     const itemTemplate = <HTMLTemplateElement>document.querySelector('.item-template');
     const notFound = document.querySelector('.not-found') as HTMLElement;
+    const categoriesDivs: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.categories div'));
+    const brandsDivs: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.brands div'));
+    const categoriesInputs: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.category-input'));
+    const brandsInputs: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.brand-input'));
+    checkCbs(categoriesInputs, categoriesDivs);
+    checkCbs(brandsInputs, brandsDivs);
 
     if (products.childNodes.length) {
         products.innerHTML = '';
@@ -51,6 +57,7 @@ export function reloadProducts(data: Data['products']): void {
     sortProducts();
     getItemsAmount();
     let productsCheck = Array.from(document.querySelectorAll('.item'));
+    
     if (!productsCheck.length) {
         products.style.display = 'none';
         notFound.style.display = 'block';
@@ -58,6 +65,7 @@ export function reloadProducts(data: Data['products']): void {
         notFound.style.display = 'none';
         products.style.display = 'flex';
     }
+
 }
 
 export function convertArrayToNode(arr: Array<Element>) {
@@ -80,6 +88,22 @@ export function getIdOfCheckedCheckboxes(checkboxes: NodeListOf<HTMLInputElement
         }
     }
     return classes;
+}
+
+export function checkCbs(inputs: Array<HTMLInputElement>, divs: Array<HTMLDivElement>) {
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            divs[i].classList.remove('item-not-active');
+            divs[i].classList.add('item-active');
+        } else {
+            divs[i].classList.remove('item-active');
+            divs[i].classList.add('item-not-active');
+        } 
+    }
+    if (inputs.every(input => !input.checked)) divs.forEach((div) => {
+        div.classList.remove('item-not-active');
+        div.classList.add('item-active');
+    })
 }
 
 export function filterCheckboxResults(filters: { categories: Array<string>, brands: Array<string>}) {
