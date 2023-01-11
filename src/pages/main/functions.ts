@@ -49,6 +49,7 @@ export function reloadProducts(data: Data['products']): void {
     });
 
     products.appendChild(fragment);
+    sortProducts();
     getItemsAmount();
     if (!productArr.length) {
         products.style.display = 'none';
@@ -220,7 +221,7 @@ export function sortProducts() {
         });
 
         products.forEach(node => node.parentNode?.removeChild(node));
-       result.forEach(product => prodCont!.append(product));
+        result.forEach(product => prodCont!.append(product));
     }
 }
 
