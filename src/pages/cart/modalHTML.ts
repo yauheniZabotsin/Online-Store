@@ -20,7 +20,7 @@ export const modalHTML = `
               </div>
               <div  class="phone-number form-item">
                 <input
-                  
+                  required pattern="(\+?7|8)?9\d{9}"
                   type="text"
                   placeholder="Phone number"
                   formcontrolname="phoneNumber"
@@ -87,7 +87,7 @@ export const modalHTML = `
               </div>
               
             </div>
-            <button">CONFIRM</button>
+            <button>CONFIRM</button>
           </form>
           </app-buy-products>
       </div>
