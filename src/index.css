@@ -185,6 +185,11 @@ input[type='checkbox'] {
 .item-active span {
   color: #f8cc7b;
 }
+.item-not-active label,
+.item-not-active span {
+  color: #968566;
+}
+
 .checkbox-line label {
   overflow: hidden;
   padding: 0.3rem;

@@ -160,6 +160,7 @@ export function filterProducts() {
         categories: getIdOfCheckedCheckboxes(catCheckboxes),
         brands: getIdOfCheckedCheckboxes(brandCheckboxes)
     }
+    
 
     filterCheckboxResults(filters);
 }
