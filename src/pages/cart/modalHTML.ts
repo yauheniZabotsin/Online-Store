@@ -87,7 +87,7 @@ export const modalHTML = `
               </div>
               
             </div>
-            <button  type="submit">CONFIRM</button>
+            <button">CONFIRM</button>
           </form>
           </app-buy-products>
       </div>
