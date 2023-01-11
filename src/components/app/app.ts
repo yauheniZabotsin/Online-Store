@@ -62,7 +62,7 @@ class App {
               page.linkToCart();
               page.addClassInCart();
               page.switchToSmall();
-              page.switchToBig();
+              page.switchToBig();             
           }
 
           if (page instanceof ProductPage) {
@@ -85,6 +85,15 @@ class App {
     constructor() {
         this.view = new DataViewer();
         this.initialPage = new MainPages('main');
+    }
+
+    resetFiltersAndProducts() {
+        const resetBtn = document.querySelector('.btn-reset') as HTMLButtonElement;
+        resetBtn.addEventListener('click', () => {
+            this.view.viewProducts(prodData);
+            this.view.viewCategories(categoryData);
+            this.view.viewBrands(brandData);
+        })
     }
 
     run() {

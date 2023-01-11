@@ -113,10 +113,10 @@ class MainPages extends Page {
     switchToSmall() {
         const switchToSmallBtn = document.querySelector('.small-vm') as HTMLElement;
         const switchToBigBtn = document.querySelector('.big-vm') as HTMLElement;
-        const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
-        const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
-    
+
         switchToSmallBtn.addEventListener('click', () => {
+            const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+            const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
             switchToSmallBtn.classList.add('active-mode');
             switchToBigBtn.classList.remove('active-mode');
             products.forEach((product) => {
@@ -127,14 +127,14 @@ class MainPages extends Page {
             })
         })
     }
-  
+    
     switchToBig() {
         const switchToSmallBtn = document.querySelector('.small-vm') as HTMLElement;
         const switchToBigBtn = document.querySelector('.big-vm') as HTMLElement;
-        const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
-        const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
       
         switchToBigBtn.addEventListener('click', () => {
+            const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+            const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
             switchToBigBtn.classList.add('active-mode');
             switchToSmallBtn.classList.remove('active-mode');
             products.forEach((product) => {
@@ -202,6 +202,7 @@ class MainPages extends Page {
         resetBtn.innerText = 'Reset Filters';
         copyBtn.innerText = 'Copy Link';
         resetBtn.className = 'btn';
+        resetBtn.classList.add('btn-reset');
         copyBtn.className = 'btn';
         resetDiv.append(resetBtn);
         resetDiv.append(copyBtn);
@@ -262,14 +263,14 @@ class MainPages extends Page {
         stockSliderToData.textContent = '150';
         stockSliderRange.className = 'multi-range2';
         stockSliderFromInput.setAttribute('type', 'range');
-        stockSliderFromInput.setAttribute('min', '0');
-        stockSliderFromInput.setAttribute('max', '75');
-        stockSliderFromInput.setAttribute('value', '0');
+        stockSliderFromInput.setAttribute('min', '2');
+        stockSliderFromInput.setAttribute('max', '150');
+        stockSliderFromInput.setAttribute('value', '2');
         stockSliderFromInput.onchange = function () {
             filterStock();
         };
         stockSliderToInput.setAttribute('type', 'range');
-        stockSliderToInput.setAttribute('min', '0');
+        stockSliderToInput.setAttribute('min', '2');
         stockSliderToInput.setAttribute('max', '150');
         stockSliderToInput.setAttribute('value', '150');
         stockSliderToInput.onchange = function () {

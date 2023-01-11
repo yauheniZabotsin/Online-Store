@@ -1,3 +1,54 @@
+import { DataViewer } from "../../components/app/dataviewer";
+import prodData from "../../components/data/products";
+import { Data, Product } from "../../components/interfaces/interfaces";
+
+
+let result: Array<Product> = [];
+
+export function reloadProducts(data: Data['products']): void {
+    const fragment = document.createDocumentFragment();
+    const products = <HTMLElement>document.querySelector('.products-items');
+    const itemTemplate = <HTMLTemplateElement>document.querySelector('.item-template');
+
+    if (products.childNodes.length) {
+        products.innerHTML = '';
+    }
+
+    data.forEach((item: Product) => {
+        const itemClone = <HTMLElement>itemTemplate.content.cloneNode(true);
+        const itemDiv = <HTMLElement>itemClone.querySelector('.item');
+        const itemCont = <HTMLElement>itemClone.querySelector('.product-item');
+        const itemText = <HTMLElement>itemClone.querySelector('.item-text');
+        const itemTitle = <HTMLElement>itemClone.querySelector('.item-title');
+        const itemInfo = <HTMLElement>itemClone.querySelector('.item-info');
+        const infoContent = <HTMLElement>itemClone.querySelector('.item-info-item');
+        const itemButtons = <HTMLElement>itemClone.querySelector('.item-buttons');
+        const itemCat = <HTMLElement>itemClone.querySelector('.item-category');
+        const itemBrand = <HTMLElement>itemClone.querySelector('.item-brand');
+        const itemPrice = <HTMLElement>itemClone.querySelector('.item-price');
+        const itemDiscount = <HTMLElement>itemClone.querySelector('.item-discount');
+        const itemRating = <HTMLElement>itemClone.querySelector('.item-rating');
+        const itemStock = <HTMLElement>itemClone.querySelector('.item-stock');
+
+        itemDiv.setAttribute('style', 'display:block');
+        itemCont.setAttribute('id', item.id.toString());
+        itemCont.style.background = `url(${item.thumbnail}) 0% 0% / cover`;
+        itemCont.style.backgroundPosition = 'top left';
+        itemCont.style.backgroundRepeat = 'cover';
+        itemTitle.innerText = item.title;
+        itemCat.insertAdjacentText('beforeend', item.category);
+        itemBrand.insertAdjacentText('beforeend', item.brand);
+        itemPrice.insertAdjacentText('beforeend', item.price.toString());
+        itemDiscount.insertAdjacentText('beforeend', item.discountPercentage.toString());
+        itemRating.insertAdjacentText('beforeend', item.rating.toString());
+        itemStock.insertAdjacentText('beforeend', item.stock.toString());
+
+        fragment.append(itemClone);
+    });
+
+    products.appendChild(fragment);
+}
+
 export function convertArrayToNode(arr: Array<Element>) {
     const fragment = document.createDocumentFragment();
     arr.forEach((item: Element) => {
@@ -21,77 +72,74 @@ export function getIdOfCheckedCheckboxes(checkboxes: NodeListOf<HTMLInputElement
 }
 
 export function filterCheckboxResults(filters: { categories: Array<string>, brands: Array<string>}) {
-    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const products: Array<Product> = prodData.products;
     const prodCont = document.querySelector('.products-items') as HTMLElement;
-    let hiddenProducts: Array<HTMLElement> = [];
     const notFound = document.querySelector('.not-found') as HTMLElement;
     const categoriesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
     const brandsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
+    const resultCat: Array<Product> = [];
+    const resultBrand: Array<Product> = [];
+    const searchInput = document.querySelector('#search-input') as HTMLInputElement;
+    const priceInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
+    let minVal = parseInt(priceInput[0].value);
+    let maxVal = parseInt(priceInput[1].value);
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let category = categoriesItems[i].textContent?.slice(9);
-        let brand = brandsItems[i].textContent?.slice(6);
+        let category = product.category;
+        let brand = product.brand;
 
         if (filters.categories.length > 0) {
-            let isHidden = true;
 
             for (let j = 0; j < filters.categories.length; j++) {
                 let filter = filters.categories[j];
 
                 if (filter === category) {
-                    console.log(product);
-                    isHidden = false;
-                    break;
+                    resultCat.push(product);
                 }
-            }
-
-            if (isHidden) {
-                hiddenProducts.push(product);
             }
         }
 
         if (filters.brands.length > 0) {
-            let isHidden = true;
 
             for (let j = 0; j < filters.brands.length; j++) {
                 let filter = filters.brands[j];
 
                 if (filter === brand) {
-                    isHidden = false;
-                    break;
+                    resultBrand.push(product);
                 }
             }
-            
-            if (isHidden) {
-                hiddenProducts.push(product);
-            }
+        }
+  
+        if (filters.brands.length > 0 && filters.categories.length > 0) {
+            result = resultCat.filter(item => resultBrand.includes(item));
+        } else if (filters.categories.length > 0 && filters.brands.length === 0) {
+            result = resultCat;
+        } else if ( filters.brands.length > 0 && filters.categories.length === 0) {
+            result = resultBrand;
+        } else if (filters.categories.length === 0 && filters.brands.length === 0) {
+            result = prodData.products;
         }
     }
 
-    for (let i = 0; i < products.length; i++) {
-        products[i].style.display = 'block';
+    if (minVal > 10 || maxVal < 1749) {
+        if (minVal <= maxVal) {
+            result = result.filter((item) => item.price >= minVal && item.price <= maxVal);
+        } else {
+            result = result.filter((item) => item.price <= minVal && item.price >= maxVal);
+        }
     }
-
-    if (hiddenProducts.length <= 0) {
-        return;
-    }
-
-    for (let i = 0; i < hiddenProducts.length; i++) {
-        hiddenProducts[i].style.display = 'none';
-    }
-
-    let check = products.filter((item) => {
-        if (item.style.display === 'block') return item;
-    })
-
-    if (check.length <= 0) {
-        prodCont.style.display = 'none';
-        notFound.style.display = 'block';
-    } else {
-        prodCont.style.display = 'flex';
-        notFound.style.display = 'none';
-    }
+    
+    reloadProducts(result);
+    if (searchInput.value) searchProducts();
+    
+    // if (result.length <= 0) {
+    //     prodCont.style.display = 'none';
+    //     notFound.style.display = 'block';
+    // } else {
+    //     prodCont.style.display = 'flex';
+    //     notFound.style.display = 'none';
+    // }
 }
 
 export function filterProducts() {
@@ -169,152 +217,81 @@ export function sortProducts() {
 }
 
 export function searchProducts() {
+    let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
     const searchInput = document.querySelector('#search-input') as HTMLInputElement;
-    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
     let value: string = searchInput.value;
-    let hiddenProducts: Array<HTMLElement> = [];
-    const titles: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-title'));
-    const categoriesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-category'));
-    const brandsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-brand'));
-    const pricesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-price'));
-    const ratingsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-rating'));
-    const discountsItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-discount'));
-    const stocksItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
+    const fromValue  = document.querySelector('.from-data') as HTMLElement;
+    const toValue = document.querySelector('.to-data') as HTMLElement;
+    const priceInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
+    let minVal = parseInt(priceInput[0].value);
+    let maxVal = parseInt(priceInput[1].value);
 
-    for (let i = 0; i < products.length; i++) {
-        let product = products[i];
-        let title = titles[i].textContent?.toLowerCase()
-        let category = categoriesItems[i].textContent?.slice(9);
-        let brand = brandsItems[i].textContent?.toLowerCase().slice(6);
-        let price = pricesItems[i].textContent?.slice(6).toString();
-        let rating = ratingsItems[i].textContent?.slice(7).toString();
-        let discount = discountsItems[i].textContent?.slice(9).toString();
-        let stock = stocksItems[i].textContent?.slice(6).toString();
-
-        if (value && value.trim().length > 0) {
-            let isHidden = true;
-            
-            if (title!.includes(value) ||
-                brand!.includes(value) ||
-                discount!.includes(value) ||
-                rating!.includes(value) ||
-                stock!.includes(value) ||
-                category!.includes(value) ||
-                price!.includes(value)) {
-                isHidden = false;
-                continue;
-            }
-
-            if (isHidden) {
-                hiddenProducts.push(product);
-            }
+    if (minVal > 10 || maxVal < 1749) {
+        if (minVal <= maxVal) {
+            products = products.filter((item) => item.price >= minVal && item.price <= maxVal);
+        } else {
+            products = products.filter((item) => item.price <= minVal && item.price >= maxVal);
         }
     }
 
-    for (let i = 0; i < products.length; i++) {
-        products[i].style.display = 'block';
-        getItemsAmount();
-    }
+    products = products.filter((product) => Object.values(product).some((item) => {
+        return item.toString().toLowerCase().includes(value);
+    }));
 
-    if (hiddenProducts.length <= 0) {
-        return;
-    }
+    reloadProducts(products);
 
-    for (let i = 0; i < hiddenProducts.length; i++) {
-        hiddenProducts[i].style.display = 'none';
-        getItemsAmount();
-    }
-
-    let check = products.filter((item) => {
-        if (item.style.display === 'block') return item;
-    })
-
-    if (check.length <= 0) {
-        prodCont.style.display = 'none';
-        notFound.style.display = 'block';
-    } else {
-        prodCont.style.display = 'flex';
-        notFound.style.display = 'none';
-    }
+    // if (result.length <= 0) {
+    //     prodCont.style.display = 'none';
+    //     notFound.style.display = 'block';
+    // } else {
+    //     prodCont.style.display = 'flex';
+    //     notFound.style.display = 'none';
+    // }
 }
 
 export function filterPrice() {
+    const searchInput = document.querySelector('#search-input') as HTMLInputElement;
     const rangeInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
-    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
     const fromValue  = document.querySelector('.from-data') as HTMLElement;
     const toValue = document.querySelector('.to-data') as HTMLElement;
     let minVal = parseInt(rangeInput[0].value);
     let maxVal = parseInt(rangeInput[1].value);
-    let hiddenProducts: Array<HTMLElement> = [];
-    const pricesItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-price'));
 
     fromValue.textContent = `€${minVal}`;
     toValue.textContent = `€${maxVal}`;
 
-    for (let i = 0; i < products.length; i++) {
-        let product = products[i];
-        let price = pricesItems[i].textContent?.slice(6);
-
-        if (minVal <= maxVal) {
-            let isHidden = true;
-
-            if (Number(price) >= minVal && Number(price) <= maxVal) {
-              isHidden = false;
-              continue;
-            }
-            
-            if (isHidden) {
-                hiddenProducts.push(product);
-            }
-          
-        } else {
-            let isHidden = true;
-            
-            if (Number(price) <= minVal && Number(price) >= maxVal) {
-              isHidden = false;
-              continue;
-            }
-            
-            if (isHidden) {
-                hiddenProducts.push(product);
-            }
-        }
-    }
-
-    for (let i = 0; i < products.length; i++) {
-        products[i].style.display = 'block';
-        getItemsAmount();
-    }
-
-    if (hiddenProducts.length <= 0) {
-        return;
-    }
-
-    for (let i = 0; i < hiddenProducts.length; i++) {
-        hiddenProducts[i].style.display = 'none';
-        getItemsAmount();
-    }
-
-    let check = products.filter((item) => {
-        if (item.style.display === 'block') return item;
-    })
-
-    if (check.length <= 0) {
-        prodCont.style.display = 'none';
-        notFound.style.display = 'block';
+    if (minVal <= maxVal) {
+        products = products.filter((item) => item.price >= minVal && item.price <= maxVal);
     } else {
-        prodCont.style.display = 'flex';
-        notFound.style.display = 'none';
+        products = products.filter((item) => item.price <= minVal && item.price >= maxVal);
     }
+    
+    // if (result.length)
+
+    if (searchInput.value) {
+        products = products.filter((product) => Object.values(product).some((item) => {
+        return item.toString().toLowerCase().includes(searchInput.value);
+    }));
+    }
+
+    reloadProducts(products);
+    // if (result.length <= 0) {
+    //     prodCont.style.display = 'none';
+    //     notFound.style.display = 'block';
+    // } else {
+    //     prodCont.style.display = 'flex';
+    //     notFound.style.display = 'none';
+    // }
 }
 
 export function filterStock() {
     const rangeInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range2 input'));
-    const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
+    const products: Array<Product> = prodData.products;
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
     const fromValue  = document.querySelector('.from-data2') as HTMLElement;
@@ -323,65 +300,39 @@ export function filterStock() {
     let maxVal = parseInt(rangeInput[1].value);
     let hiddenProducts: Array<HTMLElement> = [];
     const stocksItems: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-stock'));
+    let filterStockResult: Array<Product> = [];
 
     fromValue.textContent = `${minVal}`;
     toValue.textContent = `${maxVal}`;
 
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
-        let stock = stocksItems[i].textContent?.slice(6);
+        let stock = product.stock;
 
         if (minVal <= maxVal) {
-            let isHidden = true;
 
             if (Number(stock) >= minVal && Number(stock) <= maxVal) {
-                isHidden = false;
-                continue;
+                filterStockResult.push(product);
             }
-          
-            if (isHidden) {
-                hiddenProducts.push(product);
-            }
-        
         } else {
-            let isHidden = true;
-          
+
             if (Number(stock) <= minVal && Number(stock) >= maxVal) {
-                isHidden = false;
-                continue;
-            }
-          
-            if (isHidden) {
-                hiddenProducts.push(product);
+                filterStockResult.push(product);
             }
         }
     }
 
-    for (let i = 0; i < products.length; i++) {
-        products[i].style.display = 'block';
-        getItemsAmount();
-    }
-
-    if (hiddenProducts.length <= 0) {
-        return;
-    }
-
-    for (let i = 0; i < hiddenProducts.length; i++) {
-        hiddenProducts[i].style.display = 'none';
-        getItemsAmount();
-    }
-
-    let check = products.filter((item) => {
-        if (item.style.display === 'block') return item;
-    })
-
-    if (check.length <= 0) {
-        prodCont.style.display = 'none';
-        notFound.style.display = 'block';
-    } else {
-        prodCont.style.display = 'flex';
-        notFound.style.display = 'none';
-    }
+    if (result.length > 0) result = result.filter((item) => filterStockResult.includes(item));
+    
+    reloadProducts(result);
+    
+    // if (result.length <= 0) {
+    //     prodCont.style.display = 'none';
+    //     notFound.style.display = 'block';
+    // } else {
+    //     prodCont.style.display = 'flex';
+    //     notFound.style.display = 'none';
+    // }
 }
 
 export function getItemsAmount() {
@@ -392,34 +343,3 @@ export function getItemsAmount() {
     
     stat.textContent = `Found: ${amount.toString()}`;
 }
-
-
-// export function switchToSmall() {
-//     const switchBtn = document.querySelector('.small-vm') as HTMLElement;
-//     const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
-//     const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
-
-//     switchBtn.addEventListener('click', () => {
-//         products.forEach((product) => {
-//             product.classList.remove('big-item');
-//         });
-//         itemInfo.forEach((info) => {
-//             info.style.display = 'none';
-//         })
-//     })
-// }
-
-// export function switchToBig() {
-//   const switchBtn = document.querySelector('.big-vm') as HTMLElement;
-//   const products: Array<HTMLElement> = Array.from(document.querySelectorAll('.item'));
-//   const itemInfo: Array<HTMLElement> = Array.from(document.querySelectorAll('.item-info-item'));
-
-//   switchBtn.addEventListener('click', () => {
-//       products.forEach((product) => {
-//           product.classList.add('big-item');
-//       });
-//       itemInfo.forEach((info) => {
-//           info.style.display = 'block';
-//       })
-//   })
-// }
