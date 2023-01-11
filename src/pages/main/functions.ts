@@ -131,7 +131,7 @@ export function filterCheckboxResults(filters: { categories: Array<string>, bran
     }
     
     reloadProducts(result);
-    //if (searchInput.value) searchProducts();
+    if (searchInput.value) searchProducts();
     
     // if (result.length <= 0) {
     //     prodCont.style.display = 'none';
@@ -216,40 +216,40 @@ export function sortProducts() {
     }
 }
 
-// export function searchProducts() {
-//     let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
-//     const searchInput = document.querySelector('#search-input') as HTMLInputElement;
-//     const prodCont = document.querySelector('.products-items') as HTMLElement;
-//     const notFound = document.querySelector('.not-found') as HTMLElement;
-//     let value: string = searchInput.value;
-//     const fromValue  = document.querySelector('.from-data') as HTMLElement;
-//     const toValue = document.querySelector('.to-data') as HTMLElement;
-//     const priceInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
-//     let minVal = parseInt(priceInput[0].value);
-//     let maxVal = parseInt(priceInput[1].value);
+export function searchProducts() {
+    let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
+    const searchInput = document.querySelector('#search-input') as HTMLInputElement;
+    const prodCont = document.querySelector('.products-items') as HTMLElement;
+    const notFound = document.querySelector('.not-found') as HTMLElement;
+    let value: string = searchInput.value;
+    const fromValue  = document.querySelector('.from-data') as HTMLElement;
+    const toValue = document.querySelector('.to-data') as HTMLElement;
+    const priceInput: Array<HTMLInputElement> = Array.from(document.querySelectorAll('.multi-range input'));
+    let minVal = parseInt(priceInput[0].value);
+    let maxVal = parseInt(priceInput[1].value);
 
-//     if (minVal > 10 || maxVal < 1749) {
-//         if (minVal <= maxVal) {
-//             products = products.filter((item) => item.price >= minVal && item.price <= maxVal);
-//         } else {
-//             products = products.filter((item) => item.price <= minVal && item.price >= maxVal);
-//         }
-//     }
+    if (minVal > 10 || maxVal < 1749) {
+        if (minVal <= maxVal) {
+            products = products.filter((item) => item.price >= minVal && item.price <= maxVal);
+        } else {
+            products = products.filter((item) => item.price <= minVal && item.price >= maxVal);
+        }
+    }
 
-//     products = products.filter((product) => Object.values(product).some((item) => {
-//         return item.toString().toLowerCase().includes(value);
-//     }));
+    products = products.filter((product) => Object.values(product).some((item) => {
+        return item.toString().toLowerCase().includes(value);
+    }));
     
-//     reloadProducts(products);
+    reloadProducts(products);
 
-    // if (result.length <= 0) {
-    //     prodCont.style.display = 'none';
-    //     notFound.style.display = 'block';
-    // } else {
-    //     prodCont.style.display = 'flex';
-    //     notFound.style.display = 'none';
-    // }
-//}
+    if (result.length <= 0) {
+        prodCont.style.display = 'none';
+        notFound.style.display = 'block';
+    } else {
+        prodCont.style.display = 'flex';
+        notFound.style.display = 'none';
+    }
+}
 
 export function filterPrice() {
     const searchInput = document.querySelector('#search-input') as HTMLInputElement;
