@@ -98,7 +98,7 @@ class MainPages extends Page {
 
     addEventsModal() {
         const productItem: Array<HTMLElement> = Array.from(document.querySelectorAll('.product-item'));
-        
+
         productItem.forEach((item) => {
             item.addEventListener('click', (e: Event) => {
                 if (!(e.target as Element).classList.contains('add-to-cart')) {
