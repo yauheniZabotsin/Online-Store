@@ -10,7 +10,6 @@ export function reloadProducts(data: Data['products']): void {
     const products = <HTMLElement>document.querySelector('.products-items');
     const itemTemplate = <HTMLTemplateElement>document.querySelector('.item-template');
     const notFound = document.querySelector('.not-found') as HTMLElement;
-    let productsCheck: Array<HTMLElement> = [];
 
     if (products.childNodes.length) {
         products.innerHTML = '';
@@ -51,8 +50,8 @@ export function reloadProducts(data: Data['products']): void {
     products.appendChild(fragment);
     sortProducts();
     getItemsAmount();
-    productsCheck = Array.from(document.querySelectorAll('.item'));
-    if (productsCheck.length) {
+    let productsCheck = Array.from(document.querySelectorAll('.item'));
+    if (!productsCheck.length) {
         products.style.display = 'none';
         notFound.style.display = 'block';
     } else {
