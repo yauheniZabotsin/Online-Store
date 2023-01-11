@@ -212,12 +212,17 @@ export function sortProducts() {
         });
 
         products.forEach(node => node.parentNode?.removeChild(node));
-        result.forEach(product => prodCont!.append(product));
+       result.forEach(product => prodCont!.append(product));
     }
 }
 
 export function searchProducts() {
-    let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
+    // let products: Array<Product> = result.length ? result.slice(0) : prodData.products;
+    if (result.length) {
+        let products: Array<Product> = result.slice(0);
+    } else {
+        let products = prodData.products;
+    }
     const searchInput = document.querySelector('#search-input') as HTMLInputElement;
     const prodCont = document.querySelector('.products-items') as HTMLElement;
     const notFound = document.querySelector('.not-found') as HTMLElement;
@@ -239,7 +244,7 @@ export function searchProducts() {
     products = products.filter((product) => Object.values(product).some((item) => {
         return item.toString().toLowerCase().includes(value);
     }));
-
+    
     reloadProducts(products);
 
     // if (result.length <= 0) {
