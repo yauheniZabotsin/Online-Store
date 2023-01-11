@@ -277,8 +277,8 @@ export function filterPrice() {
     toValue.textContent = `€${maxVal}`;
 
     filterProducts();
-    reloadProducts(result);
     if (searchInput.value) searchProducts();
+    reloadProducts(result);
 }
 
 export function filterStock() {
@@ -296,8 +296,8 @@ export function filterStock() {
     toValue.textContent = `${maxVal}`;
 
     filterProducts();
-    reloadProducts(result);
     if (searchInput.value) searchProducts();
+    reloadProducts(result); 
 }
 
 export function getItemsAmount() {
