@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Online Store</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="emblem">
+                <h1 class="name">
+                    <a class="logo" href="#main"> Online Store </a>
+                </h1>
+            </div>
+            <div class="total-price">Cart total: <span>€0.00</span></div>
+            <div routerlink="cart" class="cart">
+                <div class="total"><a class="total_content" href="#cart">0</a></div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="app-storage-page">
+
+            </div>    
+        </main>
+
+        <footer class="footer">
+            <p>Online Store 2022</p>
+        </footer>
+
+        <template class="item-template">
+            <div class="item big-item">
+                <div class="product-item">
+                    <div class="item-text">
+                        <div class="item-title"></div>
+                        <div class="item-info">
+                            <div class="item-info-item">
+                                <p class="item-category"><span>Category: </span></p>
+                                <p class="item-brand"><span>Brand: </span></p>
+                                <p class="item-price"><span>Price: </span></p>
+                                <p class="item-discount"><span>Discount: </span></p>
+                                <p class="item-rating"><span>Rating: </span></p>
+                                <p class="item-stock"><span>Stock: </span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-buttons">
+                        <button class="add-to-cart">ADD TO CART</button>
+                        <button class="details">DETAILS</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template class="filter-template">
+            <div class="checkbox-line item-active">
+                <input class="filter-input" type="checkbox">
+                <label class="filter-label"></label>
+                <span class="filter-span"></span>
+            </div>
+        </template>
+    </body>
+</html>
