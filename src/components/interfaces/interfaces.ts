@@ -23,3 +23,5 @@ export interface Filter {
   category: string;
   amount: string;
 }
+
+export interface StringMap { [key: string]: number; }

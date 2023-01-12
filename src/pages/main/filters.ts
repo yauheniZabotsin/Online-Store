@@ -1,5 +1,5 @@
 import prodData from "../../components/data/productsData";
-import { Data, Product } from "../../components/interfaces/interfaces";
+import { Data, Product, StringMap } from "../../components/interfaces/interfaces";
 import MainPages from "./main";
 
 export class Filters {
@@ -18,7 +18,7 @@ export class Filters {
         const productItem: Array<HTMLDivElement> = Array.from(document.querySelectorAll('.product-item'));
         this.checkCbs(categoriesInputs, categoriesDivs);
         this.checkCbs(brandsInputs, brandsDivs);
-    
+
         if (products.childNodes.length) {
             products.innerHTML = '';
             this.initialPage = new MainPages('main');
@@ -59,17 +59,81 @@ export class Filters {
         products.appendChild(fragment);
         this.sortProducts();
         this.getItemsAmount();
+        
         this.initialPage.addEventsModal();
         this.initialPage.addEventBtn();
-
-        let productsCheck = Array.from(document.querySelectorAll('.item'));
+        
+        const productsCheck = Array.from(document.querySelectorAll('.item'));
         
         if (!productsCheck.length) {
             products.style.display = 'none';
             notFound.style.display = 'block';
+            categoriesDivs.forEach((cat) => {
+                let catAmount = cat.querySelector('.filter-span') as HTMLSpanElement;
+                let category = cat.querySelector('.category-input') as HTMLInputElement;
+                cat.classList.remove('item-active');
+                cat.classList.add('item-not-active');
+                catAmount.textContent = `0/5`;
+            });
+            brandsDivs.forEach((brand) => {
+                let brandAmount = brand.querySelector('.filter-span') as HTMLSpanElement;
+                let br = brand.querySelector('.brand-input') as HTMLInputElement;
+                brand.classList.remove('item-active');
+                brand.classList.add('item-not-active');
+                brandAmount.textContent = `0${brandAmount.textContent!.slice(1)}`;
+            });
         } else {
             notFound.style.display = 'none';
             products.style.display = 'flex';
+            let catArr: Array<string> = [];
+            let brandArr: Array<string> = [];
+            let priceArr: Array<string> = [];
+            let stockArr: Array<string>  = [];
+            productsCheck.forEach((product) => {
+                let cat = product.querySelector('.item-category') as HTMLElement;
+                let brand = product.querySelector('.item-brand') as HTMLElement;
+                let price = product.querySelector('.item-price') as HTMLElement;
+                let stock = product.querySelector('.item-stock') as HTMLElement;
+                catArr.push(cat.textContent?.slice(10)!) ;
+                brandArr.push(brand.textContent?.slice(7)!);
+                priceArr.push(price?.textContent?.slice(7)!);
+                stockArr.push(stock.textContent?.slice(7)!);
+            })
+
+            const catObj: StringMap = catArr.reduce((acc, cat, i, catArr) => {
+                return { ...acc, [cat]: catArr.filter((item) => item.includes(cat)).length }
+            }, {});
+            const brandObj: StringMap = brandArr.reduce((acc, brand, i) => {
+              return {...acc, [brand]: brandArr.filter((item) => item.includes(brand)).length }
+            }, {});
+            categoriesDivs.forEach((cat) => {
+                let catAmount = cat.querySelector('.filter-span') as HTMLSpanElement;
+                let category = cat.querySelector('.category-input') as HTMLInputElement;
+                cat.classList.remove('item-active');
+                cat.classList.add('item-not-active');
+                catAmount.textContent = `0/5`;
+                for (let key in catObj) {
+                    if (category.id === key) {
+                        cat.classList.remove('item-not-active');
+                        cat.classList.add('item-active');
+                        catAmount.textContent = `${catObj[key]}/5`;
+                    }
+                }
+            });
+            brandsDivs.forEach((brand) => {
+                let brandAmount = brand.querySelector('.filter-span') as HTMLSpanElement;
+                let br = brand.querySelector('.brand-input') as HTMLInputElement;
+                brand.classList.remove('item-active');
+                brand.classList.add('item-not-active');
+                brandAmount.textContent = `0${brandAmount.textContent!.slice(1)}`;
+                for (let key in brandObj) {
+                    if (br.id === key) {
+                        brand.classList.remove('item-not-active');
+                        brand.classList.add('item-active');
+                        brandAmount.textContent = `${brandObj[key]}${brandAmount.textContent!.slice(1)}`;
+                    }
+                }
+            });
         }
     }
 
@@ -97,6 +161,7 @@ export class Filters {
                 divs[i].classList.add('item-not-active');
             } 
         }
+
         if (inputs.every(input => !input.checked)) divs.forEach((div) => {
             div.classList.remove('item-not-active');
             div.classList.add('item-active');
@@ -142,7 +207,7 @@ export class Filters {
                     }
                 }
             }
-            console.log(resultCat);
+
             if (filters.brands.length > 0 && filters.categories.length > 0) {
                 this.result = resultCat.filter(item => resultBrand.includes(item));
             } else if (filters.categories.length > 0 && filters.brands.length === 0) {
