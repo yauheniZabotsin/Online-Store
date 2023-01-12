@@ -1,6 +1,6 @@
 import Page from '../../core/templates/page';
 import '../product/product.css';
-import prodData from '../../components/data/products';
+import prodData from '../../components/data/productsData';
 import MainPages from '../main/main';
 
 import { setIsInCart } from '../../components/app/app';

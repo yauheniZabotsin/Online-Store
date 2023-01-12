@@ -1,4 +1,3 @@
-import { categoryData } from '../data/filters';
 import { Data, Filter, Product } from '../interfaces/interfaces';
 import { Brands, Categories, Products } from './dataloader';
 

@@ -1,7 +1,13 @@
-import { filterProducts } from '../../pages/main/functions';
+import { Filters } from '../../pages/main/filters';
 import { Data, Filter, Product } from '../interfaces/interfaces';
 
 export class Products {
+
+    // filters: Filters;
+
+    // constructor() {
+    //     this.filters = new Filters();
+    // }
 
     loadProducts(data: Data['products']): void {
         const fragment = document.createDocumentFragment();
@@ -62,7 +68,6 @@ export class Categories {
             const itemSpan = <HTMLElement>itemClone.querySelector('.filter-span');
 
             itemInput.setAttribute('id', item.category);
-            itemInput.onchange = function(){filterProducts()};
             itemInput.classList.add('category-input');
             itemLabel.setAttribute('for', item.category);
             itemLabel.insertAdjacentText('beforeend', item.category);
@@ -89,7 +94,6 @@ export class Brands {
             const itemSpan = <HTMLElement>itemClone.querySelector('.filter-span');
 
             itemInput.setAttribute('id', item.category);
-            itemInput.onchange = function(){filterProducts()};
             itemInput.classList.add('brand-input');
             itemLabel.setAttribute('for', item.category);
             itemLabel.insertAdjacentText('beforeend', item.category);

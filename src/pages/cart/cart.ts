@@ -1,7 +1,7 @@
 import Page from '../../core/templates/page';
 import '../cart/cart.css';
 import '../cart/modalBuy.css';
-import prodData from '../../components/data/products';
+import prodData from '../../components/data/productsData';
 import { isCart } from '../../components/app/app';
 
 import { setIsInCart } from '../../components/app/app';
@@ -341,7 +341,6 @@ class CartPage extends Page {
             isCart[CartPage.Products[idIndex]]?.count <= 0 ||
             isCart[CartPage.Products[idIndex]]?.count === undefined
           ) {
-            // delete isCart[CartPage.Products[i]];
             isCart[CartPage.Products[idIndex]].count = 1;
             setIsInCart(String(CartPage.Products[idIndex]), false);
             CartPage.Products = Object?.entries(isCart)

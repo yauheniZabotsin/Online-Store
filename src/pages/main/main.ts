@@ -1,15 +1,11 @@
 import Page from '../../core/templates/page';
 import '../main/main.css';
-import prodData from '../../components/data/products';
-import { filterPrice, filterStock, searchProducts, sortProducts } from './functions';
-
+import prodData from '../../components/data/productsData';
 import { setIsInCart } from '../../components/app/app';
-import { getIsInCart } from '../../components/app/app';
-
 import { isCart } from '../../components/app/app';
 import CartPage from '../cart/cart';
 
-class MainPages extends Page {
+export class MainPages extends Page {
   static TextObject = {
     MainTitle: 'Main Pages',
   };
@@ -98,9 +94,7 @@ class MainPages extends Page {
   }
 
   addEventsModal() {
-    const productItem: Array<HTMLElement> = Array.from(document.querySelectorAll('.product-item'));
-
-    productItem.forEach((item) => {
+    Array.from(document.querySelectorAll('.product-item')).forEach((item) => {
       item.addEventListener('click', (e: Event) => {
         if (!(e.target as Element).classList.contains('add-to-cart')) {
           const id = ((e.target as Element).closest('.product-item') as HTMLElement).id;
@@ -234,16 +228,12 @@ class MainPages extends Page {
     priceSliderFromInput.setAttribute('min', '10');
     priceSliderFromInput.setAttribute('max', '1749');
     priceSliderFromInput.setAttribute('value', '10');
-    priceSliderFromInput.onchange = function () {
-      filterPrice();
-    };
+    priceSliderFromInput.className = 'from-price';
     priceSliderToInput.setAttribute('type', 'range');
     priceSliderToInput.setAttribute('min', '10');
     priceSliderToInput.setAttribute('max', '1749');
     priceSliderToInput.setAttribute('value', '1749');
-    priceSliderToInput.onchange = function () {
-      filterPrice();
-    };
+    priceSliderToInput.className = 'to-price';
     priceSliderRange.append(priceSliderFromInput);
     priceSliderRange.append(priceSliderToInput);
     priceSliderData.append(priceSliderFromData);
@@ -266,16 +256,12 @@ class MainPages extends Page {
     stockSliderFromInput.setAttribute('min', '2');
     stockSliderFromInput.setAttribute('max', '150');
     stockSliderFromInput.setAttribute('value', '2');
-    stockSliderFromInput.onchange = function () {
-      filterStock();
-    };
+    stockSliderFromInput.className = 'from-stock';
     stockSliderToInput.setAttribute('type', 'range');
     stockSliderToInput.setAttribute('min', '2');
     stockSliderToInput.setAttribute('max', '150');
     stockSliderToInput.setAttribute('value', '150');
-    stockSliderToInput.onchange = function () {
-      filterStock();
-    };
+    stockSliderToInput.className = 'to-stock';
     stockSliderRange.append(stockSliderFromInput);
     stockSliderRange.append(stockSliderToInput);
     stockSliderData.append(stockSliderFromData);
@@ -307,9 +293,6 @@ class MainPages extends Page {
     searchInput.setAttribute('id', 'search-input');
     searchInput.setAttribute('type', 'search');
     searchInput.setAttribute('placeholder', 'Search product');
-    searchInput.oninput = function () {
-      searchProducts();
-    };
 
     viewMode.className = 'view-mode';
     smallVM.className = 'small-vm';
@@ -338,9 +321,6 @@ class MainPages extends Page {
     productSort.append(stat);
     productSort.append(searchBar);
     productSort.append(viewMode);
-    sortSelect.onchange = function () {
-      sortProducts();
-    };
 
     mainPage.className = 'app-storage-page';
     filters.className = 'filters';
